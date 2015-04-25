@@ -1,245 +1,260 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
-	<gmd:fileIdentifier>
-		<gco:CharacterString>{{ 'ID#info' }}</gco:CharacterString>
-	</gmd:fileIdentifier>
-	<gmd:language>
-		<gco:CharacterString>en</gco:CharacterString>
-	</gmd:language>
-	<!--
-	<gmd:hierarchyLevel>
-		<gmd:MD_ScopeCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"
-		codeListValue="dataset">dataset</gmd:MD_ScopeCode>
-	</gmd:hierarchyLevel>
-	-->
-	{% if 'Resource steward organization' %}
-	<gmd:contact>
-		<gmd:CI_ResponsibleParty>
-			<gmd:organisationName>
-				<gco:CharacterString>{{ 'Resource steward organization'}}</gco:CharacterString>
-			</gmd:organisationName>
+<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
+                 xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml"
+                 xmlns:xlink="http://www.w3.org/1999/xlink">
+    <gmd:fileIdentifier>
+        <gco:CharacterString>{{ row['ID#info'] }}</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+        <gco:CharacterString>en</gco:CharacterString>
+    </gmd:language>
+    <!--
+    <gmd:hierarchyLevel>
+        <gmd:MD_ScopeCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"
+        codeListValue="dataset">dataset</gmd:MD_ScopeCode>
+    </gmd:hierarchyLevel>
+    -->
+    {% if row['Resource steward organization'] %}
+    <gmd:contact>
+        <gmd:CI_ResponsibleParty>
+            <gmd:organisationName>
+                <gco:CharacterString>{{ row['Resource steward organization'] }}</gco:CharacterString>
+            </gmd:organisationName>
 
-			{% if 'Resource POC e-mail#info' %}
-			<gmd:contactInfo>
-				<gmd:CI_Contact>
-					<gmd:address>
-						<gmd:CI_Address>
-							<gmd:electronicMailAddress>
-								<gco:CharacterString>{{'Resource POC e-mail#info' }}</gco:CharacterString>
-							</gmd:electronicMailAddress>
-						</gmd:CI_Address>
-					</gmd:address>
-				</gmd:CI_Contact>
-			</gmd:contactInfo>
-			{% endif %}
+            {% if row['Resource POC e-mail#info'] %}
+            <gmd:contactInfo>
+                <gmd:CI_Contact>
+                    <gmd:address>
+                        <gmd:CI_Address>
+                            <gmd:electronicMailAddress>
+                                <gco:CharacterString>{{row['Resource POC e-mail#info'] }}</gco:CharacterString>
+                            </gmd:electronicMailAddress>
+                        </gmd:CI_Address>
+                    </gmd:address>
+                </gmd:CI_Contact>
+            </gmd:contactInfo>
+            {% endif %}
 
-			<gmd:role>
-				<gmd:CI_RoleCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
-			</gmd:role>
-		</gmd:CI_ResponsibleParty>
-	</gmd:contact>
-	{% endif %}
-
-	<gmd:dateStamp>
-		<gco:Date>2015-04-30</gco:Date>
-	</gmd:dateStamp>
-	<!--
-	<gmd:metadataStandardName>
-		<gco:CharacterString>ISO 19139/19115 Metadata for Datasets</gco:CharacterString>
-	</gmd:metadataStandardName>
-	-->
-
-	<gmd:metadataStandardVersion>
-		<gco:CharacterString>2003</gco:CharacterString>
-	</gmd:metadataStandardVersion>
-
-
-{% if 'Resource name' %}
-	<gmd:identificationInfo>
-		<gmd:MD_DataIdentification>
-			<gmd:citation>
-				<gmd:CI_Citation>
-					<gmd:title>
-						<gco:CharacterString>{{ 'Resource name' }}</gco:CharacterString>
-					</gmd:title>
-					<gmd:date>
-						<gmd:CI_Date>
-							<gmd:date>
-								<gco:Date>2014-04-30</gco:Date>
-							</gmd:date>
-							<gmd:dateType>
-								<gmd:CI_DateTypeCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
-							</gmd:dateType>
-						</gmd:CI_Date>
-					</gmd:date>
-				</gmd:CI_Citation>
-			</gmd:citation>
-  {% if 'Resource description#info' %}
-			<gmd:abstract>
-				<gco:CharacterString>{{ 'Resource description#info' }}</gco:CharacterString>
-			</gmd:abstract>
-{% endif %}
-
-	{% if 'Resource steward organization'   %}
-            <gmd:pointOfContact>
-				<gmd:CI_ResponsibleParty>
-                    {% if 'Resource steward organization' %}
-					<gmd:individualName>
-						<gco:CharacterString>{{ 'Resource steward person#info' }}</gco:CharacterString>
-					</gmd:individualName>
-               {% endif %}
-					<gmd:organisationName>
-						<gco:CharacterString>{{ 'Resource steward organization' }} </gco:CharacterString>
-					</gmd:organisationName>
-
-			{% if 'Resource POC e-mail#info' or'Resource POC voice phone#info' %}
-
-                    <gmd:contactInfo>
-						<gmd:CI_Contact>
-                            {% if 'Resource POC voice phone#info' %}
-							<gmd:phone>
-								<gmd:CI_Telephone>
-									<gmd:voice>
-										<gco:CharacterString>{{ 'Resource POC voice phone#info' }}</gco:CharacterString>
-									</gmd:voice>
-								</gmd:CI_Telephone>
-							</gmd:phone>
-                            {% endif %}
-                             {% if 'Resource POC e-mail#info' %}
-							<gmd:address>
-								<gmd:CI_Address>
-							<gmd:electronicMailAddress>
-								<gco:CharacterString>{{ 'Resource POC e-mail#info' }} </gco:CharacterString>
-							</gmd:electronicMailAddress>
-
-								</gmd:CI_Address>
-							</gmd:address>
-                             {% endif %}
-						</gmd:CI_Contact>
-					</gmd:contactInfo>
-      	{% endif %}
-					<gmd:role>
-						<gmd:CI_RoleCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
-					</gmd:role>
-				</gmd:CI_ResponsibleParty>
-			</gmd:pointOfContact>
- {% endif %}
-
-	{% if 'CINERGI Resource Type'   %}
-            <gmd:descriptiveKeywords>
-				<gmd:MD_Keywords>
-					<gmd:keyword>
-						<gco:CharacterString>row['CINERGI Resource Type'</gco:CharacterString>
-					</gmd:keyword>
->
-					<gmd:type>
-						<gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="theme">theme</gmd:MD_KeywordTypeCode>
-					</gmd:type>
-				</gmd:MD_Keywords>
-			</gmd:descriptiveKeywords>
- {% endif %}
-
-	{% if 'keywords_geographic'   %}
-            <gmd:descriptiveKeywords>
-				<gmd:MD_Keywords>
-					<gmd:keyword>
-						<gco:CharacterString>{{ 'keywords_geographic' }}</gco:CharacterString>
-					</gmd:keyword>
-
-                    <gmd:type>
-						<gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="place">place</gmd:MD_KeywordTypeCode>
-					</gmd:type>
-				</gmd:MD_Keywords>
-			</gmd:descriptiveKeywords>
-{% endif %}
-
-
-
-			<gmd:language>
-				<gco:CharacterString>en</gco:CharacterString>
-			</gmd:language>
-	{% if 'Classification (Theme)'   %}
-			<gmd:topicCategory>
-				<gmd:MD_TopicCategoryCode>{{ 'Classification (Theme)' }}</gmd:MD_TopicCategoryCode>
-			</gmd:topicCategory>
-{% endif %}
-
-       <!--
-			<gmd:extent>
-				<gmd:EX_Extent>
-					<gmd:geographicElement>
-						<gmd:EX_GeographicBoundingBox>
-							<gmd:westBoundLongitude>
-								<gco:Decimal>-180</gco:Decimal>
-							</gmd:westBoundLongitude>
-							<gmd:eastBoundLongitude>
-								<gco:Decimal>180</gco:Decimal>
-							</gmd:eastBoundLongitude>
-							<gmd:southBoundLatitude>
-								<gco:Decimal>-90</gco:Decimal>
-							</gmd:southBoundLatitude>
-							<gmd:northBoundLatitude>
-								<gco:Decimal>90</gco:Decimal>
-							</gmd:northBoundLatitude>
-						</gmd:EX_GeographicBoundingBox>
-					</gmd:geographicElement>
-					<gmd:temporalElement>
-						<gmd:EX_TemporalExtent>
-							<gmd:extent>
-								<gml:TimePeriod gml:id="Temporal">
-									<gml:beginPosition>[startdate 1999-01-01]</gml:beginPosition>
-									<gml:endPosition>[enddate - 2000-12-31]</gml:endPosition>
-								</gml:TimePeriod>
-							</gmd:extent>
-						</gmd:EX_TemporalExtent>
-					</gmd:temporalElement>
-				</gmd:EX_Extent>
-			</gmd:extent>
-			-->
-		</gmd:MD_DataIdentification>
-	</gmd:identificationInfo>
+            <gmd:role>
+                <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                 codeListValue="pointOfContact">pointOfContact
+                </gmd:CI_RoleCode>
+            </gmd:role>
+        </gmd:CI_ResponsibleParty>
+    </gmd:contact>
     {% endif %}
 
-	{% if 'Resource URL#info'   %}
-<gmd:distributionInfo>
-<gmd:MD_Distribution>
-    <gmd:distributionFormat>
-<gmd:MD_Format>
-<gmd:name>
-<gco:CharacterString>Resource URL</gco:CharacterString>
-</gmd:name>
-
-</gmd:MD_Format>
-
-</gmd:distributionFormat>
-
-<gmd:transferOptions>
-<gmd:MD_DigitalTransferOptions>
-<gmd:onLine>
-<gmd:CI_OnlineResource>
-<gmd:linkage>
-<gmd:URL>{{ 'Resource URL#info' }}</gmd:URL>
-</gmd:linkage>
+    <gmd:dateStamp>
+        <gco:Date>2015-04-30</gco:Date>
+    </gmd:dateStamp>
     <!--
-<gmd:name>
-<gco:CharacterString>CS Technical Report</gco:CharacterString>
-</gmd:name>
-<gmd:description>
-<gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
-</gmd:description>
--->
-<gmd:function>
-<gmd:CI_OnLineFunctionCode
-                       codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
-                       codeListValue="download" />
-</gmd:function>
-</gmd:CI_OnlineResource>
-</gmd:onLine>
-</gmd:MD_DigitalTransferOptions>
-</gmd:transferOptions>
-</gmd:MD_Distribution>
-</gmd:distributionInfo>
-     {% endif %}
+    <gmd:metadataStandardName>
+        <gco:CharacterString>ISO 19139/19115 Metadata for Datasets</gco:CharacterString>
+    </gmd:metadataStandardName>
+    -->
+
+    <gmd:metadataStandardVersion>
+        <gco:CharacterString>2003</gco:CharacterString>
+    </gmd:metadataStandardVersion>
+
+
+    {% if row['Resource name'] %}
+    <gmd:identificationInfo>
+        <gmd:MD_DataIdentification>
+            <gmd:citation>
+                <gmd:CI_Citation>
+                    <gmd:title>
+                        <gco:CharacterString>{{ row['Resource name'] }}</gco:CharacterString>
+                    </gmd:title>
+                    <gmd:date>
+                        <gmd:CI_Date>
+                            <gmd:date>
+                                <gco:Date>2014-04-30</gco:Date>
+                            </gmd:date>
+                            <gmd:dateType>
+                                <gmd:CI_DateTypeCode codeSpace="ISOTC211/19115"
+                                                     codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                     codeListValue="publication">publication
+                                </gmd:CI_DateTypeCode>
+                            </gmd:dateType>
+                        </gmd:CI_Date>
+                    </gmd:date>
+                </gmd:CI_Citation>
+            </gmd:citation>
+            {% if row['Resource description#info'] %}
+            <gmd:abstract>
+                <gco:CharacterString>{{ row['Resource description#info'] }}</gco:CharacterString>
+            </gmd:abstract>
+            {% endif %}
+
+            {% if row['Resource steward organization'] %}
+            <gmd:pointOfContact>
+                <gmd:CI_ResponsibleParty>
+                    {% if row['Resource steward organization'] %}
+                    <gmd:individualName>
+                        <gco:CharacterString>{{ row['Resource steward person#info'] }}</gco:CharacterString>
+                    </gmd:individualName>
+                    {% endif %}
+                    <gmd:organisationName>
+                        <gco:CharacterString>{{ row['Resource steward organization'] }}</gco:CharacterString>
+                    </gmd:organisationName>
+
+                    {% if row['Resource POC e-mail#info'] or row['Resource POC voice phone#info'] %}
+
+                    <gmd:contactInfo>
+                        <gmd:CI_Contact>
+                            {% if row['Resource POC voice phone#info'] %}
+                            <gmd:phone>
+                                <gmd:CI_Telephone>
+                                    <gmd:voice>
+                                        <gco:CharacterString>{{ row['Resource POC voice phone#info'] }}
+                                        </gco:CharacterString>
+                                    </gmd:voice>
+                                </gmd:CI_Telephone>
+                            </gmd:phone>
+                            {% endif %}
+                            {% if row['Resource POC e-mail#info'] %}
+                            <gmd:address>
+                                <gmd:CI_Address>
+                                    <gmd:electronicMailAddress>
+                                        <gco:CharacterString>{{ row['Resource POC e-mail#info'] }}</gco:CharacterString>
+                                    </gmd:electronicMailAddress>
+
+                                </gmd:CI_Address>
+                            </gmd:address>
+                            {% endif %}
+                        </gmd:CI_Contact>
+                    </gmd:contactInfo>
+                    {% endif %}
+                    <gmd:role>
+                        <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                         codeListValue="pointOfContact">pointOfContact
+                        </gmd:CI_RoleCode>
+                    </gmd:role>
+                </gmd:CI_ResponsibleParty>
+            </gmd:pointOfContact>
+            {% endif %}
+
+            {% if row['CINERGI Resource Type'] %}
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+                    <gmd:keyword>
+                        <gco:CharacterString>{{row['CINERGI Resource Type']}}</gco:CharacterString>
+                    </gmd:keyword>
+                    >
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="theme">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            {% endif %}
+
+            {% if row['keywords_geographic'] %}
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ row['keywords_geographic'] }}</gco:CharacterString>
+                    </gmd:keyword>
+
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="place">place
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            {% endif %}
+
+
+            <gmd:language>
+                <gco:CharacterString>en</gco:CharacterString>
+            </gmd:language>
+            {% if row['Classification (Theme)'] %}
+            <gmd:topicCategory>
+                <gmd:MD_TopicCategoryCode>{{ row['Classification (Theme)'] }}</gmd:MD_TopicCategoryCode>
+            </gmd:topicCategory>
+            {% endif %}
+
+            <!--
+                 <gmd:extent>
+                     <gmd:EX_Extent>
+                         <gmd:geographicElement>
+                             <gmd:EX_GeographicBoundingBox>
+                                 <gmd:westBoundLongitude>
+                                     <gco:Decimal>-180</gco:Decimal>
+                                 </gmd:westBoundLongitude>
+                                 <gmd:eastBoundLongitude>
+                                     <gco:Decimal>180</gco:Decimal>
+                                 </gmd:eastBoundLongitude>
+                                 <gmd:southBoundLatitude>
+                                     <gco:Decimal>-90</gco:Decimal>
+                                 </gmd:southBoundLatitude>
+                                 <gmd:northBoundLatitude>
+                                     <gco:Decimal>90</gco:Decimal>
+                                 </gmd:northBoundLatitude>
+                             </gmd:EX_GeographicBoundingBox>
+                         </gmd:geographicElement>
+                         <gmd:temporalElement>
+                             <gmd:EX_TemporalExtent>
+                                 <gmd:extent>
+                                     <gml:TimePeriod gml:id="Temporal">
+                                         <gml:beginPosition>[startdate 1999-01-01]</gml:beginPosition>
+                                         <gml:endPosition>[enddate - 2000-12-31]</gml:endPosition>
+                                     </gml:TimePeriod>
+                                 </gmd:extent>
+                             </gmd:EX_TemporalExtent>
+                         </gmd:temporalElement>
+                     </gmd:EX_Extent>
+                 </gmd:extent>
+                 -->
+        </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+    {% endif %}
+
+    {% if row['Resource URL#info'] %}
+    <gmd:distributionInfo>
+        <gmd:MD_Distribution>
+            <gmd:distributionFormat>
+                <gmd:MD_Format>
+                    <gmd:name>
+                        <gco:CharacterString>Resource URL</gco:CharacterString>
+                    </gmd:name>
+
+                </gmd:MD_Format>
+
+            </gmd:distributionFormat>
+
+            <gmd:transferOptions>
+                <gmd:MD_DigitalTransferOptions>
+                    <gmd:onLine>
+                        <gmd:CI_OnlineResource>
+                            <gmd:linkage>
+                                <gmd:URL>{{ row['Resource URL#info'] }}</gmd:URL>
+                            </gmd:linkage>
+                            <!--
+                        <gmd:name>
+                        <gco:CharacterString>CS Technical Report</gco:CharacterString>
+                        </gmd:name>
+                        <gmd:description>
+                        <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
+                        </gmd:description>
+                        -->
+                            <gmd:function>
+                                <gmd:CI_OnLineFunctionCode
+                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                        codeListValue="download"/>
+                            </gmd:function>
+                        </gmd:CI_OnlineResource>
+                    </gmd:onLine>
+                </gmd:MD_DigitalTransferOptions>
+            </gmd:transferOptions>
+        </gmd:MD_Distribution>
+    </gmd:distributionInfo>
+    {% endif %}
 </gmd:MD_Metadata>

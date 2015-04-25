@@ -16,18 +16,26 @@ def load_template(template_name, base_bath= '.'):
     template = env.get_template(template_name)
     return template
 
+def render_template(row, template):
+    return template.render(row)
+
 def render_output(data,template,id_field):
     # base_name = template.name[0:template.name.index('.xml')]
     base_name='sen'
     i = 0
     for d in data:
-
-        out = template.render(d)
-       # f_out = open("%s_%s.xml" % (base_name , d[id_field]) , "w")
-        f_out = open("%s_%s.xml" % (base_name , i) , "w")
-        i +=1
-        f_out.write(out)
-        f_out.close()
+        template_values = {
+            'row': d
+            }
+        try:
+            out = render_template(template_values, template)
+           # f_out = open("%s_%s.xml" % (base_name , d[id_field]) , "w")
+            f_out = open("%s_%s.xml" % (base_name , i) , "w")
+            i +=1
+            f_out.write(out)
+            f_out.close()
+        except:
+            print "row failed:" + d
 
 
 
@@ -41,3 +49,6 @@ def test_render_output():
     out = read_input('D:\dev_earthcube\sheet2meta\SEN CINERGI-ResourceInventoryTemplate - Basic Metadata Template.csv')
     template = load_template('metadata19115_template_2.xml')
     render_output(out,template,'ID#info')
+
+if __name__ == '__main__':
+    test_render_output()
