@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<gmd:fileIdentifier>
+		<gco:CharacterString>row['ID#info']</gco:CharacterString>
+	</gmd:fileIdentifier>
+	<gmd:language>
+		<gco:CharacterString>en</gco:CharacterString>
+	</gmd:language>
+	<!--
+	<gmd:hierarchyLevel>
+		<gmd:MD_ScopeCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"
+		codeListValue="dataset">dataset</gmd:MD_ScopeCode>
+	</gmd:hierarchyLevel>
+	-->
+	{% if row["Resource steward organization"] %}
+	<gmd:contact>
+		<gmd:CI_ResponsibleParty>
+			<gmd:organisationName>
+				<gco:CharacterString>row["Resource steward organization"]</gco:CharacterString>
+			</gmd:organisationName>
+
+			{% if row["Resource POC e-mail#info"] %}
+			<gmd:contactInfo>
+				<gmd:CI_Contact>
+					<gmd:address>
+						<gmd:CI_Address>
+							<gmd:electronicMailAddress>
+								<gco:CharacterString> row["Resource POC e-mail#info"]</gco:CharacterString>
+							</gmd:electronicMailAddress>
+						</gmd:CI_Address>
+					</gmd:address>
+				</gmd:CI_Contact>
+			</gmd:contactInfo>
+			{% endif %}
+
+			<gmd:role>
+				<gmd:CI_RoleCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
+			</gmd:role>
+		</gmd:CI_ResponsibleParty>
+	</gmd:contact>
+	{% endif %}
+
+	<gmd:dateStamp>
+		<gco:Date>2015-04-30</gco:Date>
+	</gmd:dateStamp>
+	<!--
+	<gmd:metadataStandardName>
+		<gco:CharacterString>ISO 19139/19115 Metadata for Datasets</gco:CharacterString>
+	</gmd:metadataStandardName>
+	-->
+
+	<gmd:metadataStandardVersion>
+		<gco:CharacterString>2003</gco:CharacterString>
+	</gmd:metadataStandardVersion>
+
+
+
+	<gmd:identificationInfo>
+		<gmd:MD_DataIdentification>
+			<gmd:citation>
+				<gmd:CI_Citation>
+					<gmd:title>
+						<gco:CharacterString>[dataset title (composite/verbose)]</gco:CharacterString>
+					</gmd:title>
+					<gmd:date>
+						<gmd:CI_Date>
+							<gmd:date>
+								<gco:Date>What date is most appropriate?, 2014-02-18</gco:Date>
+							</gmd:date>
+							<gmd:dateType>
+								<gmd:CI_DateTypeCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+							</gmd:dateType>
+						</gmd:CI_Date>
+					</gmd:date>
+				</gmd:CI_Citation>
+			</gmd:citation>
+			<gmd:abstract>
+				<gco:CharacterString>[description/abstract]</gco:CharacterString>
+			</gmd:abstract>
+			<gmd:pointOfContact>
+				<gmd:CI_ResponsibleParty>
+					<gmd:individualName>
+						<gco:CharacterString>[creator/author] available fields: [creator/author] multiple names in 1 field that also has contact info and [ czo creator/author] separate CZO authors... maybe cram multiple names in one IndividualName and create separate IndivdiualName's for each CZO person? </gco:CharacterString>
+					</gmd:individualName>
+					<gmd:organisationName>
+						<gco:CharacterString>[czo long name + university]??</gco:CharacterString>
+					</gmd:organisationName>
+					<gmd:positionName>
+						<gco:CharacterString>[czo role]</gco:CharacterString>
+					</gmd:positionName>
+					<gmd:contactInfo>
+						<gmd:CI_Contact>
+							<gmd:phone>
+								<gmd:CI_Telephone>
+									<gmd:voice>
+										<gco:CharacterString>[phone]</gco:CharacterString>
+									</gmd:voice>
+								</gmd:CI_Telephone>
+							</gmd:phone>
+							<gmd:address>
+								<gmd:CI_Address>
+									<gmd:deliveryPoint>
+										<gco:CharacterString>[address]</gco:CharacterString>
+									</gmd:deliveryPoint>
+									<gmd:city>
+										<gco:CharacterString>[city]</gco:CharacterString>
+									</gmd:city>
+									<gmd:administrativeArea>
+										<gco:CharacterString>[state]</gco:CharacterString>
+									</gmd:administrativeArea>
+									<gmd:postalCode>
+										<gco:CharacterString>[zip]</gco:CharacterString>
+									</gmd:postalCode>
+									<gmd:electronicMailAddress>
+										<gco:CharacterString>[email]</gco:CharacterString>
+									</gmd:electronicMailAddress>
+								</gmd:CI_Address>
+							</gmd:address>
+						</gmd:CI_Contact>
+					</gmd:contactInfo>
+					<gmd:role>
+						<gmd:CI_RoleCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
+					</gmd:role>
+				</gmd:CI_ResponsibleParty>
+			</gmd:pointOfContact>
+			<gmd:pointOfContact>
+				<gmd:CI_ResponsibleParty>
+					<gmd:individualName>
+						<gco:CharacterString>[creator/author2]</gco:CharacterString>
+					</gmd:individualName>
+					<gmd:role>
+						<gmd:CI_RoleCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
+					</gmd:role>
+				</gmd:CI_ResponsibleParty>
+			</gmd:pointOfContact>
+			<gmd:descriptiveKeywords>
+				<gmd:MD_Keywords>
+					<gmd:keyword>
+						<gco:CharacterString>[keyword1] we have multiple keywords in one field. comma delimited so data quality and parsing issues, and separate topic terms that probably should be keywords too?</gco:CharacterString>
+					</gmd:keyword>
+					<gmd:keyword>
+						<gco:CharacterString>[keyword2]</gco:CharacterString>
+					</gmd:keyword>
+					<gmd:type>
+						<gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="discipline">discipline</gmd:MD_KeywordTypeCode>
+					</gmd:type>
+				</gmd:MD_Keywords>
+			</gmd:descriptiveKeywords>
+			<gmd:descriptiveKeywords>
+				<gmd:MD_Keywords>
+					<gmd:keyword>
+						<gco:CharacterString>[variable1] we have multiple keywords in one field, comma delimited, so there are probably data quality and parsing issues</gco:CharacterString>
+					</gmd:keyword>
+					<gmd:keyword>
+						<gco:CharacterString>[variable2]</gco:CharacterString>
+					</gmd:keyword>
+				</gmd:MD_Keywords>
+			</gmd:descriptiveKeywords>
+			<gmd:descriptiveKeywords>
+				<gmd:MD_Keywords>
+					<gmd:keyword>
+						<gco:CharacterString>[location] location is used only as a generic keyword, lets set it up as keyword type = place</gco:CharacterString>
+					</gmd:keyword>
+					<gmd:keyword>
+						<gco:CharacterString>[czo field area 1] as a keyword</gco:CharacterString>
+					</gmd:keyword>
+				</gmd:MD_Keywords>
+			</gmd:descriptiveKeywords>
+			<gmd:language>
+				<gco:CharacterString>en</gco:CharacterString>
+			</gmd:language>
+			<gmd:topicCategory>
+				<gmd:MD_TopicCategoryCode>[discipline tag1]</gmd:MD_TopicCategoryCode>
+			</gmd:topicCategory>
+			<gmd:topicCategory>
+				<gmd:MD_TopicCategoryCode>[discipline tag2]</gmd:MD_TopicCategoryCode>
+			</gmd:topicCategory>
+			<gmd:extent>
+				<gmd:EX_Extent>
+					<gmd:geographicElement>
+						<gmd:EX_GeographicBoundingBox>
+							<gmd:westBoundLongitude>
+								<gco:Decimal>-180</gco:Decimal>
+							</gmd:westBoundLongitude>
+							<gmd:eastBoundLongitude>
+								<gco:Decimal>180</gco:Decimal>
+							</gmd:eastBoundLongitude>
+							<gmd:southBoundLatitude>
+								<gco:Decimal>-90</gco:Decimal>
+							</gmd:southBoundLatitude>
+							<gmd:northBoundLatitude>
+								<gco:Decimal>90</gco:Decimal>
+							</gmd:northBoundLatitude>
+						</gmd:EX_GeographicBoundingBox>
+					</gmd:geographicElement>
+					<gmd:temporalElement>
+						<gmd:EX_TemporalExtent>
+							<gmd:extent>
+								<gml:TimePeriod gml:id="Temporal">
+									<gml:beginPosition>[startdate 1999-01-01]</gml:beginPosition>
+									<gml:endPosition>[enddate - 2000-12-31]</gml:endPosition>
+								</gml:TimePeriod>
+							</gmd:extent>
+						</gmd:EX_TemporalExtent>
+					</gmd:temporalElement>
+				</gmd:EX_Extent>
+			</gmd:extent>
+		</gmd:MD_DataIdentification>
+	</gmd:identificationInfo>
+</gmd:MD_Metadata>
