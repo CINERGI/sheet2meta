@@ -10,20 +10,18 @@ class TestStringMethods(unittest.TestCase):
         template = cvs2meta.load_template('metadata19115_template_2.xml',base_bath='../')
         for d in out:
             template_values = {
-            'row': d
+            'row': d,
+            'test': "abcde"
             }
             rendered = cvs2meta.render_template(template_values,template)
+            #rendered = cvs2meta.render_template(d,template)
             #print rendered
             self.assertIsNotNone(rendered)
 
     def test_render_oneouput(self):
         out = cvs2meta.read_input('onerow.csv')
         template = cvs2meta.load_template('metadata19115_template_2.xml',base_bath='../')
-        for d in out:
-            template_values = {
-            'row': d
-            }
-            cvs2meta.render_output(template_values,template,'ID#info')
+        cvs2meta.render_output(out,template,'ID#info')
 
 
 

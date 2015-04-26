@@ -17,7 +17,7 @@ def load_template(template_name, base_bath= '.'):
     return template
 
 def render_template(row, template):
-    return template.render(row)
+    return template.render(row=row, test="abces")
 
 def render_output(data,template,id_field):
     # base_name = template.name[0:template.name.index('.xml')]
@@ -28,7 +28,8 @@ def render_output(data,template,id_field):
             'row': d
             }
         try:
-            out = render_template(template_values, template)
+            #out = render_template(template_values, template)
+            out = render_template(d, template)
            # f_out = open("%s_%s.xml" % (base_name , d[id_field]) , "w")
             f_out = open("%s_%s.xml" % (base_name , i) , "w")
             i +=1
