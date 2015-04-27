@@ -21,7 +21,7 @@ class TestStringMethods(unittest.TestCase):
     def test_render_oneouput(self):
         out = cvs2meta.read_input('onerow.csv')
         template = cvs2meta.load_template('metadata19115_template_2.xml',base_bath='../')
-        cvs2meta.render_output(out,template,'ID#info')
+        cvs2meta.render_output(out,template,'ID#info', base_path="../output/tests")
 
 
 

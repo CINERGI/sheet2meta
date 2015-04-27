@@ -3,7 +3,7 @@
                  xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml"
                  xmlns:xlink="http://www.w3.org/1999/xlink">
     <gmd:fileIdentifier>
-        <gco:CharacterString></gco:CharacterString>
+        <gco:CharacterString>SEN:0004</gco:CharacterString>
     </gmd:fileIdentifier>
     <gmd:language>
         <gco:CharacterString>en</gco:CharacterString>
@@ -14,6 +14,25 @@
         codeListValue="dataset">dataset</gmd:MD_ScopeCode>
     </gmd:hierarchyLevel>
     -->
+    
+    
+    <gmd:contact>
+        <gmd:CI_ResponsibleParty>
+            <gmd:organisationName>
+                <gco:CharacterString>None Provided</gco:CharacterString>
+            </gmd:organisationName>
+
+
+
+            <gmd:role>
+                <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                 codeListValue="pointOfContact">pointOfContact
+                </gmd:CI_RoleCode>
+            </gmd:role>
+        </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+
     
 
     <gmd:dateStamp>
@@ -31,6 +50,156 @@
 
 
     
+    <gmd:identificationInfo>
+        <gmd:MD_DataIdentification>
+            <gmd:citation>
+                <gmd:CI_Citation>
+                    <gmd:title>
+                        <gco:CharacterString>NHDPlus (National Hydrography Dataset Plus)</gco:CharacterString>
+                    </gmd:title>
+                    <gmd:date>
+                        <gmd:CI_Date>
+                            <gmd:date>
+                                <gco:Date>2014-04-30</gco:Date>
+                            </gmd:date>
+                            <gmd:dateType>
+                                <gmd:CI_DateTypeCode codeSpace="ISOTC211/19115"
+                                                     codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                     codeListValue="publication">publication
+                                </gmd:CI_DateTypeCode>
+                            </gmd:dateType>
+                        </gmd:CI_Date>
+                    </gmd:date>
+                </gmd:CI_Citation>
+            </gmd:citation>
+            
+            <gmd:abstract>
+                <gco:CharacterString>NHDPlus is a geo-spatial, hydrologic framework dataset envisioned by the US Environmental Protection Agency. NHDPlus is an integrated suite of application-ready geospatial data sets that incorporate many of the best features of the National Hydrography Dataset (NHD), the National Elevation Dataset (NED), the National Land Cover Dataset (NLCD), and the Watershed Boundary Dataset (WBD). NHDPlus has been used to enhance the EPA WATERS application. Info for National Elevation, Hydrography, Land use, and Watersheds.</gco:CharacterString>
+            </gmd:abstract>
+            
 
+            
+
+            
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+                    <gmd:keyword>
+                        <gco:CharacterString>Application</gco:CharacterString>
+                    </gmd:keyword>
+
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="theme">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            
+
+            
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+                    <gmd:keyword>
+                        <gco:CharacterString>non-geographic</gco:CharacterString>
+                    </gmd:keyword>
+
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="place">place
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            
+
+
+            <gmd:language>
+                <gco:CharacterString>en</gco:CharacterString>
+            </gmd:language>
+            
+            <gmd:topicCategory>
+                <gmd:MD_TopicCategoryCode>Streamflow</gmd:MD_TopicCategoryCode>
+            </gmd:topicCategory>
+            
+
+            <!--
+                 <gmd:extent>
+                     <gmd:EX_Extent>
+                         <gmd:geographicElement>
+                             <gmd:EX_GeographicBoundingBox>
+                                 <gmd:westBoundLongitude>
+                                     <gco:Decimal>-180</gco:Decimal>
+                                 </gmd:westBoundLongitude>
+                                 <gmd:eastBoundLongitude>
+                                     <gco:Decimal>180</gco:Decimal>
+                                 </gmd:eastBoundLongitude>
+                                 <gmd:southBoundLatitude>
+                                     <gco:Decimal>-90</gco:Decimal>
+                                 </gmd:southBoundLatitude>
+                                 <gmd:northBoundLatitude>
+                                     <gco:Decimal>90</gco:Decimal>
+                                 </gmd:northBoundLatitude>
+                             </gmd:EX_GeographicBoundingBox>
+                         </gmd:geographicElement>
+                         <gmd:temporalElement>
+                             <gmd:EX_TemporalExtent>
+                                 <gmd:extent>
+                                     <gml:TimePeriod gml:id="Temporal">
+                                         <gml:beginPosition>[startdate 1999-01-01]</gml:beginPosition>
+                                         <gml:endPosition>[enddate - 2000-12-31]</gml:endPosition>
+                                     </gml:TimePeriod>
+                                 </gmd:extent>
+                             </gmd:EX_TemporalExtent>
+                         </gmd:temporalElement>
+                     </gmd:EX_Extent>
+                 </gmd:extent>
+                 -->
+        </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+    
+
+    
+    <gmd:distributionInfo>
+        <gmd:MD_Distribution>
+            <gmd:distributionFormat>
+                <gmd:MD_Format>
+                    <gmd:name>
+                        <gco:CharacterString>Resource URL</gco:CharacterString>
+                    </gmd:name>
+<gmd:version>
+ <gco:CharacterString>0.0</gco:CharacterString>
+</gmd:version>
+                </gmd:MD_Format>
+
+            </gmd:distributionFormat>
+
+            <gmd:transferOptions>
+                <gmd:MD_DigitalTransferOptions>
+                    <gmd:onLine>
+                        <gmd:CI_OnlineResource>
+                            <gmd:linkage>
+                                <gmd:URL>http://www.horizon-systems.com/nhdplus/</gmd:URL>
+                            </gmd:linkage>
+                            <!--
+                        <gmd:name>
+                        <gco:CharacterString>CS Technical Report</gco:CharacterString>
+                        </gmd:name>
+                        <gmd:description>
+                        <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
+                        </gmd:description>
+                        -->
+                            <gmd:function>
+                                <gmd:CI_OnLineFunctionCode
+                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                        codeListValue="download"/>
+                            </gmd:function>
+                        </gmd:CI_OnlineResource>
+                    </gmd:onLine>
+                </gmd:MD_DigitalTransferOptions>
+            </gmd:transferOptions>
+        </gmd:MD_Distribution>
+    </gmd:distributionInfo>
     
 </gmd:MD_Metadata>
