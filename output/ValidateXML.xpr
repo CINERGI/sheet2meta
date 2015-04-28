@@ -102,6 +102,8 @@
     </meta>
     <projectTree name="ValidateXML.xpr">
         <folder path="c4p/"/>
+        <folder path="ci/"/>
+        <folder path="ecogeo/"/>
         <folder path="SEN/"/>
         <folder path="tests/"/>
     </projectTree>

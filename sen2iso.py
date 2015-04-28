@@ -1,6 +1,9 @@
 __author__ = 'valentin'
 
 from resource import cvs2meta
+# import sys
+# reload(sys)
+# sys.setdefaultencoding('utf-8')
 
 def main():
     out = cvs2meta.read_input('files/SEN CINERGI-ResourceInventoryTemplate - Basic Metadata Template.csv')

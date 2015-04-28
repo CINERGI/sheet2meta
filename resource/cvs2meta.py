@@ -3,6 +3,9 @@ __author__ = 'valentin'
 import csv
 from csv import Dialect
 from jinja2 import Environment, FileSystemLoader
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 def read_input(csvfile , ):
     csvfile_v = open(csvfile, "rb")

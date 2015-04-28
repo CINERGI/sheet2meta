@@ -14,7 +14,8 @@
         codeListValue="dataset">dataset</gmd:MD_ScopeCode>
     </gmd:hierarchyLevel>
     -->
-        <gmd:contact>
+
+ <gmd:contact>
         <gmd:CI_ResponsibleParty>
             <gmd:organisationName>
                 <gco:CharacterString>Earthcube CINERGI Metadata Pipeline</gco:CharacterString>
@@ -22,7 +23,6 @@
             <gmd:positionName>
                   <gco:CharacterString>CINERGI Metadata Contact</gco:CharacterString>
             </gmd:positionName>
-
             <gmd:contactInfo>
                 <gmd:CI_Contact>
                     <gmd:address>
@@ -55,13 +55,14 @@
     </gmd:metadataStandardVersion>
 
 
-    {% if row['Resource name'] %}
+    {% if row['Name#info'] %}
     <gmd:identificationInfo>
-        <gmd:MD_DataIdentification>
-            <gmd:citation>
+       {# <gmd:MD_ServiceIdentification> #}
+          <gmd:MD_DataIdentification>
+        <gmd:citation>
                 <gmd:CI_Citation>
                     <gmd:title>
-                        <gco:CharacterString>{{ row['Resource name'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ row['Name#info'] }}</gco:CharacterString>
                     </gmd:title>
                     <gmd:date>
                         <gmd:CI_Date>
@@ -78,25 +79,42 @@
                     </gmd:date>
                 </gmd:CI_Citation>
             </gmd:citation>
-            {% if row['Resource description#info'] %}
+            {% if row['FunctionalDescription#info'] %}
             <gmd:abstract>
-                <gco:CharacterString>{{ row['Resource description#info'] }}</gco:CharacterString>
+                <gco:CharacterString>{{ row['FunctionalDescription#info'] }}</gco:CharacterString>
             </gmd:abstract>
             {% else %}
 
             <gmd:abstract  gco:nilReason="unknown" />
             {% endif %}
 
-            {% if row['Resource steward organization'] %}
+              {% if row['System'] %}
+            <gmd:purpose>
+                <gco:CharacterString>{{ row['System'] }}</gco:CharacterString>
+            </gmd:purpose>
+ {% endif %}
+
+           {% if row['Maturity/status'] %}
+            <gmd:status>
+            <gmd:MD_ProgressCode  codeSpace="ISOTC211/19115"
+                                                     codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ProgressCode"
+                                                     codeListValue="underDevelopment"
+                    >
+                {{ row['Maturity/status'] }}
+            </gmd:MD_ProgressCode>
+            </gmd:status>
+ {% endif %}
+
+            {% if row['Steward-Organization'] %}
             <gmd:pointOfContact>
                 <gmd:CI_ResponsibleParty>
-                    {% if row['Resource steward organization'] %}
+                    {% if row['Steward-Organization'] %}
                     <gmd:individualName>
                         <gco:CharacterString>{{ row['Resource steward person#info'] }}</gco:CharacterString>
                     </gmd:individualName>
                     {% endif %}
                     <gmd:organisationName>
-                        <gco:CharacterString>{{ row['Resource steward organization'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ row['Steward-Organization'] }}</gco:CharacterString>
                     </gmd:organisationName>
 
                     {% if row['Resource POC e-mail#info'] or row['Resource POC voice phone#info'] %}
@@ -134,13 +152,21 @@
                     </gmd:role>
                 </gmd:CI_ResponsibleParty>
             </gmd:pointOfContact>
+            {% else %}
+    {# would e nice if this worked, but not allowed to be nil
+    nilReason
+    missing -- not known to sender. may not be one
+    unknown -- not known, probably is one
+
+#}
+    <gmd:pointOfContact  gco:nilReason="unknown" />
             {% endif %}
 
-            {% if row['CINERGI Resource Type'] %}
+            {% if row['Component Type Type'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['CINERGI Resource Type'].split(',') %}
+ {% for item in row['Component Type'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -154,7 +180,7 @@
                      <gmd:thesaurusName>
                         <gmd:CI_Citation>
                             <gmd:title>
-                                <gco:CharacterString>CINERGI Resource Types</gco:CharacterString>
+                                <gco:CharacterString>CINERGI Component Type</gco:CharacterString>
                             </gmd:title>
                             <gmd:date>
                                 <gmd:CI_Date>
@@ -162,8 +188,8 @@
                                         <gco:Date>2015-01-01</gco:Date>
                                     </gmd:date>
                                     <gmd:dateType>
-                                        <CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
-                                                         xmlns="http://www.isotc211.org/2005/gmd"/>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
+                                                        />
                                     </gmd:dateType>
                                 </gmd:CI_Date>
                             </gmd:date>
@@ -173,11 +199,11 @@
             </gmd:descriptiveKeywords>
             {% endif %}
 
-            {% if row['keywords_geographic'] %}
+            {% if row['System'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['keywords_geographic'].split(',') %}
+ {% for item in row['System'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -185,19 +211,37 @@
                     <gmd:type>
                         <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="place">place
+                                                codeListValue="theme">theme
                         </gmd:MD_KeywordTypeCode>
                     </gmd:type>
+                     <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>CINERGI System Listing</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
+                                                        />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
                 </gmd:MD_Keywords>
             </gmd:descriptiveKeywords>
             {% endif %}
 
 
-            {% if row['Classification (Theme)'] %}
+            {% if row['Function'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
-{% for item in row['Classification (Theme)'] .split(',') %}
+{% for item in row['Function'] .split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -205,14 +249,14 @@
                     <gmd:type>
                         <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="place">theme
+                                                codeListValue="theme">theme
                         </gmd:MD_KeywordTypeCode>
                     </gmd:type>
 
                     <gmd:thesaurusName>
                         <gmd:CI_Citation>
                             <gmd:title>
-                                <gco:CharacterString>CINERGI Themes</gco:CharacterString>
+                                <gco:CharacterString>CINERGI Component Function</gco:CharacterString>
                             </gmd:title>
                             <gmd:date>
                                 <gmd:CI_Date>
@@ -220,8 +264,198 @@
                                         <gco:Date>2015-01-01</gco:Date>
                                     </gmd:date>
                                     <gmd:dateType>
-                                        <CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
-                                                         xmlns="http://www.isotc211.org/2005/gmd"/>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
+                                                        />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            {% endif %}
+
+            {% if row['Interfaces'] %}
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+
+{% for item in row['Interfaces'] .split(',') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="theme">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>CINERGI Component Interfaces</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
+                                                        />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            {% endif %}
+
+            {% if row['InterchangeFormats'] %}
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+
+{% for item in row['InterchangeFormats'] .split(',') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="theme">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>CINERGI Component Interchange Formats </gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
+                                                        />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            {% endif %}
+
+      {% if row['InformationModels'] %}
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+
+{% for item in row['InformationModels'] .split(',') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="theme">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>CINERGI Component Information Models </gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
+                                                        />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            {% endif %}
+
+        {% if row['Maturity/status'] %}
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+
+{% for item in row['Maturity/status'] .split(',') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="theme">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>CINERGI Component Maturity/status</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
+                                                        />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            {% endif %}
+
+         {% if row['Implementation'] %}
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+
+{% for item in row['Implementation'] .split(',') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="theme">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>CINERGI Component Implementation</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
+                                                        />
                                     </gmd:dateType>
                                 </gmd:CI_Date>
                             </gmd:date>
@@ -232,9 +466,12 @@
             {% endif %}
 
 
-    <gmd:language>
+ {#  language,topicCategory-- not used in  MD_ServiceInfo #}
+
+              <gmd:language>
         <gco:CharacterString>en</gco:CharacterString>
     </gmd:language>
+
             <gmd:topicCategory>
                 <gmd:MD_TopicCategoryCode>geoscientificInformation</gmd:MD_TopicCategoryCode>
             </gmd:topicCategory>
@@ -275,11 +512,13 @@
                  </gmd:extent>
                  -->
             #}
-        </gmd:MD_DataIdentification>
+         </gmd:MD_DataIdentification>
+   {# </gmd:MD_ServiceIdentification> #}
+
     </gmd:identificationInfo>
     {% endif %}
 
-    {% if row['Resource URL#info'] %}
+    {% if row['References-Links#info'] %}
     <gmd:distributionInfo>
         <gmd:MD_Distribution>
             <gmd:distributionFormat>
@@ -299,7 +538,7 @@
                     <gmd:onLine>
                         <gmd:CI_OnlineResource>
                             <gmd:linkage>
-                                <gmd:URL>{{ row['Resource URL#info'] }}</gmd:URL>
+                                <gmd:URL>{{ row['References-Links#info'] }}</gmd:URL>
                             </gmd:linkage>
   {#                          <!--
                         <gmd:name>

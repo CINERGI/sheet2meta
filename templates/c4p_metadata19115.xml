@@ -14,52 +14,26 @@
         codeListValue="dataset">dataset</gmd:MD_ScopeCode>
     </gmd:hierarchyLevel>
     -->
-    {% if row['Resource steward organization'] %}
-    <gmd:contact>
+ <gmd:contact>
         <gmd:CI_ResponsibleParty>
             <gmd:organisationName>
-                <gco:CharacterString>{{ row['Resource steward organization'] }}</gco:CharacterString>
+                <gco:CharacterString>Earthcube CINERGI Metadata Pipeline</gco:CharacterString>
             </gmd:organisationName>
+             <gmd:positionName>
+                  <gco:CharacterString>CINERGI Metadata Contact</gco:CharacterString>
+            </gmd:positionName>
 
-            {% if row['Resource POC e-mail#info'] %}
             <gmd:contactInfo>
                 <gmd:CI_Contact>
                     <gmd:address>
                         <gmd:CI_Address>
                             <gmd:electronicMailAddress>
-                                <gco:CharacterString>{{row['Resource POC e-mail#info'] }}</gco:CharacterString>
+                                <gco:CharacterString>metadata@earthcube.org</gco:CharacterString>
                             </gmd:electronicMailAddress>
                         </gmd:CI_Address>
                     </gmd:address>
                 </gmd:CI_Contact>
             </gmd:contactInfo>
-            {% endif %}
-
-            <gmd:role>
-                <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
-                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
-                                 codeListValue="pointOfContact">pointOfContact
-                </gmd:CI_RoleCode>
-            </gmd:role>
-        </gmd:CI_ResponsibleParty>
-    </gmd:contact>
-    {% else %}
-    {# would e nice if this worked, but not allowed to be nil
-    nilReason
-    missing -- not known to sender. may not be one
-    unknown -- not known, probably is one
-
-    <gmd:contact>
-        <gmd:CI_ResponsibleParty nil="true" nilReason="unknown"/>
-    </gmd:contact>
-    #}
-    <gmd:contact>
-        <gmd:CI_ResponsibleParty>
-            <gmd:organisationName>
-                <gco:CharacterString>None Provided</gco:CharacterString>
-            </gmd:organisationName>
-
-
             <gmd:role>
                 <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
                                  codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
@@ -69,11 +43,7 @@
         </gmd:CI_ResponsibleParty>
     </gmd:contact>
 
-    {% endif %}
-
-    <gmd:dateStamp>
-        <gco:Date>2015-04-30</gco:Date>
-    </gmd:dateStamp>
+    <gmd:dateStamp gco:nilReason="unknown" />
     <!--
     <gmd:metadataStandardName>
         <gco:CharacterString>ISO 19139/19115 Metadata for Datasets</gco:CharacterString>
@@ -96,7 +66,7 @@
                     <gmd:date>
                         <gmd:CI_Date>
                             <gmd:date>
-                                <gco:Date>2014-04-30</gco:Date>
+                                <gco:Date>2015-04-30</gco:Date>
                             </gmd:date>
                             <gmd:dateType>
                                 <gmd:CI_DateTypeCode codeSpace="ISOTC211/19115"
@@ -112,11 +82,9 @@
             <gmd:abstract>
                 <gco:CharacterString>{{ row['description#info'] }}</gco:CharacterString>
             </gmd:abstract>
-            {% else %}
-             <gmd:abstract>
-              <!--  <gco:CharacterString nil="true" nilReason="unknown" /> -->
-                 <gco:CharacterString >None Provided</gco:CharacterString>
-            </gmd:abstract>
+                {% else %}
+
+            <gmd:abstract  gco:nilReason="unknown" />
             {% endif %}
 
            {% if row['Services'] %}
@@ -403,7 +371,7 @@
                 <gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
             </gmd:topicCategory>
 
-            <!--
+ {#           <!--
                  <gmd:extent>
                      <gmd:EX_Extent>
                          <gmd:geographicElement>
@@ -435,6 +403,7 @@
                      </gmd:EX_Extent>
                  </gmd:extent>
                  -->
+ #}
         </gmd:MD_DataIdentification>
     </gmd:identificationInfo>
     {% endif %}
@@ -461,7 +430,7 @@
                             <gmd:linkage>
                                 <gmd:URL>{{ row['resource_url#info'] }}</gmd:URL>
                             </gmd:linkage>
-                            <!--
+ {#                           <!--
                         <gmd:name>
                         <gco:CharacterString>CS Technical Report</gco:CharacterString>
                         </gmd:name>
@@ -469,7 +438,7 @@
                         <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
                         </gmd:description>
                         -->
-                            <gmd:function>
+  #}                          <gmd:function>
                                 <gmd:CI_OnLineFunctionCode
                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
                                         codeListValue="download"/>
