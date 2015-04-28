@@ -178,9 +178,11 @@
             {% if row['resource_type'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
+            {% for item in row['resource_type'].split(',') %}
                     <gmd:keyword>
-                        <gco:CharacterString>{{ row['resource_type'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
+                    {% endfor %}
 
                     <gmd:type>
                         <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
@@ -212,10 +214,12 @@
   {% if row['DataType'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
-                    <gmd:keyword>
-                        <gco:CharacterString>{{ row['DataType'] }}</gco:CharacterString>
-                    </gmd:keyword>
 
+ {% for item in row['DataType'].split(',') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
                     <gmd:type>
                         <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
@@ -247,10 +251,12 @@
             {% if row['keywords_geographic'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
-                    <gmd:keyword>
-                        <gco:CharacterString>{{ row['keywords_geographic'] }}</gco:CharacterString>
-                    </gmd:keyword>
 
+ {% for item in  row['keywords_geographic'].split(',') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
                     <gmd:type>
                         <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
@@ -265,10 +271,12 @@
             {% if row['keywords_thematic'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
-                    <gmd:keyword>
-                        <gco:CharacterString>{{ row['keywords_thematic'] }}</gco:CharacterString>
-                    </gmd:keyword>
 
+ {% for item in row['keywords_thematic'].split(',') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
                     <gmd:type>
                         <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
@@ -304,11 +312,14 @@
                     <gmd:keyword>
                         <gco:CharacterString>{{ row['Keyword: Discipline Tier 1'] }}</gco:CharacterString>
                     </gmd:keyword>
-                      {% if row['Keyword: Discipline Tier 2 Human'] %}
-                    <gmd:keyword>
-                        <gco:CharacterString>{{ row['Keyword: Discipline Tier 2 Human'] }}</gco:CharacterString>
-                    </gmd:keyword>
 
+                      {% if row['Keyword: Discipline Tier 2 Human'] %}
+
+{% for item in row['Keyword: Discipline Tier 2 Human'].split(',') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
                      {% endif %}
 
                     <gmd:type>
@@ -346,10 +357,12 @@
                         <gco:CharacterString>{{ row['Keyword: Geologic Time Tier 1'] }}</gco:CharacterString>
                     </gmd:keyword>
                       {% if row['Keyword: Geologic Time Tier 2'] %}
-                    <gmd:keyword>
-                        <gco:CharacterString>{{ row['Keyword: Geologic Time Tier 2'] }}</gco:CharacterString>
-                    </gmd:keyword>
 
+{% for item in row['Keyword: Geologic Time Tier 2'].split(',') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
                      {% endif %}
 
                     <gmd:type>
