@@ -4,7 +4,7 @@
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
             <serialized version="16.1" xml:space="preserve">
-                <map>
+                <serializableOrderedMap>
                     <entry>
                         <String>catalogs.v5</String>
                         <String-array>
@@ -96,11 +96,12 @@
                             </validationScenario>
                         </validationScenario-array>
                     </entry>
-                </map>
+                </serializableOrderedMap>
             </serialized>
         </options>
     </meta>
     <projectTree name="ValidateXML.xpr">
+        <folder path="c4p/"/>
         <folder path="SEN/"/>
         <folder path="tests/"/>
     </projectTree>

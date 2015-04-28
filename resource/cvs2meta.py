@@ -21,9 +21,9 @@ def load_template(template_name, base_bath= '.'):
 def render_template(row, template):
     return template.render(row=row, test="abces")
 
-def render_output(data,template,id_field, base_path='.'):
+def render_output(data,template,id_field, base_path='.',base_name=""):
     # base_name = template.name[0:template.name.index('.xml')]
-    base_name='sen'
+
     i = 0
     for d in data:
         template_values = {
