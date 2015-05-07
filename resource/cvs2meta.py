@@ -6,6 +6,7 @@ from jinja2 import Environment, FileSystemLoader
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
+import os
 
 def read_input(csvfile , ):
     csvfile_v = open(csvfile, "rb")
@@ -26,6 +27,10 @@ def render_template(row, template):
 
 def render_output(data,template,id_field, base_path='.',base_name=""):
     # base_name = template.name[0:template.name.index('.xml')]
+    try:
+        os.stat(base_path)
+    except:
+        os.mkdir(base_path)
 
     i = 0
     for d in data:
