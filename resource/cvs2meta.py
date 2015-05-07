@@ -7,6 +7,8 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 import os
+from dateparser.date import DateDataParser
+
 
 def read_input(csvfile , ):
     csvfile_v = open(csvfile, "rb")
@@ -23,7 +25,8 @@ def load_template(template_name, base_bath= '.'):
     return template
 
 def render_template(row, template):
-    return template.render(row=row, test="abces")
+    ddp = DateDataParser()
+    return template.render(row=row, ddp=ddp)
 
 def render_output(data,template,id_field, base_path='.',base_name=""):
     # base_name = template.name[0:template.name.index('.xml')]
