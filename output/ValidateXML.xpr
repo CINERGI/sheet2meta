@@ -103,6 +103,7 @@
     <projectTree name="ValidateXML.xpr">
         <folder path="c4p/"/>
         <folder path="ci/"/>
+        <folder path="cuahsi/"/>
         <folder path="databib/"/>
         <folder path="ecogeo/"/>
         <folder path="SEN/"/>
