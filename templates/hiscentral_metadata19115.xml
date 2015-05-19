@@ -61,7 +61,7 @@
             <gmd:citation>
                 <gmd:CI_Citation>
                     <gmd:title>
-                        <gco:CharacterString>{{ row['title'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ row['title'] }} -- CUAHSI WaterOneFlow Service</gco:CharacterString>
                     </gmd:title>
                     <gmd:date>
                         <gmd:CI_Date>
