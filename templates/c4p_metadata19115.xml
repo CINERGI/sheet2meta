@@ -87,9 +87,9 @@
             <gmd:abstract  gco:nilReason="unknown" />
             {% endif %}
 
-           {% if row['Services'] %}
+           {% if row['Services#multi'] %}
             <gmd:purpose>
-                <gco:CharacterString>{{ row['Services'] }}</gco:CharacterString>
+                <gco:CharacterString>{{ row['Services#multi'] }}</gco:CharacterString>
             </gmd:purpose>
 
             {% endif %}
@@ -143,10 +143,10 @@
             </gmd:pointOfContact>
             {% endif %}
 
-            {% if row['resource_type'] %}
+            {% if row['resource_type#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
-            {% for item in row['resource_type'].split(',') %}
+            {% for item in row['resource_type#multi'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -179,11 +179,11 @@
                 </gmd:MD_Keywords>
             </gmd:descriptiveKeywords>
             {% endif %}
-  {% if row['DataType'] %}
+  {% if row['DataType#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['DataType'].split(',') %}
+ {% for item in row['DataType#multi'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -216,11 +216,11 @@
             </gmd:descriptiveKeywords>
             {% endif %}
 
-            {% if row['keywords_geographic'] %}
+            {% if row['keywords_geographic#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in  row['keywords_geographic'].split(',') %}
+ {% for item in  row['keywords_geographic#multi'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -236,11 +236,11 @@
             {% endif %}
 
 
-            {% if row['keywords_thematic'] %}
+            {% if row['keywords_thematic#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['keywords_thematic'].split(',') %}
+ {% for item in row['keywords_thematic#multi'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -274,16 +274,16 @@
             </gmd:descriptiveKeywords>
             {% endif %}
 
-           {% if row['Keyword: Discipline Tier 1'] %}
+           {% if row['Keyword: Discipline Tier 1#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
                     <gmd:keyword>
-                        <gco:CharacterString>{{ row['Keyword: Discipline Tier 1'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ row['Keyword: Discipline Tier 1#multi'] }}</gco:CharacterString>
                     </gmd:keyword>
 
-                      {% if row['Keyword: Discipline Tier 2 Human'] %}
+                      {% if row['Keyword: Discipline Tier 2 Human#multi'] %}
 
-{% for item in row['Keyword: Discipline Tier 2 Human'].split(',') %}
+{% for item in row['Keyword: Discipline Tier 2 Human#multi'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -318,15 +318,15 @@
             </gmd:descriptiveKeywords>
             {% endif %}
 
-          {% if row['Keyword: Geologic Time Tier 1'] %}
+          {% if row['Keyword: Geologic Time Tier 1#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
                     <gmd:keyword>
-                        <gco:CharacterString>{{ row['Keyword: Geologic Time Tier 1'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ row['Keyword: Geologic Time Tier 1#multi'] }}</gco:CharacterString>
                     </gmd:keyword>
-                      {% if row['Keyword: Geologic Time Tier 2'] %}
+                      {% if row['Keyword: Geologic Time Tier 2#multi'] %}
 
-{% for item in row['Keyword: Geologic Time Tier 2'].split(',') %}
+{% for item in row['Keyword: Geologic Time Tier 2#multi'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>

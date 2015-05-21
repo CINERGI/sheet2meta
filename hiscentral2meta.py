@@ -59,7 +59,7 @@ def main():
             for sv  in wof_vars.items():
                 vname= sv[1]['name']
                 service_variables.append(vname)
-            out = template.render(row=d, ddp=ddp, wof_vars=service_variables)
+            out = template.render(row=d, ddp=ddp, wof_vars=set(service_variables))
             # d[id_field]) inlcudes colons... so bad filenames
             #f_out = open(base_path+"/%s_%s.xml" % (base_name , d[id_field]) , "w")
             f_out = open(base_path+"/%s_%s.xml" % (base_name , i) , "w")

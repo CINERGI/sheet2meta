@@ -55,13 +55,13 @@
     </gmd:metadataStandardVersion>
 
 
-    {% if row['Resource name'] %}
+    {% if row['Resource name#info'] %}
     <gmd:identificationInfo>
         <gmd:MD_DataIdentification>
             <gmd:citation>
                 <gmd:CI_Citation>
                     <gmd:title>
-                        <gco:CharacterString>{{ row['Resource name'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ row['Resource name#info'] }}</gco:CharacterString>
                     </gmd:title>
                     <gmd:date>
                         <gmd:CI_Date>
@@ -136,11 +136,11 @@
             </gmd:pointOfContact>
             {% endif %}
 
-            {% if row['CINERGI Resource Type'] %}
+            {% if row['CINERGI Resource Type#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['CINERGI Resource Type'].split(',') %}
+ {% for item in row['CINERGI Resource Type#multi'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -173,11 +173,11 @@
             </gmd:descriptiveKeywords>
             {% endif %}
 
-            {% if row['keywords_geographic'] %}
+            {% if row['keywords_geographic#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['keywords_geographic'].split(',') %}
+ {% for item in row['keywords_geographic#multi'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -193,11 +193,11 @@
             {% endif %}
 
 
-            {% if row['Classification (Theme)'] %}
+            {% if row['Classification (Theme)#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
-{% for item in row['Classification (Theme)'] .split(',') %}
+{% for item in row['Classification (Theme)#multi'] .split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
