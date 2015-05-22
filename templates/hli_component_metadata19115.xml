@@ -55,14 +55,14 @@
     </gmd:metadataStandardVersion>
 
 
-    {% if row['Name#info'] %}
+    {% if row['Component Name#info'] %}
     <gmd:identificationInfo>
        {# <gmd:MD_ServiceIdentification> #}
           <gmd:MD_DataIdentification>
         <gmd:citation>
                 <gmd:CI_Citation>
                     <gmd:title>
-                        <gco:CharacterString>{{ row['Name#info'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ row['Component Name#info'] }}</gco:CharacterString>
                     </gmd:title>
                     <gmd:date>
                         <gmd:CI_Date>
@@ -79,9 +79,9 @@
                     </gmd:date>
                 </gmd:CI_Citation>
             </gmd:citation>
-            {% if row['FunctionalDescription#info'] %}
+            {% if row['Component Description#info'] %}
             <gmd:abstract>
-                <gco:CharacterString>{{ row['FunctionalDescription#info'] }}</gco:CharacterString>
+                <gco:CharacterString>{{ row['Component Description#info'] }}</gco:CharacterString>
             </gmd:abstract>
             {% else %}
 
@@ -162,11 +162,11 @@
     <gmd:pointOfContact  gco:nilReason="unknown" />
             {% endif %}
 
-            {% if row['Component Type'] %}
+            {% if row['Component Type#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['Component Type'].split(',') %}
+ {% for item in row['Component Type#multi'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -237,11 +237,11 @@
             {% endif %}
 
 
-            {% if row['Function'] %}
+            {% if row['Function#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
-{% for item in row['Function'] .split(',') %}
+{% for item in row['Function#multi'] .split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -313,11 +313,11 @@
             </gmd:descriptiveKeywords>
             {% endif %}
 
-            {% if row['InterchangeFormats'] %}
+            {% if row['InterchangeFormats#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
-{% for item in row['InterchangeFormats'] .split(',') %}
+{% for item in row['InterchangeFormats#multi'] .split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -351,11 +351,11 @@
             </gmd:descriptiveKeywords>
             {% endif %}
 
-      {% if row['InformationModels'] %}
+      {% if row['InformationModels#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
-{% for item in row['InformationModels'] .split(',') %}
+{% for item in row['InformationModels#multi'] .split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -427,11 +427,11 @@
             </gmd:descriptiveKeywords>
             {% endif %}
 
-         {% if row['Implementation'] %}
+         {% if row['Implementation#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
-{% for item in row['Implementation'] .split(',') %}
+{% for item in row['Implementation#multi'] .split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -472,14 +472,14 @@
         <gco:CharacterString>en</gco:CharacterString>
     </gmd:language>
 
-            <gmd:topicCategory>
+  {#            <gmd:topicCategory>
                 <gmd:MD_TopicCategoryCode>geoscientificInformation</gmd:MD_TopicCategoryCode>
             </gmd:topicCategory>
             <gmd:topicCategory>
                 <gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
             </gmd:topicCategory>
-
- {#           <!--
+#}
+   {#         <!--
                  <gmd:extent>
                      <gmd:EX_Extent>
                          <gmd:geographicElement>

@@ -106,6 +106,7 @@
         <folder path="cuahsi/"/>
         <folder path="databib/"/>
         <folder path="ecogeo/"/>
+        <folder path="hli/"/>
         <folder path="modified/"/>
         <folder path="SEN/"/>
         <folder path="tests/"/>
