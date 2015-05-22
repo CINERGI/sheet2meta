@@ -8,7 +8,15 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 import os
 from dateparser.date import DateDataParser
+import urllib2
 
+def read_url(url_file , ):
+    url_file_v = urllib2.urlopen(url_file)
+    #dialect = csv.Sniffer().sniff(url_file_v.read(1024))
+    #url_file_v.seek(0)
+    #reader = csv.DictReader(url_file_v, dialect=dialect)
+    reader = csv.DictReader(url_file_v, dialect=Dialect.doublequote)
+    return reader
 
 def read_input(csvfile , ):
     csvfile_v = open(csvfile, "rb")

@@ -105,16 +105,16 @@
             </gmd:status>
  {% endif %}
 
-            {% if row['Steward-Organization'] %}
+            {% if row['Steward Organization'] %}
             <gmd:pointOfContact>
                 <gmd:CI_ResponsibleParty>
-                    {% if row['Steward-Organization'] %}
+                    {% if row['Steward Organization'] %}
                     <gmd:individualName>
                         <gco:CharacterString>{{ row['Resource steward person#info'] }}</gco:CharacterString>
                     </gmd:individualName>
                     {% endif %}
                     <gmd:organisationName>
-                        <gco:CharacterString>{{ row['Steward-Organization'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ row['Steward Organization'] }}</gco:CharacterString>
                     </gmd:organisationName>
 
                     {% if row['Resource POC e-mail#info'] or row['Resource POC voice phone#info'] %}
@@ -188,7 +188,7 @@
                                         <gco:Date>2015-01-01</gco:Date>
                                     </gmd:date>
                                     <gmd:dateType>
-                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
                                                         />
                                     </gmd:dateType>
                                 </gmd:CI_Date>
@@ -225,7 +225,7 @@
                                         <gco:Date>2015-01-01</gco:Date>
                                     </gmd:date>
                                     <gmd:dateType>
-                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
                                                         />
                                     </gmd:dateType>
                                 </gmd:CI_Date>

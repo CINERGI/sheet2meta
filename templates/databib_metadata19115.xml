@@ -4,7 +4,7 @@
                  xmlns:xlink="http://www.w3.org/1999/xlink">
 
     <gmd:fileIdentifier>
-        <gco:CharacterString>{{ row['URL'] }}</gco:CharacterString>
+        <gco:CharacterString>{{ row['URL#info'] }}</gco:CharacterString>
     </gmd:fileIdentifier>
     <gmd:language>
         <gco:CharacterString>en</gco:CharacterString>
@@ -56,24 +56,24 @@
     </gmd:metadataStandardVersion>
 
 
-    {% if row['Title'] %}
+    {% if row['Title#info'] %}
     <gmd:identificationInfo>
         <gmd:MD_DataIdentification>
             <gmd:citation>
                 <gmd:CI_Citation>
                     <gmd:title>
-                        <gco:CharacterString>{{ row['Title'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ row['Title#info'] }}</gco:CharacterString>
                     </gmd:title>
                     <gmd:date>
                         {# funky dates, mostly YYYY, some dd/mm/yyyy, and then YYYY (some comment ) #}
                         <gmd:CI_Date>
-                            {% if ( row['Start Date'] )and not ( row['Start Date'] == 'NA' ) %}
-                                {% if row['Start Date'].startswith('18') %}
+                            {% if ( row['Start Date#date Date'] )and not ( row['Start Date#date Date'] == 'NA' ) %}
+                                {% if row['Start Date#date'].startswith('18') %}
                                 <gmd:date>
-                                    <gco:Date>{{ row['Start Date'][:4] }}</gco:Date>
+                                    <gco:Date>{{ row['Start Date#date'][:4] }}</gco:Date>
                                 </gmd:date>
                                 {% else %}
-                                    {% set dt = ddp.get_date_data( row['Start Date'] ) %}
+                                    {% set dt = ddp.get_date_data( row['Start Date#date'] ) %}
                                     {% if dt.date_obj %}
                                     <gmd:date>
                                         <gco:Date>{{ dt.date_obj.strftime("%Y") }}</gco:Date>
@@ -96,9 +96,9 @@
                     </gmd:date>
                 </gmd:CI_Citation>
             </gmd:citation>
-            {% if row['Description'] %}
+            {% if row['Description#info'] %}
             <gmd:abstract>
-                <gco:CharacterString>{{ row['Description'] }}</gco:CharacterString>
+                <gco:CharacterString>{{ row['Description#info'] }}</gco:CharacterString>
             </gmd:abstract>
             {% else %}
 
@@ -184,7 +184,7 @@
                                         <gco:Date>2015-01-01</gco:Date>
                                     </gmd:date>
                                     <gmd:dateType>
-                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
                                                 />
                                     </gmd:dateType>
                                 </gmd:CI_Date>
@@ -195,11 +195,11 @@
             </gmd:descriptiveKeywords>
 
 
-            {% if row['Location'] %}
+            {% if row['Location#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
-                    {% for item in row['Location'].split(',') %}
+                    {% for item in row['Location#multi'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -215,11 +215,11 @@
             {% endif %}
 
 
-            {% if row['Subjects'] %}
+            {% if row['Subjects#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
-                    {% for item in row['Subjects'] .split(',') %}
+                    {% for item in row['Subjects#multi'] .split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -242,7 +242,7 @@
                                         <gco:Date>2015-01-01</gco:Date>
                                     </gmd:date>
                                     <gmd:dateType>
-                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
                                                 />
                                     </gmd:dateType>
                                 </gmd:CI_Date>
@@ -253,7 +253,81 @@
             </gmd:descriptiveKeywords>
             {% endif %}
 
+           {% if row['Deposit'] %}
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
 
+                    {% for item in row['Deposit'] .split(';') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="theme">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>re3 Deposit</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            {% endif %}
+
+                      {% if row['Reuse'] %}
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+
+                    {% for item in row['Reuse'] .split(';') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="theme">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>re3 Reuse</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            {% endif %}
             <gmd:language>
                 <gco:CharacterString>en</gco:CharacterString>
             </gmd:language>
@@ -300,7 +374,7 @@
     </gmd:identificationInfo>
     {% endif %}
 
-    {% if row['URL'] %}
+    {% if row['URL#info'] %}
     <gmd:distributionInfo>
         <gmd:MD_Distribution>
             <gmd:distributionFormat>
@@ -320,7 +394,7 @@
                     <gmd:onLine>
                         <gmd:CI_OnlineResource>
                             <gmd:linkage>
-                                <gmd:URL>{{ row['URL'] }}</gmd:URL>
+                                <gmd:URL>{{ row['URL#info'] }}</gmd:URL>
                             </gmd:linkage>
                             {#                          <!--
                         <gmd:name>

@@ -169,7 +169,7 @@
                                         <gco:Date>2015-01-01</gco:Date>
                                     </gmd:date>
                                     <gmd:dateType>
-                                        <CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
+                                        <CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
                                                          xmlns="http://www.isotc211.org/2005/gmd"/>
                                     </gmd:dateType>
                                 </gmd:CI_Date>
@@ -205,7 +205,7 @@
                                         <gco:Date>2015-01-01</gco:Date>
                                     </gmd:date>
                                     <gmd:dateType>
-                                        <CI_DateTypeCode codeListValue="publication" codeList="CI_DateTypeCode"
+                                        <CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
                                                          xmlns="http://www.isotc211.org/2005/gmd"/>
                                     </gmd:dateType>
                                 </gmd:CI_Date>
