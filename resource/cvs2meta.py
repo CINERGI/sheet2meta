@@ -9,6 +9,7 @@ sys.setdefaultencoding('utf-8')
 import os
 from dateparser.date import DateDataParser
 import urllib2
+import uuid
 
 def read_url(url_file , ):
     url_file_v = urllib2.urlopen(url_file)
@@ -29,12 +30,19 @@ def read_input(csvfile , ):
 def load_template(template_name, base_bath= '.'):
     loader = FileSystemLoader(base_bath)
     env = Environment(loader=loader, autoescape=True)
+    env.globals['uuid'] = url2uuid
     template = env.get_template(template_name)
+
     return template
+
+def url2uuid( b):
+     u = uuid.uuid3(uuid.NAMESPACE_URL, b)
+     return u.get_hex()
 
 def render_template(row, template):
     ddp = DateDataParser()
-    return template.render(row=row, ddp=ddp)
+
+    return template.render(row=row, ddp=ddp, uuid=lambda b: url2uuid( b))
 
 def render_output(data,template,id_field, base_path='.',base_name=""):
     # base_name = template.name[0:template.name.index('.xml')]
