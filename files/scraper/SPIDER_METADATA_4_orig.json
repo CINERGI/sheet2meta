@@ -1,0 +1,27 @@
+﻿{ "data": [
+
+  { "author": [
+    "Iyer, Hariharaiyer Mahadeva",
+    "[U.S. Geological Survey],"
+  ],
+  "catalogItem": "https://www.sciencebase.gov/catalog/item/4f4e49e2e4b07f02db5e4e45",
+  "download": "https://www.sciencebase.gov/catalog/file/get/4f4e49e2e4b07f02db5e4e45",
+  "otherLinks": "http://pubs.er.usgs.gov/publication/ofr7496",
+  "title": [
+    "Search for geothermal seismic noise in the east Mesa area, Imperial Valley, California"
+  ]
+},
+{
+"author": [
+"Olmsted, F. H.",
+"U.S. Geological Survey,"
+],
+"catalogItem": "https://www.sciencebase.gov/catalog/item/4f4e4aafe4b07f02db66cea2",
+"download": "https://www.sciencebase.gov/catalog/file/get/4f4e4aafe4b07f02db66cea2",
+"otherLinks": "http://pubs.er.usgs.gov/publication/wri854033",
+"pdf": "http://pubs.usgs.gov/wri/1985/4033/report.pdf",
+"title": [
+"Ground-water discharge and recharge in the Soda Lakes and Upsal Hogback geothermal areas, Churchill County, Nevada"
+]
+}
+ ] }
