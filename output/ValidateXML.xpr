@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="16.1">
+<project version="17.1">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="16.1" xml:space="preserve">
+            <serialized version="17.1" xml:space="preserve">
                 <serializableOrderedMap>
                     <entry>
                         <String>catalogs.v5</String>
@@ -18,6 +18,36 @@
                     <entry>
                         <String>validation.scenario.associations</String>
                         <scenarioAssociation-array>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>databib/</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>iso_gmd</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>Validation_scenario</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>modified/</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>iso_gmd</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>Validation_scenario</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
                                     <String>SEN/</String>
@@ -110,5 +140,6 @@
         <folder path="modified/"/>
         <folder path="SEN/"/>
         <folder path="tests/"/>
+        <file name="Untitled.xsl"/>
     </projectTree>
 </project>
