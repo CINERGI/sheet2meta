@@ -136,9 +136,13 @@
         <folder path="cuahsi/"/>
         <folder path="databib/"/>
         <folder path="ecogeo/"/>
+        <folder path="epa_models/"/>
         <folder path="hli/"/>
         <folder path="modified/"/>
+        <folder path="noaa_models/"/>
         <folder path="SEN/"/>
+        <folder path="streaming/"/>
+        <folder path="tess_models/"/>
         <folder path="tests/"/>
         <file name="Untitled.xsl"/>
     </projectTree>

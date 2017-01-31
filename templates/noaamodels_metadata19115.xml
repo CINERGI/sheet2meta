@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
                  xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml"
-                 xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gmi="http://www.isotc211.org/2005/gmi"
->
+                 xmlns:xlink="http://www.w3.org/1999/xlink">
     <gmd:fileIdentifier>
-        <gco:CharacterString>{{ row['ID#info'] }}</gco:CharacterString>
+        <gco:CharacterString>noaa_models:{{  row['Number #']|trim }}</gco:CharacterString>
     </gmd:fileIdentifier>
     <gmd:language>
         <gco:CharacterString>en</gco:CharacterString>
     </gmd:language>
-    <!--
+
     <gmd:hierarchyLevel>
         <gmd:MD_ScopeCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"
-        codeListValue="dataset">dataset</gmd:MD_ScopeCode>
+        codeListValue="model">model</gmd:MD_ScopeCode>
     </gmd:hierarchyLevel>
-    -->
+
 <gmd:contact>
         <gmd:CI_ResponsibleParty>
             <gmd:organisationName>
@@ -56,13 +55,14 @@
     </gmd:metadataStandardVersion>
 
 
-    {% if row['Resource name#info'] %}
+    {% if row['Name of Model or Activity#info'] %}
     <gmd:identificationInfo>
         <gmd:MD_DataIdentification>
             <gmd:citation>
                 <gmd:CI_Citation>
                     <gmd:title>
-                        <gco:CharacterString>Data Turbine Stream for {{ row['Resource name#info'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ row['Name of Model or Activity#info'] }}
+                        </gco:CharacterString>
                     </gmd:title>
                     <gmd:date>
                         <gmd:CI_Date>
@@ -79,54 +79,43 @@
                     </gmd:date>
                 </gmd:CI_Citation>
             </gmd:citation>
-            {% if row['Resource description#info'] %}
+            {% if row['Description of Model or Activity#info'] or  row['Products and Services Supported by this Model or Activity#multi'] or row['Ecosystem']%}
             <gmd:abstract>
-                <gco:CharacterString>{{ row['Resource description#info'] }}</gco:CharacterString>
+                <gco:CharacterString>{{ row['Description of Model or Activity#info'] }}
+               {% if row['Modeling Activity or Purpose#info'] %} [ Modeling Activity or Purpose": {{ row['Modeling Activity or Purpose#info'] }} ]
+                     {% endif %}
+                {% if row['Model Input Types#multi']%}  [ Model Input Types: {{ row['Model Input Types#multi'] }} ]
+                     {% endif %}
+                {% if row['Products and Services Supported by this Model or Activity#multi']%}  [ Products and Services Supported: {{ row['Products and Services Supported by this Model or Activity#multi'] }} ]
+                     {% endif %}
+               {% if row['Partner Organizations with Shared Resources#multi'] %} [ Partner Organizations with Shared Resources: {{ row['Partner Organizations with Shared Resources#multi'] }} ]
+                     {% endif %}
+               {% if row['Additional Information#info']%}  [ Additional Information: {{ row['Additional Information#info'] }} ]
+                     {% endif %}
+                </gco:CharacterString>
             </gmd:abstract>
             {% else %}
 
             <gmd:abstract  gco:nilReason="unknown" />
             {% endif %}
 
-            {% if row['Resource steward organization'] %}
+ {% if row['Modeling Activity or Purpose#info']%}
+            <gmd:purpose>
+                <gco:CharacterString> {{ row['Modeling Activity or Purpose#info'] }} </gco:CharacterString>
+            </gmd:purpose>
+
+            {% endif %}
+
+
+
+   {% for item in row['Point of Contact(s)#multi'].split(',') %}
             <gmd:pointOfContact>
                 <gmd:CI_ResponsibleParty>
-                    {% if row['Resource steward person'] %}
+
                     <gmd:individualName>
-                        <gco:CharacterString>{{ row['Resource steward person#info'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:individualName>
-                    {% endif %}
-                    <gmd:organisationName>
-                        <gco:CharacterString>{{ row['Resource steward organization'] }}</gco:CharacterString>
-                    </gmd:organisationName>
 
-                    {% if row['Resource POC e-mail#info'] or row['Resource POC voice phone#info'] %}
-
-                    <gmd:contactInfo>
-                        <gmd:CI_Contact>
-                            {% if row['Resource POC voice phone#info'] %}
-                            <gmd:phone>
-                                <gmd:CI_Telephone>
-                                    <gmd:voice>
-                                        <gco:CharacterString>{{ row['Resource POC voice phone#info'] }}
-                                        </gco:CharacterString>
-                                    </gmd:voice>
-                                </gmd:CI_Telephone>
-                            </gmd:phone>
-                            {% endif %}
-                            {% if row['Resource POC e-mail#info'] %}
-                            <gmd:address>
-                                <gmd:CI_Address>
-                                    <gmd:electronicMailAddress>
-                                        <gco:CharacterString>{{ row['Resource POC e-mail#info'] }}</gco:CharacterString>
-                                    </gmd:electronicMailAddress>
-
-                                </gmd:CI_Address>
-                            </gmd:address>
-                            {% endif %}
-                        </gmd:CI_Contact>
-                    </gmd:contactInfo>
-                    {% endif %}
                     <gmd:role>
                         <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
                                          codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
@@ -135,13 +124,13 @@
                     </gmd:role>
                 </gmd:CI_ResponsibleParty>
             </gmd:pointOfContact>
-            {% endif %}
+     {% endfor %}
 
-            {% if row['CINERGI Resource Type#multi'] %}
+            {% if row['Goal:'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['CINERGI Resource Type#multi'].split('|') %}
+ {% for item in row['Goal:'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -155,7 +144,7 @@
                      <gmd:thesaurusName>
                         <gmd:CI_Citation>
                             <gmd:title>
-                                <gco:CharacterString>CINERGI Resource Types</gco:CharacterString>
+                                <gco:CharacterString>NOAA Model Goal</gco:CharacterString>
                             </gmd:title>
                             <gmd:date>
                                 <gmd:CI_Date>
@@ -174,11 +163,11 @@
             </gmd:descriptiveKeywords>
             {% endif %}
 
-            {% if row['keywords_geographic#multi'] %}
+            {% if row['Program:'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['keywords_geographic#multi'].split('|') %}
+ {% for item in row['Program:'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -186,19 +175,37 @@
                     <gmd:type>
                         <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="place">place
+                                                codeListValue="theme">theme
                         </gmd:MD_KeywordTypeCode>
                     </gmd:type>
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>NOAA Model Program</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
                 </gmd:MD_Keywords>
             </gmd:descriptiveKeywords>
             {% endif %}
 
 
-            {% if row['Classification (Theme)#multi'] %}
+            {% if row['User Community#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
-{% for item in row['Classification (Theme)#multi'] .split('|') %}
+{% for item in row['User Community#multi'] .split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -206,14 +213,14 @@
                     <gmd:type>
                         <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="place">theme
+                                                codeListValue="discipline">discipline
                         </gmd:MD_KeywordTypeCode>
                     </gmd:type>
 
                     <gmd:thesaurusName>
                         <gmd:CI_Citation>
                             <gmd:title>
-                                <gco:CharacterString>CINERGI Themes</gco:CharacterString>
+                                <gco:CharacterString>NOAA User Community</gco:CharacterString>
                             </gmd:title>
                             <gmd:date>
                                 <gmd:CI_Date>
@@ -232,6 +239,75 @@
             </gmd:descriptiveKeywords>
             {% endif %}
 
+ {% if row['Model Discipline#multi'] %}
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+
+{% for item in row['Model Discipline#multi'] .split(',') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="discipline">discipline
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>NOAA Model Discipline</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            {% endif %}
+
+    {% if row['Partner Organizations with Shared Resources#multi'] %}
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+{% for item in row['Partner Organizations with Shared Resources#multi'] .split(',') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
+
+
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>Organization</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            {% endif %}
 
     <gmd:language>
         <gco:CharacterString>en</gco:CharacterString>
@@ -243,53 +319,49 @@
                 <gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
             </gmd:topicCategory>
 
-  {% if row['west_bounding_longitude'] and row['south_bounding_latitude'] %}
-            <gmd:extent>
-                <gmd:EX_Extent>
-                    <gmd:geographicElement>
-                        <gmd:EX_GeographicBoundingBox>
-                            <gmd:westBoundLongitude>
-                                <gco:Decimal>{{ row['west_bounding_longitude'] }}</gco:Decimal>
-                            </gmd:westBoundLongitude>
-                            <gmd:eastBoundLongitude>
-                                <gco:Decimal>{{ row['west_bounding_longitude'] }}</gco:Decimal>
-                            </gmd:eastBoundLongitude>
-                            <gmd:southBoundLatitude>
-                                <gco:Decimal>{{ row['south_bounding_latitude'] }}</gco:Decimal>
-                            </gmd:southBoundLatitude>
-                            <gmd:northBoundLatitude>
-                                <gco:Decimal>{{ row['south_bounding_latitude'] }}</gco:Decimal>
-                            </gmd:northBoundLatitude>
-                        </gmd:EX_GeographicBoundingBox>
-                    </gmd:geographicElement>
-                   {% if row['ISO time start'] %}
-   <!-- Oxygen complains about TimePeriod not being a time primative -->
-      <!--              <gmd:temporalElement>
-                        <gmd:EX_TemporalExtent>
-                            <gmd:extent>
-                                <gml:TimePeriod gml:id="Temporal">
-                                    <gml:beginPosition>{{ row['ISO time start'] }}</gml:beginPosition>
-                                 <gml:endPosition indeterminatePosition="now"></gml:endPosition>
-                                </gml:TimePeriod>
-                            </gmd:extent>
-                        </gmd:EX_TemporalExtent>
-                    </gmd:temporalElement>
-                    -->
-                    {% endif %}
-                </gmd:EX_Extent>
-            </gmd:extent>
-        {% endif %}
+ {#           <!--
+                 <gmd:extent>
+                     <gmd:EX_Extent>
+                         <gmd:geographicElement>
+                             <gmd:EX_GeographicBoundingBox>
+                                 <gmd:westBoundLongitude>
+                                     <gco:Decimal>-180</gco:Decimal>
+                                 </gmd:westBoundLongitude>
+                                 <gmd:eastBoundLongitude>
+                                     <gco:Decimal>180</gco:Decimal>
+                                 </gmd:eastBoundLongitude>
+                                 <gmd:southBoundLatitude>
+                                     <gco:Decimal>-90</gco:Decimal>
+                                 </gmd:southBoundLatitude>
+                                 <gmd:northBoundLatitude>
+                                     <gco:Decimal>90</gco:Decimal>
+                                 </gmd:northBoundLatitude>
+                             </gmd:EX_GeographicBoundingBox>
+                         </gmd:geographicElement>
+                         <gmd:temporalElement>
+                             <gmd:EX_TemporalExtent>
+                                 <gmd:extent>
+                                     <gml:TimePeriod gml:id="Temporal">
+                                         <gml:beginPosition>[startdate 1999-01-01]</gml:beginPosition>
+                                         <gml:endPosition>[enddate - 2000-12-31]</gml:endPosition>
+                                     </gml:TimePeriod>
+                                 </gmd:extent>
+                             </gmd:EX_TemporalExtent>
+                         </gmd:temporalElement>
+                     </gmd:EX_Extent>
+                 </gmd:extent>
+                 -->
+            #}
         </gmd:MD_DataIdentification>
     </gmd:identificationInfo>
     {% endif %}
 
- {% if row['URLs'] or row['Resource URL#link'] %}
-   <gmd:distributionInfo>
-         <gmd:MD_Distribution>
+    {% if row['link#url'] %}
+    <gmd:distributionInfo>
+        <gmd:MD_Distribution>
             <gmd:distributionFormat>
                 <gmd:MD_Format>
-                    <gmd:name>
-                        <gco:CharacterString>Resource URL</gco:CharacterString>
+                    <gmd:name><gco:CharacterString>Resource URL</gco:CharacterString>
                     </gmd:name>
                     <gmd:version>
                         <gco:CharacterString>0.0</gco:CharacterString>
@@ -297,23 +369,23 @@
                 </gmd:MD_Format>
 
             </gmd:distributionFormat>
- {% if row['URLs'] %}
+
             <gmd:transferOptions>
                 <gmd:MD_DigitalTransferOptions>
                     <gmd:onLine>
                         <gmd:CI_OnlineResource>
                             <gmd:linkage>
-                                <gmd:URL>{{ row['URL#info'] }}</gmd:URL>
+                                <gmd:URL>{{ row['link#url'] }}</gmd:URL>
                             </gmd:linkage>
 
                         <gmd:name>
-                        <gco:CharacterString>Cloud Turbine URL</gco:CharacterString>
+                        <gco:CharacterString>Model Homepage</gco:CharacterString>
                         </gmd:name>
-                      {#                          <!--  <gmd:description>
+  {#                          <!--                       <gmd:description>
                         <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
                         </gmd:description>
                         -->
-                            #}
+   #}
                             <gmd:function>
                                 <gmd:CI_OnLineFunctionCode
                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
@@ -323,33 +395,7 @@
                     </gmd:onLine>
                 </gmd:MD_DigitalTransferOptions>
             </gmd:transferOptions>
-  {% endif %}
-      {% for item in row['Resource URL#link'].split('|') %}
-            <gmd:transferOptions>
-                <gmd:MD_DigitalTransferOptions>
-                    <gmd:onLine>
-                        <gmd:CI_OnlineResource>
-                            <gmd:linkage>
-                                <gmd:URL>{{ item.split(']')|last() }}</gmd:URL>
-                            </gmd:linkage>
-
-                        <gmd:name>
-                        <gco:CharacterString>{{ item.split(']')|first()| replace('[','') }}</gco:CharacterString>
-                        </gmd:name>
-
-                            <gmd:function>
-                                <gmd:CI_OnLineFunctionCode
-                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
-                                        codeListValue="download"/>
-                            </gmd:function>
-                        </gmd:CI_OnlineResource>
-                    </gmd:onLine>
-                </gmd:MD_DigitalTransferOptions>
-            </gmd:transferOptions>
-       {% endfor %}
+        </gmd:MD_Distribution>
+    </gmd:distributionInfo>
     {% endif %}
-
-</gmd:MD_Distribution>
- </gmd:distributionInfo>
-
 </gmd:MD_Metadata>

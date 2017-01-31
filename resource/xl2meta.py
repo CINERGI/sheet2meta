@@ -1,3 +1,4 @@
+
 __author__ = 'valentin'
 
 import csv
@@ -10,10 +11,10 @@ import os
 from dateparser.date import DateDataParser
 import urllib2
 import uuid
-import ssl
+import xlwings
 
-def read_url(url_file , context=None ):
-    url_file_v = urllib2.urlopen(url_file , context=context)
+def read_url(url_file , ):
+    url_file_v = urllib2.urlopen(url_file)
     #dialect = csv.Sniffer().sniff(url_file_v.read(1024))
     #url_file_v.seek(0)
     #reader = csv.DictReader(url_file_v, dialect=dialect)
@@ -59,7 +60,6 @@ def render_output(data,template,id_field, base_path='.',base_name=""):
             }
         try:
             #out = render_template(template_values, template)
-            # need a remove bad XML chars from the row: https://gist.github.com/lawlesst/4110923
             out = render_template(d, template)
             # d[id_field]) inlcudes colons... so bad filenames
             #f_out = open(base_path+"/%s_%s.xml" % (base_name , d[id_field]) , "w")
@@ -73,13 +73,13 @@ def render_output(data,template,id_field, base_path='.',base_name=""):
 
 
 def test_read_input():
-    out = read_input('D:\dev_earthcube\sheet2meta\SEN CINERGI-ResourceInventoryTemplate - Basic Metadata Template.csv')
+    out = read_input('D:\dev_earthcube\sheet2meta\files\models\EPA_Models_Markup.csv')
     assert out != None
     for r in out:
         print r
 
 def test_render_output():
-    out = read_input('D:\dev_earthcube\sheet2meta\SEN CINERGI-ResourceInventoryTemplate - Basic Metadata Template.csv')
+    out = read_input('D:\dev_earthcube\sheet2meta\files\models\EPA_Models_Markup.csv')
     template = load_template('metadata19115_template_2.xml')
     render_output(out,template,'ID#info')
 
