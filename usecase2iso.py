@@ -8,7 +8,7 @@ from resource import cvs2meta
 def main():
 
     #out = cvs2meta.read_input('files/hli_pivot - Components.csv')
-    out = cvs2meta.read_input('D:\\dev_earthcube\\sheet2meta\\files\\Use Case Summary Matrix_dwv - Combined Summaries.csv')
+    out = cvs2meta.read_input('D:\\dev_earthcube\\sheet2meta\\files\\Use Case Summary Matrix_dwv - Combined Summaries2.csv')
     template = cvs2meta.load_template('usecase_metadata19115.xml',base_bath='./templates')
     cvs2meta.render_output(out,template,'title', base_path="output/usecase",base_name="usecase")
 

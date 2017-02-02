@@ -3,7 +3,7 @@
                  xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml"
                  xmlns:xlink="http://www.w3.org/1999/xlink">
     <gmd:fileIdentifier>
-        <gco:CharacterString>{{ row['Internal ID (from List of Completed)'] }}</gco:CharacterString>
+        <gco:CharacterString>cinergi:ddh:usecase:ds:{{ row['ID'] }}</gco:CharacterString>
     </gmd:fileIdentifier>
     <gmd:language>
         <gco:CharacterString>en</gco:CharacterString>
@@ -66,7 +66,7 @@
                     <gmd:date>
                         <gmd:CI_Date>
                             <gmd:date>
-                                <gco:Date>{{ row['Summary Date'] }}</gco:Date>
+                                <gco:Date>2017-02-01</gco:Date>
                             </gmd:date>
                             <gmd:dateType>
                                 <gmd:CI_DateTypeCode codeSpace="ISOTC211/19115"
@@ -78,21 +78,21 @@
                     </gmd:date>
                 </gmd:CI_Citation>
             </gmd:citation>
-            {% if row['Abstract'] %}
+            {% if row['description'] %}
             <gmd:abstract>
-                <gco:CharacterString>{{ row['Abstract'] }}</gco:CharacterString>
+                <gco:CharacterString>{{ row['description'] }}</gco:CharacterString>
             </gmd:abstract>
             {% else %}
 
             <gmd:abstract  gco:nilReason="unknown" />
             {% endif %}
 
-            {% if row['Resource steward organization'] %}
+            {% if row['Source'] %}
             <gmd:pointOfContact>
                 <gmd:CI_ResponsibleParty>
-                    {% if row['Resource steward person'] %}
+                    {% if row['Source'] %}
                     <gmd:individualName>
-                        <gco:CharacterString>{{ row['Resource steward person#info'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ row['Source'] }}</gco:CharacterString>
                     </gmd:individualName>
                     {% endif %}
                     <gmd:organisationName>
@@ -136,11 +136,11 @@
             </gmd:pointOfContact>
             {% endif %}
 
-            {% if row['Domain Keywords#multi'] %}
+            {% if row['Mandatory keywords'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['Domain Keywords#multi'].split(';') %}
+ {% for item in row['Mandatory keywords'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -173,11 +173,11 @@
             </gmd:descriptiveKeywords>
             {% endif %}
 
-            {% if row['keywords_geographic#multi'] %}
+            {% if row['Spatial extent'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['keywords_geographic#multi'].split(',') %}
+ {% for item in row['Spatial extent'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -193,11 +193,11 @@
             {% endif %}
 
 
-            {% if row['EC Science Themes#multi'] %}
+            {% if row['Standards supported'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
-{% for item in row['EC Science Themes#multii'] .split(';') %}
+{% for item in row['Standards supported'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -212,7 +212,7 @@
                     <gmd:thesaurusName>
                         <gmd:CI_Citation>
                             <gmd:title>
-                                <gco:CharacterString>CINERGI Themes</gco:CharacterString>
+                                <gco:CharacterString>Standards</gco:CharacterString>
                             </gmd:title>
                             <gmd:date>
                                 <gmd:CI_Date>
@@ -279,7 +279,7 @@
     </gmd:identificationInfo>
     {% endif %}
 
-    {% if row['Use Case filename w/url'] %}
+    {% if row['API Landing'] or  row['URL mentioned']  %}
     <gmd:distributionInfo>
         <gmd:MD_Distribution>
             <gmd:distributionFormat>
@@ -293,23 +293,20 @@
                 </gmd:MD_Format>
 
             </gmd:distributionFormat>
-
+    {% if row['API Landing'] %}
             <gmd:transferOptions>
                 <gmd:MD_DigitalTransferOptions>
                     <gmd:onLine>
                         <gmd:CI_OnlineResource>
                             <gmd:linkage>
-                                <gmd:URL>{{ row['Use Case filename w/url'] }}</gmd:URL>
+                                <gmd:URL>{{ row['API vocabulary'] }}</gmd:URL>
                             </gmd:linkage>
-  {#                          <!--
+
                         <gmd:name>
-                        <gco:CharacterString>CS Technical Report</gco:CharacterString>
+                        <gco:CharacterString>API Landing</gco:CharacterString>
                         </gmd:name>
-                        <gmd:description>
-                        <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
-                        </gmd:description>
-                        -->
-   #}
+
+
                             <gmd:function>
                                 <gmd:CI_OnLineFunctionCode
                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
@@ -319,6 +316,31 @@
                     </gmd:onLine>
                 </gmd:MD_DigitalTransferOptions>
             </gmd:transferOptions>
+         {% endif %}
+           {% if row['URL mentioned'] %}
+            <gmd:transferOptions>
+                <gmd:MD_DigitalTransferOptions>
+                    <gmd:onLine>
+                        <gmd:CI_OnlineResource>
+                            <gmd:linkage>
+                                <gmd:URL>{{ row['URL mentioned'] }}</gmd:URL>
+                            </gmd:linkage>
+
+                        <gmd:name>
+                        <gco:CharacterString>URL mentioned</gco:CharacterString>
+                        </gmd:name>
+
+                            <gmd:function>
+                                <gmd:CI_OnLineFunctionCode
+                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                        codeListValue="download"/>
+                            </gmd:function>
+                        </gmd:CI_OnlineResource>
+                    </gmd:onLine>
+                </gmd:MD_DigitalTransferOptions>
+            </gmd:transferOptions>
+         {% endif %}
+
         </gmd:MD_Distribution>
     </gmd:distributionInfo>
     {% endif %}

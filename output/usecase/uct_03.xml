@@ -2,8 +2,8 @@
 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
                  xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml"
                  xmlns:xlink="http://www.w3.org/1999/xlink">
-    <gmd:fileIdentifier>
-        <gco:CharacterString>{{ row['Internal ID (from List of Completed)'] }}</gco:CharacterString>
+    <gmd:fileIdentifier><!-- ddh:usecase:{{ row['ID#info'] }} -->
+        <gco:CharacterString>ddh:usecase:3</gco:CharacterString>
     </gmd:fileIdentifier>
     <gmd:language>
         <gco:CharacterString>en</gco:CharacterString>
@@ -55,18 +55,19 @@
     </gmd:metadataStandardVersion>
 
 
-    {% if row['Title'] %}
+   
     <gmd:identificationInfo>
         <gmd:MD_DataIdentification>
             <gmd:citation>
                 <gmd:CI_Citation>
                     <gmd:title>
-                        <gco:CharacterString>{{ row['Title'] }}</gco:CharacterString>
+                    <!--    {{ row['Title'] }}-->
+                        <gco:CharacterString>Streaming real-time data for seismic early warning and monitoring and environmental monitoring</gco:CharacterString>
                     </gmd:title>
                     <gmd:date>
                         <gmd:CI_Date>
-                            <gmd:date>
-                                <gco:Date>{{ row['Summary Date'] }}</gco:Date>
+                            <gmd:date><!--{{ row['Summary Date'] }}-->
+                                <gco:Date>8/15/2016</gco:Date>
                             </gmd:date>
                             <gmd:dateType>
                                 <gmd:CI_DateTypeCode codeSpace="ISOTC211/19115"
@@ -78,73 +79,42 @@
                     </gmd:date>
                 </gmd:CI_Citation>
             </gmd:citation>
-            {% if row['Abstract'] %}
+         <!--   {% if row['Resource description#info'] %}-->
             <gmd:abstract>
-                <gco:CharacterString>{{ row['Abstract'] }}</gco:CharacterString>
+             <!--   {{ row['Overall Goals'] }}
+                 Main CI Challenges#multi
+                 Data Discovery Challenges#multi
+                 Additional Information
+             -->
+                <gco:CharacterString>Develop a real-time streaming network for seismology and atmospheric sensors and cameras (data and processed products), for use by researchers, policy makers, first responders.. Specifically, for Seismology and other areas: ;1) Make it easier to bring in data in real-time. This enhances usefulness by getting the scientific analysis out of it faster and earlier, by making the best quality measurements. ;2) Generating more, better data products that more accurately reflect the actual weather phenomenon.;3) Capture enough data to get big picture of environment with high-quality timing (correlated timing between sensors);- Funding is insufficient to cover the number of sensors (don't have meteorological sensorss at all monitoring sites) and the sophistication of algorithms he would like. ;- Need to figure out a way to build a sustainable network that’s well engineered and migrated into a sustainable infrastructure.A long term maintenance model is needed.;
+                    </gco:CharacterString>
             </gmd:abstract>
-            {% else %}
+           
 
-            <gmd:abstract  gco:nilReason="unknown" />
-            {% endif %}
 
-            {% if row['Resource steward organization'] %}
-            <gmd:pointOfContact>
-                <gmd:CI_ResponsibleParty>
-                    {% if row['Resource steward person'] %}
-                    <gmd:individualName>
-                        <gco:CharacterString>{{ row['Resource steward person#info'] }}</gco:CharacterString>
-                    </gmd:individualName>
-                    {% endif %}
-                    <gmd:organisationName>
-                        <gco:CharacterString>{{ row['Resource steward organization'] }}</gco:CharacterString>
-                    </gmd:organisationName>
-
-                    {% if row['Resource POC e-mail#info'] or row['Resource POC voice phone#info'] %}
-
-                    <gmd:contactInfo>
-                        <gmd:CI_Contact>
-                            {% if row['Resource POC voice phone#info'] %}
-                            <gmd:phone>
-                                <gmd:CI_Telephone>
-                                    <gmd:voice>
-                                        <gco:CharacterString>{{ row['Resource POC voice phone#info'] }}
-                                        </gco:CharacterString>
-                                    </gmd:voice>
-                                </gmd:CI_Telephone>
-                            </gmd:phone>
-                            {% endif %}
-                            {% if row['Resource POC e-mail#info'] %}
-                            <gmd:address>
-                                <gmd:CI_Address>
-                                    <gmd:electronicMailAddress>
-                                        <gco:CharacterString>{{ row['Resource POC e-mail#info'] }}</gco:CharacterString>
-                                    </gmd:electronicMailAddress>
-
-                                </gmd:CI_Address>
-                            </gmd:address>
-                            {% endif %}
-                        </gmd:CI_Contact>
-                    </gmd:contactInfo>
-                    {% endif %}
-                    <gmd:role>
-                        <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
-                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
-                                         codeListValue="pointOfContact">pointOfContact
-                        </gmd:CI_RoleCode>
-                    </gmd:role>
-                </gmd:CI_ResponsibleParty>
+       
+            <gmd:pointOfContact gco:nilReason="unknown" >
+                
             </gmd:pointOfContact>
-            {% endif %}
+         
 
-            {% if row['Domain Keywords#multi'] %}
+    <!--        {% if row['Domain Keywords#multi'] %}-->
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
-
- {% for item in row['Domain Keywords#multi'].split(';') %}
+                   <!-- on keyword for each item {{ item|trim }} -->
                     <gmd:keyword>
-                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                        <!--{{ item|trim }}-->
+                        <gco:CharacterString>Atomspheric processes</gco:CharacterString>
                     </gmd:keyword>
-                    {% endfor %}
+                    <gmd:keyword>
+                        <!--{{ item|trim }}-->
+                        <gco:CharacterString>seismology</gco:CharacterString>
+                    </gmd:keyword>
+                    <gmd:keyword>
+                        <!--{{ item|trim }}-->
+                        <gco:CharacterString>natural hazards</gco:CharacterString>
+                    </gmd:keyword>
+
                     <gmd:type>
                         <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
@@ -171,37 +141,24 @@
                     </gmd:thesaurusName>
                 </gmd:MD_Keywords>
             </gmd:descriptiveKeywords>
-            {% endif %}
+         
 
-            {% if row['keywords_geographic#multi'] %}
+ 
+
+
+        <!--    {% if row['EC Science Themes#multi'] %}-->
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['keywords_geographic#multi'].split(',') %}
+ <!-- on keyword for each item {{ item|trim }} -->
                     <gmd:keyword>
-                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                        <!--{{ item|trim }}-->
+                        <gco:CharacterString>Sources of variability</gco:CharacterString>
                     </gmd:keyword>
-                    {% endfor %}
-                    <gmd:type>
-                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
-                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="place">place
-                        </gmd:MD_KeywordTypeCode>
-                    </gmd:type>
-                </gmd:MD_Keywords>
-            </gmd:descriptiveKeywords>
-            {% endif %}
-
-
-            {% if row['EC Science Themes#multi'] %}
-            <gmd:descriptiveKeywords>
-                <gmd:MD_Keywords>
-
-{% for item in row['EC Science Themes#multii'] .split(';') %}
                     <gmd:keyword>
-                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                        <!--{{ item|trim }}-->
+                        <gco:CharacterString>Hazards</gco:CharacterString>
                     </gmd:keyword>
-                    {% endfor %}
                     <gmd:type>
                         <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
@@ -229,9 +186,46 @@
                     </gmd:thesaurusName>
                 </gmd:MD_Keywords>
             </gmd:descriptiveKeywords>
-            {% endif %}
+         
 
-
+            <!--    {% if row['Interdisciplinarity (Low, Med, High)'] %}-->
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+                    
+                    <!-- on keyword for each item {{ item|trim }} -->
+                    <gmd:keyword>
+                        <!--{{ item|trim }}-->
+                        <gco:CharacterString>High</gco:CharacterString>
+                    </gmd:keyword>
+                    
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                            codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                            codeListValue="place">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+                    
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>CINERGI Use Case Interdisciplinarity</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                        />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            
     <gmd:language>
         <gco:CharacterString>en</gco:CharacterString>
     </gmd:language>
@@ -242,44 +236,12 @@
                 <gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
             </gmd:topicCategory>
 
- {#           <!--
-                 <gmd:extent>
-                     <gmd:EX_Extent>
-                         <gmd:geographicElement>
-                             <gmd:EX_GeographicBoundingBox>
-                                 <gmd:westBoundLongitude>
-                                     <gco:Decimal>-180</gco:Decimal>
-                                 </gmd:westBoundLongitude>
-                                 <gmd:eastBoundLongitude>
-                                     <gco:Decimal>180</gco:Decimal>
-                                 </gmd:eastBoundLongitude>
-                                 <gmd:southBoundLatitude>
-                                     <gco:Decimal>-90</gco:Decimal>
-                                 </gmd:southBoundLatitude>
-                                 <gmd:northBoundLatitude>
-                                     <gco:Decimal>90</gco:Decimal>
-                                 </gmd:northBoundLatitude>
-                             </gmd:EX_GeographicBoundingBox>
-                         </gmd:geographicElement>
-                         <gmd:temporalElement>
-                             <gmd:EX_TemporalExtent>
-                                 <gmd:extent>
-                                     <gml:TimePeriod gml:id="Temporal">
-                                         <gml:beginPosition>[startdate 1999-01-01]</gml:beginPosition>
-                                         <gml:endPosition>[enddate - 2000-12-31]</gml:endPosition>
-                                     </gml:TimePeriod>
-                                 </gmd:extent>
-                             </gmd:EX_TemporalExtent>
-                         </gmd:temporalElement>
-                     </gmd:EX_Extent>
-                 </gmd:extent>
-                 -->
-            #}
+
         </gmd:MD_DataIdentification>
     </gmd:identificationInfo>
-    {% endif %}
 
-    {% if row['Use Case filename w/url'] %}
+
+  
     <gmd:distributionInfo>
         <gmd:MD_Distribution>
             <gmd:distributionFormat>
@@ -299,18 +261,9 @@
                     <gmd:onLine>
                         <gmd:CI_OnlineResource>
                             <gmd:linkage>
-                                <gmd:URL>{{ row['Use Case filename w/url'] }}</gmd:URL>
+                                <gmd:URL>https://docs.google.com/document/d/1VNXD3-bTl3XWcdgFH-4Py4Y_XZMDodyao2E-K-vrksg/edit</gmd:URL>
                             </gmd:linkage>
-  {#                          <!--
-                        <gmd:name>
-                        <gco:CharacterString>CS Technical Report</gco:CharacterString>
-                        </gmd:name>
-                        <gmd:description>
-                        <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
-                        </gmd:description>
-                        -->
-   #}
-                            <gmd:function>
+                         <gmd:function>
                                 <gmd:CI_OnLineFunctionCode
                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
                                         codeListValue="download"/>
@@ -321,5 +274,6 @@
             </gmd:transferOptions>
         </gmd:MD_Distribution>
     </gmd:distributionInfo>
-    {% endif %}
+
 </gmd:MD_Metadata>
+
