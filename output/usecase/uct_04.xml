@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
+                 xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml"
+                 xmlns:xlink="http://www.w3.org/1999/xlink">
+    <gmd:fileIdentifier><!-- ddh:usecase:{{ row['ID#info'] }} -->
+        <gco:CharacterString>ddh:usecase:4</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+        <gco:CharacterString>en</gco:CharacterString>
+    </gmd:language>
+    <!--
+    <gmd:hierarchyLevel>
+        <gmd:MD_ScopeCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"
+        codeListValue="dataset">dataset</gmd:MD_ScopeCode>
+    </gmd:hierarchyLevel>
+    -->
+<gmd:contact>
+        <gmd:CI_ResponsibleParty>
+            <gmd:organisationName>
+                <gco:CharacterString>Earthcube CINERGI Metadata Pipeline</gco:CharacterString>
+            </gmd:organisationName>
+            <gmd:positionName>
+                  <gco:CharacterString>CINERGI Metadata Contact</gco:CharacterString>
+            </gmd:positionName>
+
+            <gmd:contactInfo>
+                <gmd:CI_Contact>
+                    <gmd:address>
+                        <gmd:CI_Address>
+                            <gmd:electronicMailAddress>
+                                <gco:CharacterString>metadata@earthcube.org</gco:CharacterString>
+                            </gmd:electronicMailAddress>
+                        </gmd:CI_Address>
+                    </gmd:address>
+                </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+                <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                 codeListValue="pointOfContact">pointOfContact
+                </gmd:CI_RoleCode>
+            </gmd:role>
+        </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+
+    <gmd:dateStamp gco:nilReason="unknown" />
+    <!--
+    <gmd:metadataStandardName>
+        <gco:CharacterString>ISO 19139/19115 Metadata for Datasets</gco:CharacterString>
+    </gmd:metadataStandardName>
+    -->
+
+    <gmd:metadataStandardVersion>
+        <gco:CharacterString>2003</gco:CharacterString>
+    </gmd:metadataStandardVersion>
+
+
+   
+    <gmd:identificationInfo>
+        <gmd:MD_DataIdentification>
+            <gmd:citation>
+                <gmd:CI_Citation>
+                    <gmd:title>
+                    <!--    {{ row['Title'] }}-->
+                        <gco:CharacterString>A dynamical watershed model for concentration-age-discharge in a highly weathered tropical site (Luquillo CZO).</gco:CharacterString>
+                    </gmd:title>
+                    <gmd:date>
+                        <gmd:CI_Date>
+                            <gmd:date><!--{{ row['Summary Date'] }}-->
+                                <gco:Date>8/15/2016</gco:Date>
+                            </gmd:date>
+                            <gmd:dateType>
+                                <gmd:CI_DateTypeCode codeSpace="ISOTC211/19115"
+                                                     codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                     codeListValue="publication">publication
+                                </gmd:CI_DateTypeCode>
+                            </gmd:dateType>
+                        </gmd:CI_Date>
+                    </gmd:date>
+                </gmd:CI_Citation>
+            </gmd:citation>
+         <!--   {% if row['Resource description#info'] %}-->
+            <gmd:abstract>
+             <!--   {{ row['Overall Goals'] }}
+                 Main CI Challenges#multi
+                 Data Discovery Challenges#multi
+                 Additional Information
+             -->
+                <gco:CharacterString>Improve knowledge of the relationship between chemical weathering, nutrient cycling and hydrology by developing model repositories and online access to data to support the hydrological parameters1. Not all data are discoverable and accessible - LTER Catalog helps, but is not complete, so individual scientists need to be asked for their data. ;2. The data require QC and manipulation that is time consuming. Some of the QC could be automated if community scripts were available. Variations in parameter names and units also made time consuming, and metadata was not always complete;3. There were gaps in the data, making it hard to find sites and timespans with complete data.
+                    </gco:CharacterString>
+            </gmd:abstract>
+           
+
+
+       
+            <gmd:pointOfContact gco:nilReason="unknown" >
+                
+            </gmd:pointOfContact>
+         
+
+    <!--        {% if row['Domain Keywords#multi'] %}-->
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+                   <!-- on keyword for each item {{ item|trim }} -->
+                    <gmd:keyword>
+                        <!--{{ item|trim }}-->
+                        <gco:CharacterString>Computational hydrology (geophysics)</gco:CharacterString>
+                    </gmd:keyword>
+                   
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="theme">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+                     <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>Domain Keywords</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2016-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+         
+
+ 
+
+
+        <!--    {% if row['EC Science Themes#multi'] %}-->
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+
+ <!-- on keyword for each item {{ item|trim }} -->
+                    <gmd:keyword>
+                        <!--{{ item|trim }}-->
+                        <gco:CharacterString>sources of variability</gco:CharacterString>
+                    </gmd:keyword>
+                    <gmd:keyword>
+                        <!--{{ item|trim }}-->
+                        <gco:CharacterString>Predictions</gco:CharacterString>
+                    </gmd:keyword>
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="place">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>CINERGI Themes</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+         
+
+            <!--    {% if row['Interdisciplinarity (Low, Med, High)'] %}-->
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+                    
+                    <!-- on keyword for each item {{ item|trim }} -->
+                    <gmd:keyword>
+                        <!--{{ item|trim }}-->
+                        <gco:CharacterString>High</gco:CharacterString>
+                    </gmd:keyword>
+                    
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                            codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                            codeListValue="place">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+                    
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>CINERGI Use Case Interdisciplinarity</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                        />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            
+    <gmd:language>
+        <gco:CharacterString>en</gco:CharacterString>
+    </gmd:language>
+            <gmd:topicCategory>
+                <gmd:MD_TopicCategoryCode>geoscientificInformation</gmd:MD_TopicCategoryCode>
+            </gmd:topicCategory>
+            <gmd:topicCategory>
+                <gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
+            </gmd:topicCategory>
+
+
+        </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+
+
+  
+    <gmd:distributionInfo>
+        <gmd:MD_Distribution>
+            <gmd:distributionFormat>
+                <gmd:MD_Format>
+                    <gmd:name>
+                        <gco:CharacterString>Resource URL</gco:CharacterString>
+                    </gmd:name>
+                    <gmd:version>
+                        <gco:CharacterString>0.0</gco:CharacterString>
+                    </gmd:version>
+                </gmd:MD_Format>
+
+            </gmd:distributionFormat>
+
+            <gmd:transferOptions>
+                <gmd:MD_DigitalTransferOptions>
+                    <gmd:onLine>
+                        <gmd:CI_OnlineResource>
+                            <gmd:linkage>
+                                <gmd:URL>https://docs.google.com/document/d/1BsgLmJE8tpioR0yuwGLWjs92YwOvWwcAXhmLNCkBH4U/edit</gmd:URL>
+                            </gmd:linkage>
+                         <gmd:function>
+                                <gmd:CI_OnLineFunctionCode
+                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                        codeListValue="download"/>
+                            </gmd:function>
+                        </gmd:CI_OnlineResource>
+                    </gmd:onLine>
+                </gmd:MD_DigitalTransferOptions>
+            </gmd:transferOptions>
+        </gmd:MD_Distribution>
+    </gmd:distributionInfo>
+
+</gmd:MD_Metadata>
+

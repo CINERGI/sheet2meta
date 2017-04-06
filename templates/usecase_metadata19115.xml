@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
                  xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml"
-                 xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gmi="http://www.isotc211.org/2005/gmi"
->
+                 xmlns:xlink="http://www.w3.org/1999/xlink">
     <gmd:fileIdentifier>
-        <gco:CharacterString>{{ row['ID#info'] }}</gco:CharacterString>
+        <gco:CharacterString>{{ row['Internal ID (from List of Completed)'] }}</gco:CharacterString>
     </gmd:fileIdentifier>
     <gmd:language>
         <gco:CharacterString>en</gco:CharacterString>
@@ -56,18 +55,18 @@
     </gmd:metadataStandardVersion>
 
 
-    {% if row['Resource name#info'] %}
+    {% if row['Title'] %}
     <gmd:identificationInfo>
         <gmd:MD_DataIdentification>
             <gmd:citation>
                 <gmd:CI_Citation>
                     <gmd:title>
-                        <gco:CharacterString>Data Turbine Stream for {{ row['Resource name#info'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ row['Title'] }}</gco:CharacterString>
                     </gmd:title>
                     <gmd:date>
                         <gmd:CI_Date>
                             <gmd:date>
-                                <gco:Date>2015-04-30</gco:Date>
+                                <gco:Date>{{ row['Summary Date'] }}</gco:Date>
                             </gmd:date>
                             <gmd:dateType>
                                 <gmd:CI_DateTypeCode codeSpace="ISOTC211/19115"
@@ -79,9 +78,9 @@
                     </gmd:date>
                 </gmd:CI_Citation>
             </gmd:citation>
-            {% if row['Resource description#info'] %}
+            {% if row['Abstract'] %}
             <gmd:abstract>
-                <gco:CharacterString>{{ row['Resource description#info'] }}</gco:CharacterString>
+                <gco:CharacterString>{{ row['Abstract'] }}</gco:CharacterString>
             </gmd:abstract>
             {% else %}
 
@@ -137,11 +136,11 @@
             </gmd:pointOfContact>
             {% endif %}
 
-            {% if row['CINERGI Resource Type#multi'] %}
+            {% if row['Domain Keywords#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['CINERGI Resource Type#multi'].split('|') %}
+ {% for item in row['Domain Keywords#multi'].split(';') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -155,12 +154,12 @@
                      <gmd:thesaurusName>
                         <gmd:CI_Citation>
                             <gmd:title>
-                                <gco:CharacterString>CINERGI Resource Types</gco:CharacterString>
+                                <gco:CharacterString>Domain Keywords</gco:CharacterString>
                             </gmd:title>
                             <gmd:date>
                                 <gmd:CI_Date>
                                     <gmd:date>
-                                        <gco:Date>2015-01-01</gco:Date>
+                                        <gco:Date>2016-01-01</gco:Date>
                                     </gmd:date>
                                     <gmd:dateType>
                                         <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
@@ -178,7 +177,7 @@
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['keywords_geographic#multi'].split('|') %}
+ {% for item in row['keywords_geographic#multi'].split(',') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -194,11 +193,11 @@
             {% endif %}
 
 
-            {% if row['Classification (Theme)#multi'] %}
+            {% if row['EC Science Themes#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
-{% for item in row['Classification (Theme)#multi'] .split('|') %}
+{% for item in row['EC Science Themes#multii'] .split(';') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -243,49 +242,46 @@
                 <gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
             </gmd:topicCategory>
 
-  {% if row['west_bounding_longitude'] and row['south_bounding_latitude'] %}
-            <gmd:extent>
-                <gmd:EX_Extent>
-                    <gmd:geographicElement>
-                        <gmd:EX_GeographicBoundingBox>
-                            <gmd:westBoundLongitude>
-                                <gco:Decimal>{{ row['west_bounding_longitude'] }}</gco:Decimal>
-                            </gmd:westBoundLongitude>
-                            <gmd:eastBoundLongitude>
-                                <gco:Decimal>{{ row['west_bounding_longitude'] }}</gco:Decimal>
-                            </gmd:eastBoundLongitude>
-                            <gmd:southBoundLatitude>
-                                <gco:Decimal>{{ row['south_bounding_latitude'] }}</gco:Decimal>
-                            </gmd:southBoundLatitude>
-                            <gmd:northBoundLatitude>
-                                <gco:Decimal>{{ row['south_bounding_latitude'] }}</gco:Decimal>
-                            </gmd:northBoundLatitude>
-                        </gmd:EX_GeographicBoundingBox>
-                    </gmd:geographicElement>
-                   {% if row['ISO time start'] %}
-   <!-- Oxygen complains about TimePeriod not being a time primative -->
-      <!--              <gmd:temporalElement>
-                        <gmd:EX_TemporalExtent>
-                            <gmd:extent>
-                                <gml:TimePeriod gml:id="Temporal">
-                                    <gml:beginPosition>{{ row['ISO time start'] }}</gml:beginPosition>
-                                 <gml:endPosition indeterminatePosition="now"></gml:endPosition>
-                                </gml:TimePeriod>
-                            </gmd:extent>
-                        </gmd:EX_TemporalExtent>
-                    </gmd:temporalElement>
-                    -->
-                    {% endif %}
-                </gmd:EX_Extent>
-            </gmd:extent>
-        {% endif %}
+ {#           <!--
+                 <gmd:extent>
+                     <gmd:EX_Extent>
+                         <gmd:geographicElement>
+                             <gmd:EX_GeographicBoundingBox>
+                                 <gmd:westBoundLongitude>
+                                     <gco:Decimal>-180</gco:Decimal>
+                                 </gmd:westBoundLongitude>
+                                 <gmd:eastBoundLongitude>
+                                     <gco:Decimal>180</gco:Decimal>
+                                 </gmd:eastBoundLongitude>
+                                 <gmd:southBoundLatitude>
+                                     <gco:Decimal>-90</gco:Decimal>
+                                 </gmd:southBoundLatitude>
+                                 <gmd:northBoundLatitude>
+                                     <gco:Decimal>90</gco:Decimal>
+                                 </gmd:northBoundLatitude>
+                             </gmd:EX_GeographicBoundingBox>
+                         </gmd:geographicElement>
+                         <gmd:temporalElement>
+                             <gmd:EX_TemporalExtent>
+                                 <gmd:extent>
+                                     <gml:TimePeriod gml:id="Temporal">
+                                         <gml:beginPosition>[startdate 1999-01-01]</gml:beginPosition>
+                                         <gml:endPosition>[enddate - 2000-12-31]</gml:endPosition>
+                                     </gml:TimePeriod>
+                                 </gmd:extent>
+                             </gmd:EX_TemporalExtent>
+                         </gmd:temporalElement>
+                     </gmd:EX_Extent>
+                 </gmd:extent>
+                 -->
+            #}
         </gmd:MD_DataIdentification>
     </gmd:identificationInfo>
     {% endif %}
 
- {% if row['URLs'] or row['Resource URL#link'] %}
-   <gmd:distributionInfo>
-         <gmd:MD_Distribution>
+    {% if row['Use Case filename w/url'] %}
+    <gmd:distributionInfo>
+        <gmd:MD_Distribution>
             <gmd:distributionFormat>
                 <gmd:MD_Format>
                     <gmd:name>
@@ -297,23 +293,23 @@
                 </gmd:MD_Format>
 
             </gmd:distributionFormat>
- {% if row['URLs'] %}
+
             <gmd:transferOptions>
                 <gmd:MD_DigitalTransferOptions>
                     <gmd:onLine>
                         <gmd:CI_OnlineResource>
                             <gmd:linkage>
-                                <gmd:URL>{{ row['URL#info'] }}</gmd:URL>
+                                <gmd:URL>{{ row['Use Case filename w/url'] }}</gmd:URL>
                             </gmd:linkage>
-
+  {#                          <!--
                         <gmd:name>
-                        <gco:CharacterString>Cloud Turbine URL</gco:CharacterString>
+                        <gco:CharacterString>CS Technical Report</gco:CharacterString>
                         </gmd:name>
-                      {#                          <!--  <gmd:description>
+                        <gmd:description>
                         <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
                         </gmd:description>
                         -->
-                            #}
+   #}
                             <gmd:function>
                                 <gmd:CI_OnLineFunctionCode
                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
@@ -323,33 +319,7 @@
                     </gmd:onLine>
                 </gmd:MD_DigitalTransferOptions>
             </gmd:transferOptions>
-  {% endif %}
-      {% for item in row['Resource URL#link'].split('|') %}
-            <gmd:transferOptions>
-                <gmd:MD_DigitalTransferOptions>
-                    <gmd:onLine>
-                        <gmd:CI_OnlineResource>
-                            <gmd:linkage>
-                                <gmd:URL>{{ item.split(']')|last() }}</gmd:URL>
-                            </gmd:linkage>
-
-                        <gmd:name>
-                        <gco:CharacterString>{{ item.split(']')|first()| replace('[','') }}</gco:CharacterString>
-                        </gmd:name>
-
-                            <gmd:function>
-                                <gmd:CI_OnLineFunctionCode
-                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
-                                        codeListValue="download"/>
-                            </gmd:function>
-                        </gmd:CI_OnlineResource>
-                    </gmd:onLine>
-                </gmd:MD_DigitalTransferOptions>
-            </gmd:transferOptions>
-       {% endfor %}
+        </gmd:MD_Distribution>
+    </gmd:distributionInfo>
     {% endif %}
-
-</gmd:MD_Distribution>
- </gmd:distributionInfo>
-
 </gmd:MD_Metadata>

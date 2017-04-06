@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="17.1">
+<project version="18.1">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="17.1" xml:space="preserve">
+            <serialized version="18.1" xml:space="preserve">
                 <serializableOrderedMap>
                     <entry>
                         <String>catalogs.v5</String>
@@ -136,10 +136,16 @@
         <folder path="cuahsi/"/>
         <folder path="databib/"/>
         <folder path="ecogeo/"/>
+        <folder path="epa_models/"/>
         <folder path="hli/"/>
         <folder path="modified/"/>
+        <folder path="noaa_models/"/>
         <folder path="SEN/"/>
+        <folder path="streaming/"/>
+        <folder path="tess_models/"/>
         <folder path="tests/"/>
+        <folder path="usecase/"/>
+        <folder path="usecaseDS/"/>
         <file name="Untitled.xsl"/>
     </projectTree>
 </project>
