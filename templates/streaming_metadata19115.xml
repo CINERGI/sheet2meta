@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
-                 xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml"
-                 xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gmi="http://www.isotc211.org/2005/gmi"
+<gmi:MI_Metadata xmlns:gmi="http://www.isotc211.org/2005/gmi"
+                 xmlns:gco="http://www.isotc211.org/2005/gco"
+                 xmlns:gmd="http://www.isotc211.org/2005/gmd"
+                 xmlns:gml="http://www.opengis.net/gml"
+                 xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                 xmlns:srv="http://www.isotc211.org/2005/srv"
+                 xmlns:xlink="http://www.w3.org/1999/xlink"
 >
     <gmd:fileIdentifier>
         <gco:CharacterString>{{ row['ID#info'] }}</gco:CharacterString>
@@ -62,7 +66,7 @@
             <gmd:citation>
                 <gmd:CI_Citation>
                     <gmd:title>
-                        <gco:CharacterString>Data Turbine Stream for {{ row['Resource name#info'] }}</gco:CharacterString>
+                        <gco:CharacterString>Data Turbine Stream for {{ row['Resource name#info'] }} {{ row['Experiment Unit'] }} at {{ row['Location'] }}</gco:CharacterString>
                     </gmd:title>
                     <gmd:date>
                         <gmd:CI_Date>
@@ -198,7 +202,7 @@
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
-{% for item in row['Classification (Theme)#multi'] .split('|') %}
+              {% for item in row['Classification (Theme)#multi'] .split('|') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -232,7 +236,43 @@
             </gmd:descriptiveKeywords>
             {% endif %}
 
+         {% if row['Measured parameter descriptive name'] %}
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
 
+
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ row['Measured parameter descriptive name'] }}</gco:CharacterString>
+                    </gmd:keyword>
+
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="place">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>DataTurbine Keyword</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2015-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            {% endif %}
     <gmd:language>
         <gco:CharacterString>en</gco:CharacterString>
     </gmd:language>
@@ -303,7 +343,7 @@
                     <gmd:onLine>
                         <gmd:CI_OnlineResource>
                             <gmd:linkage>
-                                <gmd:URL>{{ row['URL#info'] }}</gmd:URL>
+                                <gmd:URL>{{ row['URLs'] }}</gmd:URL>
                             </gmd:linkage>
 
                         <gmd:name>
@@ -352,4 +392,4 @@
 </gmd:MD_Distribution>
  </gmd:distributionInfo>
 
-</gmd:MD_Metadata>
+</gmi:MI_Metadata>
