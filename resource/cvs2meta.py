@@ -13,6 +13,9 @@ import uuid
 import ssl
 
 def read_url(url_file , context=None ):
+    if (context == None ):
+        context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+        context.options &= ~ssl.OP_NO_SSLv3
     url_file_v = urllib2.urlopen(url_file , context=context)
     #dialect = csv.Sniffer().sniff(url_file_v.read(1024))
     #url_file_v.seek(0)

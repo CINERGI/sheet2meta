@@ -133,10 +133,13 @@
     <projectTree name="ValidateXML.xpr">
         <folder path="c4p/"/>
         <folder path="ci/"/>
+        <folder path="crescynt/"/>
         <folder path="cuahsi/"/>
         <folder path="databib/"/>
+        <folder path="earthref_magic/"/>
         <folder path="ecogeo/"/>
         <folder path="epa_models/"/>
+        <folder path="his_series/"/>
         <folder path="hli/"/>
         <folder path="modified/"/>
         <folder path="noaa_models/"/>
