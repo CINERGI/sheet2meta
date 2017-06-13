@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
-                 xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml"
+<gmi:MI_Metadata xmlns:gmi="http://www.isotc211.org/2005/gmi"
+                 xmlns:gco="http://www.isotc211.org/2005/gco"
+                 xmlns:gmd="http://www.isotc211.org/2005/gmd"
+                 xmlns:gml="http://www.opengis.net/gml"
+                 xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                 xmlns:srv="http://www.isotc211.org/2005/srv"
                  xmlns:xlink="http://www.w3.org/1999/xlink">
     <gmd:fileIdentifier>
         <gco:CharacterString>{{ row['ID#info'] }}</gco:CharacterString>
@@ -518,7 +522,7 @@
     </gmd:identificationInfo>
     {% endif %}
 
-    {% if row['References-Links#info'] %}
+    {% if row['URL#link'] %}
     <gmd:distributionInfo>
         <gmd:MD_Distribution>
             <gmd:distributionFormat>
@@ -538,7 +542,7 @@
                     <gmd:onLine>
                         <gmd:CI_OnlineResource>
                             <gmd:linkage>
-                                <gmd:URL>{{ row['References-Links#info'] }}</gmd:URL>
+                                <gmd:URL>{{ row['URL#link'] }}</gmd:URL>
                             </gmd:linkage>
   {#                          <!--
                         <gmd:name>
@@ -561,4 +565,4 @@
         </gmd:MD_Distribution>
     </gmd:distributionInfo>
     {% endif %}
-</gmd:MD_Metadata>
+</gmi:MI_Metadata>

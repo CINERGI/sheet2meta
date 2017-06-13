@@ -8,7 +8,7 @@ from resource import cvs2meta
 def main():
 
     #out = cvs2meta.read_input('files/hli_pivot - Components.csv')
-    out = cvs2meta.read_input('D:\\dev_earthcube\\sheet2meta\\files\\models\\Tess_models3_b_pivots2.csv')
+    out = cvs2meta.read_input('files/models/Tess_models3_b_pivots2.csv')
     template = cvs2meta.load_template('tessmodels_metadata19115.xml',base_bath='./templates')
     cvs2meta.render_output(out,template,'Model Abbreviated Name#info', base_path="output/tess_models",base_name="tessmodels")
 

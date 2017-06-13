@@ -7,7 +7,7 @@
                  xmlns:srv="http://www.isotc211.org/2005/srv"
                  xmlns:xlink="http://www.w3.org/1999/xlink">
     <gmd:fileIdentifier>
-        <gco:CharacterString>earthref_magic:{{ row['Contribution ID#long'] }}</gco:CharacterString>
+        <gco:CharacterString>metpetdb:{{ j['ident'] }}</gco:CharacterString>
     </gmd:fileIdentifier>
     <gmd:language>
         <gco:CharacterString>en</gco:CharacterString>
@@ -59,18 +59,18 @@
     </gmd:metadataStandardVersion>
 
 
-    {% if row['Paper title#long'] %}
+    {% if j['title'] %}
     <gmd:identificationInfo>
         <gmd:MD_DataIdentification>
             <gmd:citation>
                 <gmd:CI_Citation>
                     <gmd:title>
-                        <gco:CharacterString>{{ row['Paper title#long'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ j['title'] }}</gco:CharacterString>
                     </gmd:title>
                     <gmd:date>
                         <gmd:CI_Date>
                             <gmd:date>
-                                <gco:Date>{{ row['Contribution Year#number'] }}</gco:Date>
+                                <gco:Date>{{ j['publicanYear'] }}</gco:Date>
                             </gmd:date>
                             <gmd:dateType>
                                 <gmd:CI_DateTypeCode codeSpace="ISOTC211/19115"
@@ -82,67 +82,77 @@
                     </gmd:date>
                 </gmd:CI_Citation>
             </gmd:citation>
-            {% if row['Citation#hidden'] %}
+            {% if j['abstract'] %}
             <gmd:abstract>
                 <gco:CharacterString>
-                    {{ row['Citation#hidden'] }}</gco:CharacterString>
+                    {{  j['abstract'] }}</gco:CharacterString>
             </gmd:abstract>
                 {% else %}
 
             <gmd:abstract  gco:nilReason="unknown" />
             {% endif %}
 
-           {% if row['Type#multi'] or  row['Class#multi'] or row['Lithology#multi'] or row['Ages#long']  %}
+           {% if j['journalName'] %}
             <gmd:purpose>
-                <gco:CharacterString>Type [ {{ row['Type#multi'] }}] Class [ {{ row['Class#multi'] }} ]
-                 Lithology [   {{ row['Lithology#multi'] }} ] Ages [ {{ row['Ages#long'] }} ]</gco:CharacterString>
+                <!-- for each sample -->
+                <gco:CharacterString>Journal [ {{ j['journalName'] }}] </gco:CharacterString>
             </gmd:purpose>
 
             {% endif %}
 
-            {% if row['Submitted by'] %}
+            <!-- metpet db contact -->
             <gmd:pointOfContact>
                 <gmd:CI_ResponsibleParty>
-                    {% if row['Submitted by'] %}
+
                     <gmd:individualName>
-                        <gco:CharacterString>{{ row['Submitted by'] }}</gco:CharacterString>
+                        <gco:CharacterString>Frank Spear</gco:CharacterString>
                     </gmd:individualName>
-                    {% endif %}
+
                     <gmd:organisationName>
-                        <gco:CharacterString>{{ row['Resource steward organization'] }}</gco:CharacterString>
+                        <gco:CharacterString>Rensselaer Polytechnic Institute</gco:CharacterString>
                     </gmd:organisationName>
 
-                    {% if row['Resource POC e-mail#info'] or row['Resource POC voice phone#info'] %}
 
                     <gmd:contactInfo>
                         <gmd:CI_Contact>
-                            {% if row['Resource POC voice phone#info'] %}
-                            <gmd:phone>
-                                <gmd:CI_Telephone>
-                                    <gmd:voice>
-                                        <gco:CharacterString>{{ row['Resource POC voice phone#info'] }}
-                                        </gco:CharacterString>
-                                    </gmd:voice>
-                                </gmd:CI_Telephone>
-                            </gmd:phone>
-                            {% endif %}
-                            {% if row['Resource POC e-mail#info'] %}
+
                             <gmd:address>
                                 <gmd:CI_Address>
                                     <gmd:electronicMailAddress>
-                                        <gco:CharacterString>{{ row['Resource POC e-mail#info'] }}</gco:CharacterString>
+                                        <gco:CharacterString>info@metpetdb.com</gco:CharacterString>
                                     </gmd:electronicMailAddress>
 
                                 </gmd:CI_Address>
                             </gmd:address>
-                            {% endif %}
+
                         </gmd:CI_Contact>
                     </gmd:contactInfo>
-                    {% endif %}
+
                     <gmd:role>
                         <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
                                          codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
-                                         codeListValue="pointOfContact">pointOfContact
+                                         codeListValue="custodian">custodian
+                        </gmd:CI_RoleCode>
+                    </gmd:role>
+                </gmd:CI_ResponsibleParty>
+            </gmd:pointOfContact>
+
+            {% if j['author'] %}
+            <gmd:pointOfContact>
+                <gmd:CI_ResponsibleParty>
+                    {% if  j['author'] %}
+                    <gmd:individualName>
+                        <gco:CharacterString>{{  j['author'] }}</gco:CharacterString>
+                    </gmd:individualName>
+                    {% endif %}
+
+
+
+
+                    <gmd:role>
+                        <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                         codeListValue="originator">originator
                         </gmd:CI_RoleCode>
                     </gmd:role>
                 </gmd:CI_ResponsibleParty>
@@ -154,7 +164,7 @@
                 <gmd:MD_Keywords>
 
                     <gmd:keyword>
-                        <gco:CharacterString>dataset</gco:CharacterString>
+                        <gco:CharacterString>data (sample)</gco:CharacterString>
                     </gmd:keyword>
 
 
@@ -340,13 +350,13 @@
                     <gmd:geographicElement>
                         <gmd:EX_GeographicBoundingBox>
                             <gmd:westBoundLongitude>
-                                <gco:Decimal>{{ row['Longitude#number #hidden'] }}</gco:Decimal>
+                                <gco:Decimal>{{ row['Longitude#number #hidden'] }}}</gco:Decimal>
                             </gmd:westBoundLongitude>
                             <gmd:eastBoundLongitude>
-                                <gco:Decimal>{{ row['Longitude#number #hidden'] }}</gco:Decimal>
+                                <gco:Decimal>{{ row['Longitude#number #hidden'] }}}</gco:Decimal>
                             </gmd:eastBoundLongitude>
                             <gmd:southBoundLatitude>
-                                <gco:Decimal>{{ row['Latitude#number #hidden'] }}</gco:Decimal>
+                                <gco:Decimal>{{ row['Latitude#number #hidden'] }}}</gco:Decimal>
                             </gmd:southBoundLatitude>
                             <gmd:northBoundLatitude>
                                 <gco:Decimal>{{ row['Latitude#number #hidden'] }}</gco:Decimal>

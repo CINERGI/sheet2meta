@@ -7,7 +7,7 @@
                  xmlns:srv="http://www.isotc211.org/2005/srv"
                  xmlns:xlink="http://www.w3.org/1999/xlink">
     <gmd:fileIdentifier>
-        <gco:CharacterString>earthref_magic:{{ row['Contribution ID#long'] }}</gco:CharacterString>
+        <gco:CharacterString>journalmap:{{ a['id'] }}</gco:CharacterString>
     </gmd:fileIdentifier>
     <gmd:language>
         <gco:CharacterString>en</gco:CharacterString>
@@ -59,18 +59,18 @@
     </gmd:metadataStandardVersion>
 
 
-    {% if row['Paper title#long'] %}
+    {% if a['title'] %}
     <gmd:identificationInfo>
         <gmd:MD_DataIdentification>
             <gmd:citation>
                 <gmd:CI_Citation>
                     <gmd:title>
-                        <gco:CharacterString>{{ row['Paper title#long'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ a['title'] }} {{ a['publication_name'] }} </gco:CharacterString>
                     </gmd:title>
                     <gmd:date>
                         <gmd:CI_Date>
                             <gmd:date>
-                                <gco:Date>{{ row['Contribution Year#number'] }}</gco:Date>
+                                <gco:Date>{{ a['publish_year']}}</gco:Date>
                             </gmd:date>
                             <gmd:dateType>
                                 <gmd:CI_DateTypeCode codeSpace="ISOTC211/19115"
@@ -82,71 +82,41 @@
                     </gmd:date>
                 </gmd:CI_Citation>
             </gmd:citation>
-            {% if row['Citation#hidden'] %}
+            {% if a['abstract'] %}
             <gmd:abstract>
                 <gco:CharacterString>
-                    {{ row['Citation#hidden'] }}</gco:CharacterString>
+                    {{ a['abstract']|striptags|e }}</gco:CharacterString>
             </gmd:abstract>
                 {% else %}
 
             <gmd:abstract  gco:nilReason="unknown" />
             {% endif %}
 
-           {% if row['Type#multi'] or  row['Class#multi'] or row['Lithology#multi'] or row['Ages#long']  %}
-            <gmd:purpose>
-                <gco:CharacterString>Type [ {{ row['Type#multi'] }}] Class [ {{ row['Class#multi'] }} ]
-                 Lithology [   {{ row['Lithology#multi'] }} ] Ages [ {{ row['Ages#long'] }} ]</gco:CharacterString>
-            </gmd:purpose>
 
-            {% endif %}
 
-            {% if row['Submitted by'] %}
+            {% if authors %}
+             {% for item in authors %}
             <gmd:pointOfContact>
                 <gmd:CI_ResponsibleParty>
-                    {% if row['Submitted by'] %}
+
                     <gmd:individualName>
-                        <gco:CharacterString>{{ row['Submitted by'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ item['first_name'] }} {{ item['last_name'] }}</gco:CharacterString>
                     </gmd:individualName>
-                    {% endif %}
+                    <!--
                     <gmd:organisationName>
-                        <gco:CharacterString>{{ row['Resource steward organization'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ item['organization'] }}</gco:CharacterString>
                     </gmd:organisationName>
+-->
 
-                    {% if row['Resource POC e-mail#info'] or row['Resource POC voice phone#info'] %}
-
-                    <gmd:contactInfo>
-                        <gmd:CI_Contact>
-                            {% if row['Resource POC voice phone#info'] %}
-                            <gmd:phone>
-                                <gmd:CI_Telephone>
-                                    <gmd:voice>
-                                        <gco:CharacterString>{{ row['Resource POC voice phone#info'] }}
-                                        </gco:CharacterString>
-                                    </gmd:voice>
-                                </gmd:CI_Telephone>
-                            </gmd:phone>
-                            {% endif %}
-                            {% if row['Resource POC e-mail#info'] %}
-                            <gmd:address>
-                                <gmd:CI_Address>
-                                    <gmd:electronicMailAddress>
-                                        <gco:CharacterString>{{ row['Resource POC e-mail#info'] }}</gco:CharacterString>
-                                    </gmd:electronicMailAddress>
-
-                                </gmd:CI_Address>
-                            </gmd:address>
-                            {% endif %}
-                        </gmd:CI_Contact>
-                    </gmd:contactInfo>
-                    {% endif %}
                     <gmd:role>
                         <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
                                          codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
-                                         codeListValue="pointOfContact">pointOfContact
+                                         codeListValue="originator">originator
                         </gmd:CI_RoleCode>
                     </gmd:role>
                 </gmd:CI_ResponsibleParty>
             </gmd:pointOfContact>
+            {% endfor %}
             {% endif %}
 
 
@@ -154,7 +124,7 @@
                 <gmd:MD_Keywords>
 
                     <gmd:keyword>
-                        <gco:CharacterString>dataset</gco:CharacterString>
+                        <gco:CharacterString>article</gco:CharacterString>
                     </gmd:keyword>
 
 
@@ -188,15 +158,17 @@
             </gmd:descriptiveKeywords>
 
 
-  {% if row['Type#multi'] %}
+<!-- keywords_list -->
+
+  {% if a['keywords_list'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
-
- {% for item in row['Type#multi'].split('|') %}
+            {% for item in a['keywords_list'].split(';') %}
                     <gmd:keyword>
-                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                        <gco:CharacterString>{{ item|trim|e }}</gco:CharacterString>
                     </gmd:keyword>
                     {% endfor %}
+
                     <gmd:type>
                         <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
@@ -206,7 +178,7 @@
                      <gmd:thesaurusName>
                         <gmd:CI_Citation>
                             <gmd:title>
-                                <gco:CharacterString>Type from Earthref MagIC</gco:CharacterString>
+                                <gco:CharacterString>Keywords from Journalmap</gco:CharacterString>
                             </gmd:title>
                             <gmd:date>
                                 <gmd:CI_Date>
@@ -214,7 +186,9 @@
                                         <gco:Date>2017-05-30</gco:Date>
                                     </gmd:date>
                                     <gmd:dateType>
-                                  <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                   <gmd:CI_DateTypeCode
+                                           codeListValue="publication"
+                                           codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
                                                 />
                                     </gmd:dateType>
                                 </gmd:CI_Date>
@@ -224,104 +198,6 @@
                 </gmd:MD_Keywords>
             </gmd:descriptiveKeywords>
             {% endif %}
-
-            {% if row['Region Name#long'] %}
-            <gmd:descriptiveKeywords>
-                <gmd:MD_Keywords>
-
-
-                    <gmd:keyword>
-                        <gco:CharacterString>{{row['Region Name#long'] }}</gco:CharacterString>
-                    </gmd:keyword>
-
-                    <gmd:type>
-                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
-                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="place">place
-                        </gmd:MD_KeywordTypeCode>
-                    </gmd:type>
-                </gmd:MD_Keywords>
-            </gmd:descriptiveKeywords>
-            {% endif %}
-
-
-            {% if row['Class#multi'] %}
-            <gmd:descriptiveKeywords>
-                <gmd:MD_Keywords>
-
- {% for item in row['Class#multi'].split('|') %}
-                    <gmd:keyword>
-                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
-                    </gmd:keyword>
-                    {% endfor %}
-                    <gmd:type>
-                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
-                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="place">theme
-                        </gmd:MD_KeywordTypeCode>
-                    </gmd:type>
-
-                    <gmd:thesaurusName>
-                        <gmd:CI_Citation>
-                            <gmd:title>
-                                <gco:CharacterString>Class from Earthref MagIC</gco:CharacterString>
-                            </gmd:title>
-                            <gmd:date>
-                                <gmd:CI_Date>
-                                    <gmd:date>
-                                        <gco:Date>2015-01-01</gco:Date>
-                                    </gmd:date>
-                                    <gmd:dateType>
-                                  <gmd:CI_DateTypeCode codeListValue="publication"
-                                                       codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
-                                                />
-                                    </gmd:dateType>
-                                </gmd:CI_Date>
-                            </gmd:date>
-                        </gmd:CI_Citation>
-                    </gmd:thesaurusName>
-                </gmd:MD_Keywords>
-            </gmd:descriptiveKeywords>
-            {% endif %}
-
-      {% if row['Method Codes#multi'] %}
-            <gmd:descriptiveKeywords>
-                <gmd:MD_Keywords>
-
- {% for item in row['Method Codes#multi'].split('|') %}
-                    <gmd:keyword>
-                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
-                    </gmd:keyword>
-                    {% endfor %}
-                    <gmd:type>
-                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
-                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="theme">theme
-                        </gmd:MD_KeywordTypeCode>
-                    </gmd:type>
-                     <gmd:thesaurusName>
-                        <gmd:CI_Citation>
-                            <gmd:title>
-                                <gco:CharacterString>Method Code from  Earthref MagIC</gco:CharacterString>
-                            </gmd:title>
-                            <gmd:date>
-                                <gmd:CI_Date>
-                                    <gmd:date>
-                                        <gco:Date>2017-05-30</gco:Date>
-                                    </gmd:date>
-                                    <gmd:dateType>
-                                  <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
-                                                />
-                                    </gmd:dateType>
-                                </gmd:CI_Date>
-                            </gmd:date>
-                        </gmd:CI_Citation>
-                    </gmd:thesaurusName>
-                </gmd:MD_Keywords>
-            </gmd:descriptiveKeywords>
-            {% endif %}
-
-
 
     <gmd:language>
         <gco:CharacterString>en</gco:CharacterString>
@@ -333,44 +209,44 @@
                 <gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
             </gmd:topicCategory>
 
-           {% if ( row['Latitude#number #hidden'] and row['Longitude#number #hidden'] ) or  row['Ages#long']  %}
+           {% if locations  %}
             <gmd:extent>
                 <gmd:EX_Extent>
-                    {% if row['Latitude#number #hidden'] and row['Longitude#number #hidden'] %}
+                    {% for item in locations %}
                     <gmd:geographicElement>
                         <gmd:EX_GeographicBoundingBox>
                             <gmd:westBoundLongitude>
-                                <gco:Decimal>{{ row['Longitude#number #hidden'] }}</gco:Decimal>
+                                <gco:Decimal>{{ item['longitude'] }}</gco:Decimal>
                             </gmd:westBoundLongitude>
                             <gmd:eastBoundLongitude>
-                                <gco:Decimal>{{ row['Longitude#number #hidden'] }}</gco:Decimal>
+                                <gco:Decimal>{{ item['longitude'] }}</gco:Decimal>
                             </gmd:eastBoundLongitude>
                             <gmd:southBoundLatitude>
-                                <gco:Decimal>{{ row['Latitude#number #hidden'] }}</gco:Decimal>
+                                <gco:Decimal>{{ item['latitude'] }}</gco:Decimal>
                             </gmd:southBoundLatitude>
                             <gmd:northBoundLatitude>
-                                <gco:Decimal>{{ row['Latitude#number #hidden'] }}</gco:Decimal>
+                                <gco:Decimal>{{ item['latitude'] }}</gco:Decimal>
                             </gmd:northBoundLatitude>
                         </gmd:EX_GeographicBoundingBox>
                     </gmd:geographicElement>
-                     {% endif %}
+                     {% endfor %}
 
-  <!--                 {% if row['Ages#long']  %}
+  <!--                 {% if a['Ages#long']  %}
                     <gmd:temporalElement>
                         <gmd:EX_TemporalExtent>
                             <gmd:extent>
-                                 {% if row['Ages#long'] %}
+                                 {% if a['Ages#long'] %}
                                 <gml:TimePeriod gml:id="Temporal">
-                                    <gml:name>{{ row['Ages#long'] }}</gml:name>
+                                    <gml:name>{{ a['Ages#long'] }}</gml:name>
                                     <gml:beginPosition>[startdate 1999-01-01]</gml:beginPosition>
                                     <gml:endPosition>[enddate - 2000-12-31]</gml:endPosition>
                                 </gml:TimePeriod>
                                  {% else %}
                                   <gml:TimeInstant gml:id="ID">
 
-         <gml:name>{{ row['Ages#long'] }}</gml:name>
+         <gml:name>{{ a['Ages#long'] }}</gml:name>
 
-         <gml:timePosition>{{ row['Ages#long'] }}</gml:timePosition>
+         <gml:timePosition>{{ a['Ages#long'] }}</gml:timePosition>
       </gml:TimeInstant>
                                 {% endif %}
                             </gmd:extent>
@@ -386,7 +262,7 @@
     </gmd:identificationInfo>
     {% endif %}
 
-    {% if row['MagIC URL#link #hidden'] %}
+
     <gmd:distributionInfo>
         <gmd:MD_Distribution>
             <gmd:distributionFormat>
@@ -400,17 +276,17 @@
                 </gmd:MD_Format>
 
             </gmd:distributionFormat>
-
+ {% if article['article_url'] %}
             <gmd:transferOptions>
                 <gmd:MD_DigitalTransferOptions>
                     <gmd:onLine>
                         <gmd:CI_OnlineResource>
                             <gmd:linkage>
-                                <gmd:URL>{{ row['MagIC URL#link #hidden'] }}</gmd:URL>
+                                <gmd:URL>{{ article['article_url'] }}</gmd:URL>
                             </gmd:linkage>
  {#
                         <gmd:name>
-                        <gco:CharacterString>Earthref MagIC page</gco:CharacterString>
+                        <gco:CharacterString>Journalmap Article JSON</gco:CharacterString>
                         </gmd:name>
                       <!--  <gmd:description>
                         <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
@@ -425,12 +301,14 @@
                     </gmd:onLine>
                 </gmd:MD_DigitalTransferOptions>
             </gmd:transferOptions>
-             <gmd:transferOptions>
+            {% endif %}
+     {% if a['doi'] %}
+            <gmd:transferOptions>
                 <gmd:MD_DigitalTransferOptions>
                     <gmd:onLine>
                         <gmd:CI_OnlineResource>
                             <gmd:linkage>
-                                <gmd:URL>{{ row['DOI#link #hidden'] }}</gmd:URL>
+                                <gmd:URL>http://doi.org/{{ a['doi']|urlencode }}</gmd:URL>
                             </gmd:linkage>
 
                         <gmd:name>
@@ -450,7 +328,8 @@
                     </gmd:onLine>
                 </gmd:MD_DigitalTransferOptions>
             </gmd:transferOptions>
+            {% endif %}
         </gmd:MD_Distribution>
     </gmd:distributionInfo>
-    {% endif %}
+
 </gmi:MI_Metadata>

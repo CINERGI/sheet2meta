@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="18.1">
+<project version="14.1">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="18.1" xml:space="preserve">
+            <serialized version="14.1" xml:space="preserve">
                 <serializableOrderedMap>
                     <entry>
                         <String>catalogs.v5</String>
@@ -103,9 +103,6 @@
                                                     <field name="dtdSchemaPublicID">
                                                         <null/>
                                                     </field>
-                                                    <field name="schematronPhase">
-                                                        <null/>
-                                                    </field>
                                                     <field name="type">
                                                         <Integer>2</Integer>
                                                     </field>
@@ -141,6 +138,7 @@
         <folder path="epa_models/"/>
         <folder path="his_series/"/>
         <folder path="hli/"/>
+        <folder path="journalmap/"/>
         <folder path="modified/"/>
         <folder path="noaa_models/"/>
         <folder path="SEN/"/>
