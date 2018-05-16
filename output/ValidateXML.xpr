@@ -1,131 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="14.1">
+<project version="18.1">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
-        <options>
-            <serialized version="14.1" xml:space="preserve">
-                <serializableOrderedMap>
-                    <entry>
-                        <String>catalogs.v5</String>
-                        <String-array>
-                            <String>file:/D:/dev_ogc/SCHEMAS_OPENGIS_NET/xmlcatalog.xml</String>
-                        </String-array>
-                    </entry>
-                    <entry>
-                        <String>key.xml.catalog.option.pane</String>
-                        <Boolean>true</Boolean>
-                    </entry>
-                    <entry>
-                        <String>validation.scenario.associations</String>
-                        <scenarioAssociation-array>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>databib/</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>iso_gmd</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>Validation_scenario</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>modified/</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>iso_gmd</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>Validation_scenario</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>SEN/</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>iso_gmd</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>Validation_scenario</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                        </scenarioAssociation-array>
-                    </entry>
-                    <entry>
-                        <String>validation.scenarios</String>
-                        <validationScenario-array>
-                            <validationScenario>
-                                <field name="pairs">
-                                    <list>
-                                        <validationUnit>
-                                            <field name="validationType">
-                                                <validationUnitType>
-                                                    <field name="validationInputType">
-                                                        <String>text/xml</String>
-                                                    </field>
-                                                </validationUnitType>
-                                            </field>
-                                            <field name="url">
-                                                <String>${currentFileURL}</String>
-                                            </field>
-                                            <field name="validationEngine">
-                                                <validationEngine>
-                                                    <field name="engineType">
-                                                        <String>&lt;Default engine></String>
-                                                    </field>
-                                                    <field name="allowsAutomaticValidation">
-                                                        <Boolean>true</Boolean>
-                                                    </field>
-                                                </validationEngine>
-                                            </field>
-                                            <field name="allowAutomaticValidation">
-                                                <Boolean>true</Boolean>
-                                            </field>
-                                            <field name="extensions">
-                                                <null/>
-                                            </field>
-                                            <field name="validationSchema">
-                                                <validationUnitSchema>
-                                                    <field name="dtdSchemaPublicID">
-                                                        <null/>
-                                                    </field>
-                                                    <field name="type">
-                                                        <Integer>2</Integer>
-                                                    </field>
-                                                    <field name="uri">
-                                                        <String>http://www.isotc211.org/2005/gmd/gmd.xsd</String>
-                                                    </field>
-                                                </validationUnitSchema>
-                                            </field>
-                                        </validationUnit>
-                                    </list>
-                                </field>
-                                <field name="type">
-                                    <String>Validation_scenario</String>
-                                </field>
-                                <field name="name">
-                                    <String>iso_gmd</String>
-                                </field>
-                            </validationScenario>
-                        </validationScenario-array>
-                    </entry>
-                </serializableOrderedMap>
-            </serialized>
-        </options>
+        <options/>
     </meta>
     <projectTree name="ValidateXML.xpr">
         <folder path="c4p/"/>
@@ -140,13 +17,14 @@
         <folder path="hli/"/>
         <folder path="journalmap/"/>
         <folder path="modified/"/>
+        <folder path="ndbc/"/>
         <folder path="noaa_models/"/>
         <folder path="SEN/"/>
         <folder path="streaming/"/>
         <folder path="tess_models/"/>
         <folder path="tests/"/>
         <folder path="usecase/"/>
+        <folder path="usecase_save/"/>
         <folder path="usecaseDS/"/>
-        <file name="Untitled.xsl"/>
     </projectTree>
 </project>

@@ -43,10 +43,15 @@ def url2uuid( b):
      u = uuid.uuid3(uuid.NAMESPACE_URL, b)
      return u.get_hex()
 
+def datetimeformat(b, format='%Y-%m-%d'):
+    from dateutil import parser
+    dt = parser.parse(b)
+    return dt.strftime(format)
+
 def render_template(row, template):
     ddp = DateDataParser()
 
-    return template.render(row=row, ddp=ddp, uuid=lambda b: url2uuid( b))
+    return template.render(row=row, ddp=ddp, uuid=lambda b: url2uuid( b), datetimefmt=lambda b: datetimeformat( b))
 
 def render_output(data,template,id_field, base_path='.',base_name=""):
     # base_name = template.name[0:template.name.index('.xml')]
@@ -70,7 +75,8 @@ def render_output(data,template,id_field, base_path='.',base_name=""):
             i +=1
             f_out.write(out)
             f_out.close()
-        except:
+        except Exception  as err:
+            print ("exception: ",  err)
             print "row failed:" + str(d)
 
 
