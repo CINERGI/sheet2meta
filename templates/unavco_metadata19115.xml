@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
+                 xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml"
+                 xmlns:xlink="http://www.w3.org/1999/xlink">
+    <gmd:fileIdentifier>
+        <gco:CharacterString>{{ row['identifier'] }}</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+        <gco:CharacterString>en</gco:CharacterString>
+    </gmd:language>
+    <!--
+    <gmd:hierarchyLevel>
+        <gmd:MD_ScopeCode codeSpace="ISOTC211/19115" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"
+        codeListValue="dataset">dataset</gmd:MD_ScopeCode>
+    </gmd:hierarchyLevel>
+    -->
+<gmd:contact>
+        <gmd:CI_ResponsibleParty>
+            <gmd:organisationName>
+                <gco:CharacterString>Earthcube CINERGI Metadata Pipeline</gco:CharacterString>
+            </gmd:organisationName>
+            <gmd:positionName>
+                  <gco:CharacterString>CINERGI Metadata Contact</gco:CharacterString>
+            </gmd:positionName>
+
+            <gmd:contactInfo>
+                <gmd:CI_Contact>
+                    <gmd:address>
+                        <gmd:CI_Address>
+                            <gmd:electronicMailAddress>
+                                <gco:CharacterString>metadata@earthcube.org</gco:CharacterString>
+                            </gmd:electronicMailAddress>
+                        </gmd:CI_Address>
+                    </gmd:address>
+                </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+                <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                 codeListValue="pointOfContact">pointOfContact
+                </gmd:CI_RoleCode>
+            </gmd:role>
+        </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+
+    <gmd:dateStamp gco:nilReason="unknown" />
+    <!--
+    <gmd:metadataStandardName>
+        <gco:CharacterString>ISO 19139/19115 Metadata for Datasets</gco:CharacterString>
+    </gmd:metadataStandardName>
+    -->
+
+    <gmd:metadataStandardVersion>
+        <gco:CharacterString>2003</gco:CharacterString>
+    </gmd:metadataStandardVersion>
+
+
+    {% if row['identifier'] %}
+    <gmd:identificationInfo>
+        <gmd:MD_DataIdentification>
+            <gmd:citation>
+                <gmd:CI_Citation>
+                    <gmd:title>
+                        <gco:CharacterString>Global Navigation Satellite System (GNSS) Station {{ row['identifier'] }}
+                            Processing Level:
+                            {{ row['processing_level'] }}</gco:CharacterString>
+                    </gmd:title>
+                    <gmd:date>
+                        <gmd:CI_Date>
+                            <gmd:date>
+                                <gco:Date>2018-06-01</gco:Date>
+                            </gmd:date>
+                            <gmd:dateType>
+                                <gmd:CI_DateTypeCode codeSpace="ISOTC211/19115"
+                                                     codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                     codeListValue="publication">publication
+                                </gmd:CI_DateTypeCode>
+                            </gmd:dateType>
+                        </gmd:CI_Date>
+                    </gmd:date>
+                </gmd:CI_Citation>
+            </gmd:citation>
+            {% if row['name'] %}
+            <gmd:abstract>
+                <gco:CharacterString>Global Navigation Satellite System (GNSS) Station {{ row['identifier'] }}
+                    Name: {{ row['name'] }}
+                    Processing Level: {{ row['processing_level'] }}
+                    measurement_technique: {{ row['measurement_technique'] }}
+                     variable_measured: {{ row['variable_measured'] }}
+                    creator:{{ row['creator'] }}
+                    data_start_time:{{ row['data_start_time'] }}
+                    data_stop_time:{{ row['data_stop_time'] }}
+
+
+
+
+                </gco:CharacterString>
+            </gmd:abstract>
+            {% else %}
+
+            <gmd:abstract  gco:nilReason="unknown" />
+            {% endif %}
+
+            {% if row['provider'] %}
+            <gmd:pointOfContact>
+                <gmd:CI_ResponsibleParty>
+                    {% if row['Resource steward person'] %}
+                    <gmd:individualName>
+                        <gco:CharacterString>{{ row['Resource steward person#info'] }}</gco:CharacterString>
+                    </gmd:individualName>
+                    {% endif %}
+                    <gmd:organisationName>
+                        <gco:CharacterString>{{ row['provider'] }}</gco:CharacterString>
+                    </gmd:organisationName>
+
+                    {% if row['provider']  %}
+
+                    <gmd:contactInfo>
+                        <gmd:CI_Contact>
+
+
+                            <gmd:address>
+                                <gmd:CI_Address>
+                                    <gmd:electronicMailAddress>
+                                        <gco:CharacterString>data@unavco.org</gco:CharacterString>
+                                    </gmd:electronicMailAddress>
+
+                                </gmd:CI_Address>
+                            </gmd:address>
+
+                        </gmd:CI_Contact>
+                    </gmd:contactInfo>
+                    {% endif %}
+                    <gmd:role>
+                        <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                         codeListValue="pointOfContact">pointOfContact
+                        </gmd:CI_RoleCode>
+                    </gmd:role>
+                </gmd:CI_ResponsibleParty>
+            </gmd:pointOfContact>
+            {% endif %}
+
+
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+
+
+                    <gmd:keyword>
+                        <gco:CharacterString>GPS</gco:CharacterString>
+                    </gmd:keyword>
+                   <gmd:keyword>
+                        <gco:CharacterString>GNSS</gco:CharacterString>
+                     </gmd:keyword>
+                <gmd:keyword>
+                        <gco:CharacterString>{{ row['variable_measured']  }} </gco:CharacterString>
+                     </gmd:keyword>
+
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="theme">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+                     <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>UNAVCO</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date>
+                                        <gco:Date>2018-01-01</gco:Date>
+                                    </gmd:date>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                />
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+
+
+
+
+    <gmd:language>
+        <gco:CharacterString>en</gco:CharacterString>
+    </gmd:language>
+            <gmd:topicCategory>
+                <gmd:MD_TopicCategoryCode>geoscientificInformation</gmd:MD_TopicCategoryCode>
+            </gmd:topicCategory>
+            <gmd:topicCategory>
+                <gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
+            </gmd:topicCategory>
+
+
+                 <gmd:extent>
+                     <gmd:EX_Extent>
+                      <gmd:geographicElement>
+                             <gmd:EX_GeographicBoundingBox>
+                                 <gmd:westBoundLongitude>
+                                     <gco:Decimal>{{ row['lon'] }}</gco:Decimal>
+                                 </gmd:westBoundLongitude>
+                                 <gmd:eastBoundLongitude>
+                                     <gco:Decimal>{{ row['lon'] }}</gco:Decimal>
+                                 </gmd:eastBoundLongitude>
+                                 <gmd:southBoundLatitude>
+                                     <gco:Decimal>{{ row['lat'] }}
+</gco:Decimal>
+                                 </gmd:southBoundLatitude>
+                                 <gmd:northBoundLatitude>
+                                     <gco:Decimal>{{ row['lat'] }}</gco:Decimal>
+                                 </gmd:northBoundLatitude>
+                             </gmd:EX_GeographicBoundingBox>
+                         </gmd:geographicElement>
+                         <gmd:temporalElement>
+                             <gmd:EX_TemporalExtent>
+                                 <gmd:extent>
+                                     <gml:TimePeriod gml:id="Temporal">
+                                         <gml:beginPosition>{{ row['data_start_time'] }}</gml:beginPosition>
+                                         <gml:endPosition>{{ row['data_stop_time'] }}</gml:endPosition>
+                                     </gml:TimePeriod>
+                                 </gmd:extent>
+                             </gmd:EX_TemporalExtent>
+                         </gmd:temporalElement>
+                         <gmd:verticalElement>
+ <gmd:EX_VerticalExtent>
+  <gmd:minimumValue>
+   <gco:Real> {{ row['h'] }} </gco:Real>
+  </gmd:minimumValue>
+  <gmd:maximumValue>
+   <gco:Real> {{ row['h'] }} </gco:Real>
+  </gmd:maximumValue>
+  <gmd:verticalCRS gco:nilReason="unknown"/>
+ </gmd:EX_VerticalExtent>
+</gmd:verticalElement>
+                     </gmd:EX_Extent>
+                 </gmd:extent>
+
+
+        </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+    {% endif %}
+
+    {% if row['alternate_name'] %}
+    <gmd:distributionInfo>
+        <gmd:MD_Distribution>
+            <gmd:distributionFormat>
+                <gmd:MD_Format>
+                    <gmd:name>
+                        <gco:CharacterString>UNAVCO Unified Web Services</gco:CharacterString>
+                    </gmd:name>
+                    <gmd:version>
+                        <gco:CharacterString>0.0</gco:CharacterString>
+                    </gmd:version>
+                </gmd:MD_Format>
+
+            </gmd:distributionFormat>
+          <gmd:transferOptions>
+                <gmd:MD_DigitalTransferOptions>
+                    <gmd:onLine>
+                        <gmd:CI_OnlineResource>
+                            <gmd:linkage>
+                                <gmd:URL>https://www.unavco.org/data/web-services/documentation/documentation.html</gmd:URL>
+                            </gmd:linkage>
+
+                        <gmd:name>
+                        <gco:CharacterString>API via SWAGGER Documentation</gco:CharacterString>
+                        </gmd:name>
+                     <gmd:description>
+                        <gco:CharacterString>ODocumentation and URL builders for UNAVCO web services.
+</gco:CharacterString>
+                        </gmd:description>
+
+                            <gmd:function>
+                                <gmd:CI_OnLineFunctionCode
+                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                        codeListValue="download"/>
+                            </gmd:function>
+                        </gmd:CI_OnlineResource>
+                    </gmd:onLine>
+                </gmd:MD_DigitalTransferOptions>
+            </gmd:transferOptions>
+
+            <gmd:transferOptions>
+                <gmd:MD_DigitalTransferOptions>
+                    <gmd:onLine>
+                        <gmd:CI_OnlineResource>
+                            <gmd:linkage>
+                                <gmd:URL>https://web-services.unavco.org/gps/data/position/{{ row['alternate_name'] }}/v3?analysisCenter=pbo&amp;referenceFrame=igs08&amp;report=short&amp;refCoordOption=from_analysis_center</gmd:URL>
+                            </gmd:linkage>
+
+                        <gmd:name>
+                        <gco:CharacterString>/gps/data/position/{station}/v3 </gco:CharacterString>
+                        </gmd:name>
+                     <gmd:description>
+                        <gco:CharacterString>Outputs processed GPS station position time series. Basic descriptions of
+parameter options are provided on the form. Note that the analysisCenter and
+referenceFrame parameters are codependent. More detailed descriptions are
+provided here</gco:CharacterString>
+                        </gmd:description>
+
+                            <gmd:function>
+                                <gmd:CI_OnLineFunctionCode
+                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                        codeListValue="download"/>
+                            </gmd:function>
+                        </gmd:CI_OnlineResource>
+                    </gmd:onLine>
+                </gmd:MD_DigitalTransferOptions>
+            </gmd:transferOptions>
+
+             <gmd:transferOptions>
+                <gmd:MD_DigitalTransferOptions>
+                    <gmd:onLine>
+                        <gmd:CI_OnlineResource>
+                            <gmd:linkage>
+                                <gmd:URL>https://web-services.unavco.org/gps/data/velocity/{{ row['alternate_name'] }}/beta?analysisCenter=pbo&amp;referenceFrame=igs08&amp;report=short&amp;solutionType=snaps</gmd:URL>
+                            </gmd:linkage>
+
+                        <gmd:name>
+                        <gco:CharacterString>/gps/data/velocity/{station}/beta </gco:CharacterString>
+                        </gmd:name>
+                     <gmd:description>
+                        <gco:CharacterString>Outputs GPS crustal motion velocity field estimates.
+Results from daily GPS station position solutions are combined to generate
+long-term velocity estimate solutions of stations in IGS08 and NAM08 (North America fixed)
+reference frames. Station offsets due to earthquakes and equipment changes are estimated
+and low-quality outliers due to snow, for example, are removed from the velocity estimate
+solutions. More detailed descriptions are provided here: https://www.unavco.org/data/web-services/documentation/gps-velocity-documentation.html
+
+                        </gco:CharacterString>
+                        </gmd:description>
+
+                            <gmd:function>
+                                <gmd:CI_OnLineFunctionCode
+                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                        codeListValue="download"/>
+                            </gmd:function>
+                        </gmd:CI_OnlineResource>
+                    </gmd:onLine>
+                </gmd:MD_DigitalTransferOptions>
+            </gmd:transferOptions>
+
+             <gmd:transferOptions>
+                <gmd:MD_DigitalTransferOptions>
+                    <gmd:onLine>
+                        <gmd:CI_OnlineResource>
+                            <gmd:linkage>
+                                <gmd:URL>https://web-services.unavco.org/hydro/model/load/displacement/{{ row['alternate_name'] }}/beta?model=gldas</gmd:URL>
+                            </gmd:linkage>
+
+                        <gmd:name>
+                        <gco:CharacterString>GET /hydro/model/load/displacement/{station}/beta </gco:CharacterString>
+                        </gmd:name>
+                     <gmd:description>
+                        <gco:CharacterString>Outputs Hydrological Loading Timeseries. Hydrological products are displacement models calculated at GPS/GNSS station coordinates and based on loading from water stored as snowpack, soil moisture, and in vegetation. More detailed descriptions are
+provided here: https://www.unavco.org/data/web-services/documentation/hydro-loading-documentation.html.
+
+  </gco:CharacterString>
+                        </gmd:description>
+                            <gmd:function>
+                                <gmd:CI_OnLineFunctionCode
+                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                        codeListValue="download"/>
+                            </gmd:function>
+                        </gmd:CI_OnlineResource>
+                    </gmd:onLine>
+                </gmd:MD_DigitalTransferOptions>
+            </gmd:transferOptions>
+
+            <!-- other services require time -->
+
+        </gmd:MD_Distribution>
+    </gmd:distributionInfo>
+    {% endif %}
+</gmd:MD_Metadata>

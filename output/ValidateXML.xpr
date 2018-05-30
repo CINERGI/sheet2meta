@@ -23,6 +23,7 @@
         <folder path="streaming/"/>
         <folder path="tess_models/"/>
         <folder path="tests/"/>
+        <folder path="unavco/"/>
         <folder path="usecase/"/>
         <folder path="usecase_save/"/>
         <folder path="usecaseDS/"/>

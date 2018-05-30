@@ -70,7 +70,7 @@
             <gmd:citation>
                 <gmd:CI_Citation>
                     <gmd:title>
-                        <gco:CharacterString>{{ row['StationID_good'] }} -- NDBC Station</gco:CharacterString>
+                        <gco:CharacterString>{{ row['StationID_good'] }} -- from National Data Buoy Center (NDBC)</gco:CharacterString>
                     </gmd:title>
                     <gmd:date>
                         <gmd:CI_Date>
@@ -281,16 +281,16 @@
                     <gmd:geographicElement>
                         <gmd:EX_GeographicBoundingBox>
                             <gmd:westBoundLongitude>
-                                <gco:Decimal>{{ row['lat'] }}</gco:Decimal>
+                                <gco:Decimal>{{ row['lon'] }}</gco:Decimal>
                             </gmd:westBoundLongitude>
                             <gmd:eastBoundLongitude>
-                                <gco:Decimal>{{ row['lat'] }}</gco:Decimal>
+                                <gco:Decimal>{{ row['lon'] }}</gco:Decimal>
                             </gmd:eastBoundLongitude>
                             <gmd:southBoundLatitude>
-                                <gco:Decimal>{{ row['lon'] }}</gco:Decimal>
+                                <gco:Decimal>{{ row['lat'] }}</gco:Decimal>
                             </gmd:southBoundLatitude>
                             <gmd:northBoundLatitude>
-                                <gco:Decimal>{{ row['lon'] }}</gco:Decimal>
+                                <gco:Decimal>{{ row['lat'] }}</gco:Decimal>
                             </gmd:northBoundLatitude>
                         </gmd:EX_GeographicBoundingBox>
                     </gmd:geographicElement>
@@ -328,17 +328,45 @@
                 </gmd:MD_Format>
 
             </gmd:distributionFormat>
+            {% if row['Station_pageURL'] %}
+            <gmd:transferOptions>
+                <gmd:MD_DigitalTransferOptions>
+                    <gmd:onLine>
+                        <gmd:CI_OnlineResource>
+                            <gmd:linkage>
+                                <gmd:URL>{{ row['Station_pageURL'] }}</gmd:URL>
+                            </gmd:linkage>
+
+                        <gmd:name>
+                        <gco:CharacterString>Station page </gco:CharacterString>
+                        </gmd:name>
+                        {#                          <!-- <gmd:description>
+                        <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
+                        </gmd:description>
+                        -->
+                            #}
+            <gmd:function>
+                                <gmd:CI_OnLineFunctionCode
+                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                        codeListValue="information"/>
+                            </gmd:function>
+                        </gmd:CI_OnlineResource>
+                    </gmd:onLine>
+                </gmd:MD_DigitalTransferOptions>
+            </gmd:transferOptions>
+            {% endif %}
+
 {% for file in fileList  %}
             <gmd:transferOptions>
                 <gmd:MD_DigitalTransferOptions>
                     <gmd:onLine>
                         <gmd:CI_OnlineResource>
                             <gmd:linkage>
-                                <gmd:URL>{{ file['ViewAsTextURL'] }}</gmd:URL>
+                                <gmd:URL>{{ file['ViewAsTextURL']}}</gmd:URL>
                             </gmd:linkage>
 
                         <gmd:name>
-                        <gco:CharacterString>ViewAsTextURL</gco:CharacterString>
+                        <gco:CharacterString>{{ file['folder'] }} from {{ file['Year'] }}--View As Text </gco:CharacterString>
                         </gmd:name>
                         {#                          <!-- <gmd:description>
                         <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
@@ -359,11 +387,11 @@
                     <gmd:onLine>
                         <gmd:CI_OnlineResource>
                             <gmd:linkage>
-                                <gmd:URL>{{ file['Download_as_GZ_URL'] }}</gmd:URL>
+                                <gmd:URL>{{ file['Download_as_GZ_URL'] }} </gmd:URL>
                             </gmd:linkage>
 
                         <gmd:name>
-                        <gco:CharacterString>Download_as_GZ_URL</gco:CharacterString>
+                        <gco:CharacterString>{{ file['folder'] }} from {{ file['Year'] }}--Download GZip</gco:CharacterString>
                         </gmd:name>
                         {# <!-- <gmd:description>
                         <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
