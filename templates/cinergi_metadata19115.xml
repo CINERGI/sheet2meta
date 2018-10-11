@@ -238,7 +238,7 @@
                     <gmd:type>
                         <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="place">theme
+                                                codeListValue="theme">theme
                         </gmd:MD_KeywordTypeCode>
                     </gmd:type>
 
@@ -283,7 +283,7 @@
                     <gmd:type>
   <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="place">theme
+                                                codeListValue="theme">theme
                         </gmd:MD_KeywordTypeCode>
                     </gmd:type>
                      <gmd:thesaurusName>
@@ -320,7 +320,7 @@
                     <gmd:type>
   <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="place">theme
+                                                codeListValue="theme">theme
                         </gmd:MD_KeywordTypeCode>
                     </gmd:type>
                      <gmd:thesaurusName>
@@ -359,7 +359,7 @@
                     <gmd:type>
   <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
-                                                codeListValue="place">theme
+                                                codeListValue="theme">theme
                         </gmd:MD_KeywordTypeCode>
                     </gmd:type>
                      <gmd:thesaurusName>

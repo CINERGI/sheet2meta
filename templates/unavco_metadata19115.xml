@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
-                 xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gml="http://www.opengis.net/gml"
-                 xmlns:xlink="http://www.w3.org/1999/xlink">
+<gmi:MI_Metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.isotc211.org/2005/gmi http://ngdc.noaa.gov/metadata/published/xsd/schema.xsd"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:gco="http://www.isotc211.org/2005/gco"
+    xmlns:gmd="http://www.isotc211.org/2005/gmd"
+    xmlns:gmx="http://www.isotc211.org/2005/gmx"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+    xmlns:gss="http://www.isotc211.org/2005/gss"
+    xmlns:gts="http://www.isotc211.org/2005/gts"
+    xmlns:gsr="http://www.isotc211.org/2005/gsr"
+    xmlns:gmi="http://www.isotc211.org/2005/gmi"
+    xmlns:srv="http://www.isotc211.org/2005/srv" >
     <gmd:fileIdentifier>
         <gco:CharacterString>{{ row['identifier'] }}</gco:CharacterString>
     </gmd:fileIdentifier>
@@ -62,8 +71,9 @@
                 <gmd:CI_Citation>
                     <gmd:title>
                         <gco:CharacterString>Global Navigation Satellite System (GNSS) Station {{ row['identifier'] }}
-                            Processing Level:
-                            {{ row['processing_level'] }}</gco:CharacterString>
+ Processing Level:{{ row['processing_level'] }}
+ Variable:{{ row['variable_measured '] }}
+                        </gco:CharacterString>
                     </gmd:title>
                     <gmd:date>
                         <gmd:CI_Date>
@@ -83,17 +93,27 @@
             {% if row['name'] %}
             <gmd:abstract>
                 <gco:CharacterString>Global Navigation Satellite System (GNSS) Station {{ row['identifier'] }}
-                    Name: {{ row['name'] }}
-                    Processing Level: {{ row['processing_level'] }}
-                    measurement_technique: {{ row['measurement_technique'] }}
-                     variable_measured: {{ row['variable_measured'] }}
-                    creator:{{ row['creator'] }}
-                    data_start_time:{{ row['data_start_time'] }}
-                    data_stop_time:{{ row['data_stop_time'] }}
+ Name: {{ row['name'] }}
+ Processing Level: {{ row['processing_level'] }}
+ measurement_technique: {{ row['measurement_technique'] }}
+ variable_measured: {{ row['variable_measured'] }}
+ creator:{{ row['creator'] }}
+ data_start_time:{{ row['data_start_time'] }}
+  data_stop_time:{{ row['data_stop_time'] }}
 
 
+GPS/GNSS instrumentation records broadcast signals from the GPS and other satellite constellation, and these raw data are converted into standard daily RINEX files suitable for processing. GPS/GNSS data are recorded at 15-s or 30-s intervals. Several hundred stations of the PBO network also supply downloaded or streamed 1-s data for archiving and distribution. In addition highrate data of 1 Hz or 5 Hz may be Custom Data Requested in association with an event such as a significant earthquake. For data of all rates UNAVCO translates to RINEX and quality checks the data using teqc.
 
+GAGE Analysis Centers process data for all 1100 sites in the PBO GPS/GNSS network and for other sites, including most of the sites in COCONet in the Caribbean region and an additional 500 sites distributed across North America, most of which are operated by other institutions. The final, processed products are SINEX solutions, position ti
 
+                    Web Service Link [" The hydrologic models are surface-loading displacement time series calculated at GAGE-processed sites from hydrological data. Soil moisture, snow-water equivalent from snowpack, and water stored in vegetation exert a load on the Earth’s surface that is modeled to obtain displacements at GPS/GNSS sites.
+Outputs GPS crustal motion velocity field estimates. "]
+
+Web Service Link [" Results from daily GPS station position solutions are combined to generate
+long-term velocity estimate solutions of stations in IGS08 and NAM08 (North America fixed)
+reference frames. Station offsets due to earthquakes and equipment changes are estimated
+and low-quality outliers due to snow, for example, are removed from the velocity estimate
+solutions "]
                 </gco:CharacterString>
             </gmd:abstract>
             {% else %}
@@ -155,7 +175,9 @@
                 <gmd:keyword>
                         <gco:CharacterString>{{ row['variable_measured']  }} </gco:CharacterString>
                      </gmd:keyword>
-
+                  <gmd:keyword>
+                        <gco:CharacterString>Hydrologic Models </gco:CharacterString>
+                     </gmd:keyword>
                     <gmd:type>
                         <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
@@ -259,6 +281,34 @@
                 </gmd:MD_Format>
 
             </gmd:distributionFormat>
+
+{% if  row['provider'] == "UNAVCO" %}
+             <gmd:transferOptions>
+                <gmd:MD_DigitalTransferOptions>
+                    <gmd:onLine>
+                        <gmd:CI_OnlineResource>
+                            <gmd:linkage>
+                                <gmd:URL> https://www.unavco.org/instrumentation/networks/status/pbo/overview/{{ row['alternate_name'] }}</gmd:URL>
+                            </gmd:linkage>
+
+                        <gmd:name>
+                        <gco:CharacterString>Station Page</gco:CharacterString>
+                        </gmd:name>
+                     <gmd:description>
+                        <gco:CharacterString>Web page providing station descriptions for UNAVCO pages
+</gco:CharacterString>
+                        </gmd:description>
+
+                            <gmd:function>
+                                <gmd:CI_OnLineFunctionCode
+                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                        codeListValue="download"/>
+                            </gmd:function>
+                        </gmd:CI_OnlineResource>
+                    </gmd:onLine>
+                </gmd:MD_DigitalTransferOptions>
+            </gmd:transferOptions>
+ {% endif %}
           <gmd:transferOptions>
                 <gmd:MD_DigitalTransferOptions>
                     <gmd:onLine>
@@ -271,7 +321,7 @@
                         <gco:CharacterString>API via SWAGGER Documentation</gco:CharacterString>
                         </gmd:name>
                      <gmd:description>
-                        <gco:CharacterString>ODocumentation and URL builders for UNAVCO web services.
+                        <gco:CharacterString>Documentation and URL builders for UNAVCO web services.
 </gco:CharacterString>
                         </gmd:description>
 
@@ -377,4 +427,4 @@ provided here: https://www.unavco.org/data/web-services/documentation/hydro-load
         </gmd:MD_Distribution>
     </gmd:distributionInfo>
     {% endif %}
-</gmd:MD_Metadata>
+</gmi:MI_Metadata>
