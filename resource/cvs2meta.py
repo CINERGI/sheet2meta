@@ -51,7 +51,7 @@ def datetimeformat(b, format='%Y-%m-%d'):
 def render_template(row, template):
     ddp = DateDataParser()
 
-    return template.render(row=row, ddp=ddp, uuid=lambda b: url2uuid( b), datetimefmt=lambda b: datetimeformat( b))
+    return template.render(row=row, ddp=ddp, uuid=lambda b: url2uuid( b), datetimefmt=lambda b: datetimeformat( b)).encode( "utf-8" )
 
 def render_output(data,template,id_field, base_path='.',base_name=""):
     # base_name = template.name[0:template.name.index('.xml')]

@@ -106,7 +106,7 @@ GPS/GNSS instrumentation records broadcast signals from the GPS and other satell
 
 GAGE Analysis Centers process data for all 1100 sites in the PBO GPS/GNSS network and for other sites, including most of the sites in COCONet in the Caribbean region and an additional 500 sites distributed across North America, most of which are operated by other institutions. The final, processed products are SINEX solutions, position ti
 
-                    Web Service Link [" The hydrologic models are surface-loading displacement time series calculated at GAGE-processed sites from hydrological data. Soil moisture, snow-water equivalent from snowpack, and water stored in vegetation exert a load on the Earth’s surface that is modeled to obtain displacements at GPS/GNSS sites.
+                    Web Service Link [" The hydrologic models are surface-loading displacement time series calculated at GAGE-processed sites from hydrological data. Soil moisture, snow-water equivalent from snowpack, and water stored in vegetation exert a load on the Earth's surface that is modeled to obtain displacements at GPS/GNSS sites.
 Outputs GPS crustal motion velocity field estimates. "]
 
 Web Service Link [" Results from daily GPS station position solutions are combined to generate

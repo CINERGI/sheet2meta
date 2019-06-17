@@ -18,13 +18,13 @@
         codeListValue="dataset">dataset</gmd:MD_ScopeCode>
     </gmd:hierarchyLevel>
     -->
- <gmd:contact>
+    <gmd:contact>
         <gmd:CI_ResponsibleParty>
             <gmd:organisationName>
                 <gco:CharacterString>Earthcube CINERGI Metadata Pipeline</gco:CharacterString>
             </gmd:organisationName>
-             <gmd:positionName>
-                  <gco:CharacterString>CINERGI Metadata Contact</gco:CharacterString>
+            <gmd:positionName>
+                <gco:CharacterString>CINERGI Metadata Contact</gco:CharacterString>
             </gmd:positionName>
 
             <gmd:contactInfo>
@@ -47,7 +47,7 @@
         </gmd:CI_ResponsibleParty>
     </gmd:contact>
 
-    <gmd:dateStamp gco:nilReason="unknown" />
+    <gmd:dateStamp gco:nilReason="unknown"/>
     <!--
     <gmd:metadataStandardName>
         <gco:CharacterString>ISO 19139/19115 Metadata for Datasets</gco:CharacterString>
@@ -82,20 +82,24 @@
                     </gmd:date>
                 </gmd:CI_Citation>
             </gmd:citation>
-            {% if row['Citation#hidden'] %}
+            {% if row['Citation#hidden'] or row['Type#multi'] or row['Class#multi'] or row['Lithology#multi'] or
+            row['Ages#long'] %}
             <gmd:abstract>
                 <gco:CharacterString>
-                    {{ row['Citation#hidden'] }}</gco:CharacterString>
+                    {{ row['Citation#hidden'] }} Type: [ {{ row['Type#multi'] }} ] Class: [ {{ row['Class#multi'] }} ]
+                    Lithology: [ {{ row['Lithology#multi'] }} ] Ages: [ {{ row['Ages#long'] }} ] from Earthref Magic
+                </gco:CharacterString>
             </gmd:abstract>
-                {% else %}
+            {% else %}
 
-            <gmd:abstract  gco:nilReason="unknown" />
+            <gmd:abstract gco:nilReason="unknown"/>
             {% endif %}
 
-           {% if row['Type#multi'] or  row['Class#multi'] or row['Lithology#multi'] or row['Ages#long']  %}
+            {% if row['Type#multi'] or row['Class#multi'] or row['Lithology#multi'] or row['Ages#long'] %}
             <gmd:purpose>
-                <gco:CharacterString>Type [ {{ row['Type#multi'] }}] Class [ {{ row['Class#multi'] }} ]
-                 Lithology [   {{ row['Lithology#multi'] }} ] Ages [ {{ row['Ages#long'] }} ]</gco:CharacterString>
+                <gco:CharacterString>Type: [ {{ row['Type#multi'] }}] Class: [ {{ row['Class#multi'] }} ]
+                    Lithology: [ {{ row['Lithology#multi'] }} ] Ages: [ {{ row['Ages#long'] }} ]
+                </gco:CharacterString>
             </gmd:purpose>
 
             {% endif %}
@@ -148,7 +152,36 @@
                 </gmd:CI_ResponsibleParty>
             </gmd:pointOfContact>
             {% endif %}
-
+            {% if row['Plot image#link #hidden'] %}
+            <gmd:graphicOverview>
+                <gmd:MD_BrowseGraphic>
+                    <gmd:fileName>
+                        <gco:CharacterString>{{ row['Plot image#link #hidden'] }}</gco:CharacterString>
+                    </gmd:fileName>
+                    <gmd:fileDescription>
+                        <gco:CharacterString>Plot graphic</gco:CharacterString>
+                    </gmd:fileDescription>
+                    <gmd:fileType>
+                        <gco:CharacterString>PNG</gco:CharacterString>
+                    </gmd:fileType>
+                </gmd:MD_BrowseGraphic>
+            </gmd:graphicOverview>
+            {% endif %}
+            {% if row['Region image#link #hidden'] %}
+            <gmd:graphicOverview>
+                <gmd:MD_BrowseGraphic>
+                    <gmd:fileName>
+                        <gco:CharacterString>{{ row['Region image#link #hidden'] }}</gco:CharacterString>
+                    </gmd:fileName>
+                    <gmd:fileDescription>
+                        <gco:CharacterString>Location graphic</gco:CharacterString>
+                    </gmd:fileDescription>
+                    <gmd:fileType>
+                        <gco:CharacterString>PNG</gco:CharacterString>
+                    </gmd:fileType>
+                </gmd:MD_BrowseGraphic>
+            </gmd:graphicOverview>
+            {% endif %}
 
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
@@ -164,35 +197,62 @@
                                                 codeListValue="theme">theme
                         </gmd:MD_KeywordTypeCode>
                     </gmd:type>
-                     <gmd:thesaurusName>
+                    <gmd:thesaurusName>
                         <gmd:CI_Citation>
                             <gmd:title>
                                 <gco:CharacterString>CINERGI Resource Types</gco:CharacterString>
                             </gmd:title>
                             <gmd:date>
                                 <gmd:CI_Date>
-                                    <gmd:date>
-                                        <gco:Date>2017-05-30</gco:Date>
-                                    </gmd:date>
+                                    <gmd:date gco:nilReason="inapplicable"/>
                                     <gmd:dateType>
-                                   <gmd:CI_DateTypeCode
-                                           codeListValue="publication"
-                                           codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
-                                                />
+                                        <gmd:CI_DateTypeCode
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                codeListValue="publication">publication
+                                        </gmd:CI_DateTypeCode>
                                     </gmd:dateType>
                                 </gmd:CI_Date>
                             </gmd:date>
+                            <gmd:citedResponsibleParty>
+                                <gmd:CI_ResponsibleParty>
+                                    <gmd:organisationName>
+                                        <gco:CharacterString>Earthcube CINERGI Metadata Pipeline</gco:CharacterString>
+                                    </gmd:organisationName>
+                                    <gmd:positionName>
+                                        <gco:CharacterString>CINERGI Metadata Contact</gco:CharacterString>
+                                    </gmd:positionName>
+
+                                    <gmd:contactInfo>
+                                        <gmd:CI_Contact>
+                                            <gmd:address>
+                                                <gmd:CI_Address>
+                                                    <gmd:electronicMailAddress>
+                                                        <gco:CharacterString>metadata@earthcube.org
+                                                        </gco:CharacterString>
+                                                    </gmd:electronicMailAddress>
+                                                </gmd:CI_Address>
+                                            </gmd:address>
+                                        </gmd:CI_Contact>
+                                    </gmd:contactInfo>
+                                    <gmd:role>
+                                        <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                                         codeListValue="pointOfContact">pointOfContact
+                                        </gmd:CI_RoleCode>
+                                    </gmd:role>
+                                </gmd:CI_ResponsibleParty>
+                            </gmd:citedResponsibleParty>
                         </gmd:CI_Citation>
                     </gmd:thesaurusName>
                 </gmd:MD_Keywords>
             </gmd:descriptiveKeywords>
 
 
-  {% if row['Type#multi'] %}
+            {% if row['Type#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['Type#multi'].split('|') %}
+                    {% for item in row['Type#multi'].split('|') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -203,22 +263,66 @@
                                                 codeListValue="theme">theme
                         </gmd:MD_KeywordTypeCode>
                     </gmd:type>
-                     <gmd:thesaurusName>
+                    <gmd:thesaurusName>
                         <gmd:CI_Citation>
                             <gmd:title>
-                                <gco:CharacterString>Type from Earthref MagIC</gco:CharacterString>
+                                <gco:CharacterString>Type</gco:CharacterString>
                             </gmd:title>
                             <gmd:date>
                                 <gmd:CI_Date>
-                                    <gmd:date>
-                                        <gco:Date>2017-05-30</gco:Date>
-                                    </gmd:date>
+                                    <gmd:date gco:nilReason="inapplicable"/>
                                     <gmd:dateType>
-                                  <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
-                                                />
+                                        <gmd:CI_DateTypeCode
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                codeListValue="publication">publication
+                                        </gmd:CI_DateTypeCode>
                                     </gmd:dateType>
                                 </gmd:CI_Date>
                             </gmd:date>
+                            <gmd:citedResponsibleParty>
+                                <gmd:CI_ResponsibleParty>
+                                    <gmd:organisationName>
+                                        <gco:CharacterString>Earthref MagIC</gco:CharacterString>
+                                    </gmd:organisationName>
+                                    <gmd:positionName>
+                                        <gco:CharacterString>Earthref MagIC vocabularies</gco:CharacterString>
+                                    </gmd:positionName>
+
+                                    <gmd:contactInfo>
+                                        <gmd:CI_Contact>
+                                            <gmd:onlineResource>
+                                                <gmd:CI_OnlineResource>
+                                                    <gmd:linkage>
+                                                        <gmd:URL>https://www2.earthref.org/vocabularies/controlled
+                                                        </gmd:URL>
+                                                    </gmd:linkage>
+
+                                                    <gmd:name>
+                                                        <gco:CharacterString>Web Page for Vocabularies
+                                                        </gco:CharacterString>
+                                                    </gmd:name>
+                                                    {# <!-- <gmd:description>
+                        <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
+                        </gmd:description>
+                        -->
+                                                    #}
+                                                    <gmd:function>
+                                                        <gmd:CI_OnLineFunctionCode
+                                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                                                codeListValue="information"/>
+                                                    </gmd:function>
+                                                </gmd:CI_OnlineResource>
+                                            </gmd:onlineResource>
+                                        </gmd:CI_Contact>
+                                    </gmd:contactInfo>
+                                    <gmd:role>
+                                        <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                                         codeListValue="pointOfContact">pointOfContact
+                                        </gmd:CI_RoleCode>
+                                    </gmd:role>
+                                </gmd:CI_ResponsibleParty>
+                            </gmd:citedResponsibleParty>
                         </gmd:CI_Citation>
                     </gmd:thesaurusName>
                 </gmd:MD_Keywords>
@@ -243,13 +347,92 @@
                 </gmd:MD_Keywords>
             </gmd:descriptiveKeywords>
             {% endif %}
+            {% if row['Region Type'] %}
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
 
+
+                    <gmd:keyword>
+                        <gco:CharacterString>{{row['Region Type'] }}</gco:CharacterString>
+                    </gmd:keyword>
+
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="theme">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>Region Type</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date gco:nilReason="inapplicable"/>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                codeListValue="publication">publication
+                                        </gmd:CI_DateTypeCode>
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                            <gmd:citedResponsibleParty>
+                                <gmd:CI_ResponsibleParty>
+                                    <gmd:organisationName>
+                                        <gco:CharacterString>Earthref MagIC</gco:CharacterString>
+                                    </gmd:organisationName>
+                                    <gmd:positionName>
+                                        <gco:CharacterString>Earthref MagIC vocabularies</gco:CharacterString>
+                                    </gmd:positionName>
+
+                                    <gmd:contactInfo>
+                                        <gmd:CI_Contact>
+                                            <gmd:onlineResource>
+                                                <gmd:CI_OnlineResource>
+                                                    <gmd:linkage>
+                                                        <gmd:URL>https://www2.earthref.org/vocabularies/controlled
+                                                        </gmd:URL>
+                                                    </gmd:linkage>
+
+                                                    <gmd:name>
+                                                        <gco:CharacterString>Web Page for Vocabularies
+                                                        </gco:CharacterString>
+                                                    </gmd:name>
+                                                    {# <!-- <gmd:description>
+                        <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
+                        </gmd:description>
+                        -->
+                                                    #}
+                                                    <gmd:function>
+                                                        <gmd:CI_OnLineFunctionCode
+                                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                                                codeListValue="information"/>
+                                                    </gmd:function>
+                                                </gmd:CI_OnlineResource>
+                                            </gmd:onlineResource>
+                                        </gmd:CI_Contact>
+                                    </gmd:contactInfo>
+                                    <gmd:role>
+                                        <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                                         codeListValue="pointOfContact">pointOfContact
+                                        </gmd:CI_RoleCode>
+                                    </gmd:role>
+                                </gmd:CI_ResponsibleParty>
+                            </gmd:citedResponsibleParty>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            {% endif %}
 
             {% if row['Class#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['Class#multi'].split('|') %}
+                    {% for item in row['Class#multi'].split('|') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -264,31 +447,74 @@
                     <gmd:thesaurusName>
                         <gmd:CI_Citation>
                             <gmd:title>
-                                <gco:CharacterString>Class from Earthref MagIC</gco:CharacterString>
+                                <gco:CharacterString>Class</gco:CharacterString>
                             </gmd:title>
                             <gmd:date>
                                 <gmd:CI_Date>
-                                    <gmd:date>
-                                        <gco:Date>2015-01-01</gco:Date>
-                                    </gmd:date>
+                                    <gmd:date gco:nilReason="inapplicable"/>
                                     <gmd:dateType>
-                                  <gmd:CI_DateTypeCode codeListValue="publication"
-                                                       codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
-                                                />
+                                        <gmd:CI_DateTypeCode
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                codeListValue="publication">publication
+                                        </gmd:CI_DateTypeCode>
                                     </gmd:dateType>
                                 </gmd:CI_Date>
                             </gmd:date>
+                            <gmd:citedResponsibleParty>
+                                <gmd:CI_ResponsibleParty>
+                                    <gmd:organisationName>
+                                        <gco:CharacterString>Earthref MagIC</gco:CharacterString>
+                                    </gmd:organisationName>
+                                    <gmd:positionName>
+                                        <gco:CharacterString>Earthref MagIC vocabularies</gco:CharacterString>
+                                    </gmd:positionName>
+
+                                    <gmd:contactInfo>
+                                        <gmd:CI_Contact>
+                                            <gmd:onlineResource>
+                                                <gmd:CI_OnlineResource>
+                                                    <gmd:linkage>
+                                                        <gmd:URL>https://www2.earthref.org/vocabularies/controlled
+                                                        </gmd:URL>
+                                                    </gmd:linkage>
+
+                                                    <gmd:name>
+                                                        <gco:CharacterString>Web Page for Vocabularies
+                                                        </gco:CharacterString>
+                                                    </gmd:name>
+                                                    {# <!-- <gmd:description>
+                        <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
+                        </gmd:description>
+                        -->
+                                                    #}
+                                                    <gmd:function>
+                                                        <gmd:CI_OnLineFunctionCode
+                                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                                                codeListValue="information"/>
+                                                    </gmd:function>
+                                                </gmd:CI_OnlineResource>
+                                            </gmd:onlineResource>
+                                        </gmd:CI_Contact>
+                                    </gmd:contactInfo>
+                                    <gmd:role>
+                                        <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                                         codeListValue="pointOfContact">pointOfContact
+                                        </gmd:CI_RoleCode>
+                                    </gmd:role>
+                                </gmd:CI_ResponsibleParty>
+                            </gmd:citedResponsibleParty>
                         </gmd:CI_Citation>
                     </gmd:thesaurusName>
                 </gmd:MD_Keywords>
             </gmd:descriptiveKeywords>
             {% endif %}
 
-      {% if row['Method Codes#multi'] %}
+            {% if row['Method Codes#multi'] %}
             <gmd:descriptiveKeywords>
                 <gmd:MD_Keywords>
 
- {% for item in row['Method Codes#multi'].split('|') %}
+                    {% for item in row['Method Codes#multi'].split('|') %}
                     <gmd:keyword>
                         <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
                     </gmd:keyword>
@@ -299,22 +525,147 @@
                                                 codeListValue="theme">theme
                         </gmd:MD_KeywordTypeCode>
                     </gmd:type>
-                     <gmd:thesaurusName>
+                    <gmd:thesaurusName>
                         <gmd:CI_Citation>
                             <gmd:title>
-                                <gco:CharacterString>Method Code from  Earthref MagIC</gco:CharacterString>
+                                <gco:CharacterString>Method Code</gco:CharacterString>
                             </gmd:title>
                             <gmd:date>
                                 <gmd:CI_Date>
-                                    <gmd:date>
-                                        <gco:Date>2017-05-30</gco:Date>
-                                    </gmd:date>
+                                    <gmd:date gco:nilReason="inapplicable"/>
                                     <gmd:dateType>
-                                  <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
-                                                />
+                                        <gmd:CI_DateTypeCode
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                codeListValue="publication">publication
+                                        </gmd:CI_DateTypeCode>
                                     </gmd:dateType>
                                 </gmd:CI_Date>
                             </gmd:date>
+                            <gmd:citedResponsibleParty>
+                                <gmd:CI_ResponsibleParty>
+                                    <gmd:organisationName>
+                                        <gco:CharacterString>Earthref MagIC</gco:CharacterString>
+                                    </gmd:organisationName>
+                                    <gmd:positionName>
+                                        <gco:CharacterString>Earthref MagIC vocabularies</gco:CharacterString>
+                                    </gmd:positionName>
+
+                                    <gmd:contactInfo>
+                                        <gmd:CI_Contact>
+                                            <gmd:onlineResource>
+                                                <gmd:CI_OnlineResource>
+                                                    <gmd:linkage>
+                                                        <gmd:URL>https://www2.earthref.org/vocabularies/controlled
+                                                        </gmd:URL>
+                                                    </gmd:linkage>
+
+                                                    <gmd:name>
+                                                        <gco:CharacterString>Web Page for Vocabularies
+                                                        </gco:CharacterString>
+                                                    </gmd:name>
+                                                    {# <!-- <gmd:description>
+                        <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
+                        </gmd:description>
+                        -->
+                                                    #}
+                                                    <gmd:function>
+                                                        <gmd:CI_OnLineFunctionCode
+                                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                                                codeListValue="information"/>
+                                                    </gmd:function>
+                                                </gmd:CI_OnlineResource>
+                                            </gmd:onlineResource>
+                                        </gmd:CI_Contact>
+                                    </gmd:contactInfo>
+                                    <gmd:role>
+                                        <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                                         codeListValue="pointOfContact">pointOfContact
+                                        </gmd:CI_RoleCode>
+                                    </gmd:role>
+                                </gmd:CI_ResponsibleParty>
+                            </gmd:citedResponsibleParty>
+                        </gmd:CI_Citation>
+                    </gmd:thesaurusName>
+                </gmd:MD_Keywords>
+            </gmd:descriptiveKeywords>
+            {% endif %}
+
+            {% if row['Lithology#multi'] %}
+            <gmd:descriptiveKeywords>
+                <gmd:MD_Keywords>
+
+                    {% for item in row['Lithology#multi'].split('|') %}
+                    <gmd:keyword>
+                        <gco:CharacterString>{{ item|trim }}</gco:CharacterString>
+                    </gmd:keyword>
+                    {% endfor %}
+                    <gmd:type>
+                        <gmd:MD_KeywordTypeCode codeSpace="ISOTC211/19115"
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                                codeListValue="theme">theme
+                        </gmd:MD_KeywordTypeCode>
+                    </gmd:type>
+                    <gmd:thesaurusName>
+                        <gmd:CI_Citation>
+                            <gmd:title>
+                                <gco:CharacterString>Lithology from EarthRef MagIC</gco:CharacterString>
+                            </gmd:title>
+                            <gmd:date>
+                                <gmd:CI_Date>
+                                    <gmd:date gco:nilReason="inapplicable"/>
+                                    <gmd:dateType>
+                                        <gmd:CI_DateTypeCode
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                                codeListValue="publication">publication
+                                        </gmd:CI_DateTypeCode>
+                                    </gmd:dateType>
+                                </gmd:CI_Date>
+                            </gmd:date>
+                            <gmd:citedResponsibleParty>
+                                <gmd:CI_ResponsibleParty>
+                                    <gmd:organisationName>
+                                        <gco:CharacterString>Earthref MagIC</gco:CharacterString>
+                                    </gmd:organisationName>
+                                    <gmd:positionName>
+                                        <gco:CharacterString>Earthref MagIC vocabularies</gco:CharacterString>
+                                    </gmd:positionName>
+
+                                    <gmd:contactInfo>
+                                        <gmd:CI_Contact>
+                                            <gmd:onlineResource>
+                                                <gmd:CI_OnlineResource>
+                                                    <gmd:linkage>
+                                                        <gmd:URL>https://www2.earthref.org/vocabularies/controlled
+                                                        </gmd:URL>
+                                                    </gmd:linkage>
+
+                                                    <gmd:name>
+                                                        <gco:CharacterString>Web Page for Vocabularies
+                                                        </gco:CharacterString>
+                                                    </gmd:name>
+                                                    {# <!-- <gmd:description>
+                        <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
+                        </gmd:description>
+                        -->
+                                                    #}
+                                                    <gmd:function>
+                                                        <gmd:CI_OnLineFunctionCode
+                                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                                                codeListValue="information"/>
+                                                    </gmd:function>
+                                                </gmd:CI_OnlineResource>
+                                            </gmd:onlineResource>
+                                        </gmd:CI_Contact>
+                                    </gmd:contactInfo>
+                                    <gmd:role>
+                                        <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                                         codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                                         codeListValue="pointOfContact">pointOfContact
+                                        </gmd:CI_RoleCode>
+                                    </gmd:role>
+                                </gmd:CI_ResponsibleParty>
+                            </gmd:citedResponsibleParty>
                         </gmd:CI_Citation>
                     </gmd:thesaurusName>
                 </gmd:MD_Keywords>
@@ -322,10 +673,9 @@
             {% endif %}
 
 
-
-    <gmd:language>
-        <gco:CharacterString>en</gco:CharacterString>
-    </gmd:language>
+            <gmd:language>
+                <gco:CharacterString>en</gco:CharacterString>
+            </gmd:language>
             <gmd:topicCategory>
                 <gmd:MD_TopicCategoryCode>geoscientificInformation</gmd:MD_TopicCategoryCode>
             </gmd:topicCategory>
@@ -333,7 +683,7 @@
                 <gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
             </gmd:topicCategory>
 
-           {% if ( row['Latitude#number #hidden'] and row['Longitude#number #hidden'] ) or  row['Ages#long']  %}
+            {% if ( row['Latitude#number #hidden'] and row['Longitude#number #hidden'] ) or row['Ages#long'] %}
             <gmd:extent>
                 <gmd:EX_Extent>
                     {% if row['Latitude#number #hidden'] and row['Longitude#number #hidden'] %}
@@ -353,34 +703,56 @@
                             </gmd:northBoundLatitude>
                         </gmd:EX_GeographicBoundingBox>
                     </gmd:geographicElement>
-                     {% endif %}
+                    {% endif %}
 
-  <!--                 {% if row['Ages#long']  %}
+                    {% if row['Ages#long'] %}
                     <gmd:temporalElement>
                         <gmd:EX_TemporalExtent>
                             <gmd:extent>
-                                 {% if row['Ages#long'] %}
+                                {% if row['Ages#long'] %}
                                 <gml:TimePeriod gml:id="Temporal">
                                     <gml:name>{{ row['Ages#long'] }}</gml:name>
-                                    <gml:beginPosition>[startdate 1999-01-01]</gml:beginPosition>
-                                    <gml:endPosition>[enddate - 2000-12-31]</gml:endPosition>
+                                    {#
+                                    <gml:beginPosition frame="urn:CGI:TemporalCRS:cgi:standardGeologyMa">[startdate
+                                        1999-01-01]
+                                    </gml:beginPosition>
+                                    <gml:endPosition frame="urn:CGI:TemporalCRS:cgi:standardGeologyMa">[enddate -
+                                        2000-12-31]
+                                    </gml:endPosition>
+                                    #}
                                 </gml:TimePeriod>
-                                 {% else %}
-                                  <gml:TimeInstant gml:id="ID">
+                                {% else %}
+                                <gml:TimeInstant gml:id="ID">
 
-         <gml:name>{{ row['Ages#long'] }}</gml:name>
+                                    <gml:name>{{ row['Ages#long'] }}</gml:name>
 
-         <gml:timePosition>{{ row['Ages#long'] }}</gml:timePosition>
-      </gml:TimeInstant>
+                                    <gml:timePosition>{{ row['Ages#long'] }}</gml:timePosition>
+                                </gml:TimeInstant>
                                 {% endif %}
                             </gmd:extent>
                         </gmd:EX_TemporalExtent>
                     </gmd:temporalElement>
-                   {% endif %}
+                    {% endif %}
+
+
+                    {#                  <!--
+<extent>
+<gml:TimePeriod gml:id="y34096">
+<gml:beginPosition
+frame="urn:CGI:TemporalCRS:cgi:standardGeologyMa">220
+</gml:beginPosition>
+<gml:endPosition
+frame="urn:CGI:TemporalCRS:cgi:standardGeologyMa">140
+</gml:endPosition>
+</gml:TimePeriod>
+</extent>
+</EX_TemporalExtent>
+
                    -->
+                    #}
                 </gmd:EX_Extent>
             </gmd:extent>
-        {% endif %}
+            {% endif %}
 
         </gmd:MD_DataIdentification>
     </gmd:identificationInfo>
@@ -392,64 +764,214 @@
             <gmd:distributionFormat>
                 <gmd:MD_Format>
                     <gmd:name>
-                        <gco:CharacterString>Resource URL</gco:CharacterString>
+                        <gco:CharacterString>ASCII</gco:CharacterString>
                     </gmd:name>
-                    <gmd:version>
-                        <gco:CharacterString>0.0</gco:CharacterString>
-                    </gmd:version>
+                    <gmd:version gco:nilReason="inapplicable"/>
+
                 </gmd:MD_Format>
 
             </gmd:distributionFormat>
 
-            <gmd:transferOptions>
-                <gmd:MD_DigitalTransferOptions>
-                    <gmd:onLine>
-                        <gmd:CI_OnlineResource>
-                            <gmd:linkage>
-                                <gmd:URL>{{ row['MagIC URL#link #hidden'] }}</gmd:URL>
-                            </gmd:linkage>
- {#
-                        <gmd:name>
-                        <gco:CharacterString>Earthref MagIC page</gco:CharacterString>
-                        </gmd:name>
-                      <!--  <gmd:description>
-                        <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
-                        </gmd:description>
-                        -->
-  #}                          <gmd:function>
-                                <gmd:CI_OnLineFunctionCode
-                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
-                                        codeListValue="information"/>
-                            </gmd:function>
-                        </gmd:CI_OnlineResource>
-                    </gmd:onLine>
-                </gmd:MD_DigitalTransferOptions>
-            </gmd:transferOptions>
-             <gmd:transferOptions>
-                <gmd:MD_DigitalTransferOptions>
-                    <gmd:onLine>
-                        <gmd:CI_OnlineResource>
-                            <gmd:linkage>
-                                <gmd:URL>{{ row['DOI#link #hidden'] }}</gmd:URL>
-                            </gmd:linkage>
+            <gmd:distributor>
+                <gmd:MD_Distributor>
+                    <gmd:distributorContact>
+                        <gmd:CI_ResponsibleParty>
 
-                        <gmd:name>
-                        <gco:CharacterString>DOI</gco:CharacterString>
-                        </gmd:name>
-                        {# <!-- <gmd:description>
+                            <gmd:individualName>
+                                <gco:CharacterString>MagIC Database Team</gco:CharacterString>
+                            </gmd:individualName>
+
+                            <gmd:organisationName>
+                                <gco:CharacterString>Magnetics Information Consortium (MagIC)</gco:CharacterString>
+                            </gmd:organisationName>
+
+
+                            <gmd:role>
+                                <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                                 codeListValue="pointOfContact">pointOfContact
+                                </gmd:CI_RoleCode>
+                            </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                    </gmd:distributorContact>
+                    <gmd:distributorFormat>
+
+                        <gmd:MD_Format>
+                            <gmd:name>
+                                <gmx:Anchor xlink:href="https://www.wikidata.org/wiki/Q64403452">multipart/related;type=text/tab-separated-values;boundary=>>>>>>>>>>;</gmx:Anchor>
+                            </gmd:name>
+                            <gmd:version gco:nilReason="inapplicable"/>
+
+
+                        </gmd:MD_Format>
+
+
+                    </gmd:distributorFormat>
+                    <gmd:distributorTransferOptions>
+
+                        <gmd:MD_DigitalTransferOptions>
+                            <gmd:onLine>
+                                <gmd:CI_OnlineResource>
+                                    <gmd:linkage>
+                                        <gmd:URL>https://earthref.org/MagIC/download/{{ row['Contribution ID#long']
+                                            }}/
+                                        </gmd:URL>
+                                    </gmd:linkage>
+                                    <gmd:applicationProfile>
+                                        <gco:CharacterString>PyMag</gco:CharacterString>
+                                    </gmd:applicationProfile>
+
+                                    <gmd:name>
+                                        <gco:CharacterString>MAGIC Multipart Tab Separated Values</gco:CharacterString>
+                                    </gmd:name>
+                                    {# <!-- <gmd:description>
                         <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
                         </gmd:description>
                         -->
-                            #}
-                            <gmd:function>
-                                <gmd:CI_OnLineFunctionCode
-                                        codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
-                                        codeListValue="information"/>
-                            </gmd:function>
-                        </gmd:CI_OnlineResource>
-                    </gmd:onLine>
-                </gmd:MD_DigitalTransferOptions>
-            </gmd:transferOptions>
+                                    #}
+                                    <gmd:function>
+                                        <gmd:CI_OnLineFunctionCode
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                                codeListValue="download"/>
+                                    </gmd:function>
+                                </gmd:CI_OnlineResource>
+                            </gmd:onLine>
+                        </gmd:MD_DigitalTransferOptions>
+
+                    </gmd:distributorTransferOptions>
+                </gmd:MD_Distributor>
+            </gmd:distributor>
+            <gmd:distributor>
+                <gmd:MD_Distributor>
+                    <gmd:distributorContact>
+                        <gmd:CI_ResponsibleParty>
+
+                            <gmd:individualName>
+                                <gco:CharacterString>MagIC Database Team</gco:CharacterString>
+                            </gmd:individualName>
+
+                            <gmd:organisationName>
+                                <gco:CharacterString>Magnetics Information Consortium (MagIC)</gco:CharacterString>
+                            </gmd:organisationName>
+
+
+                            <gmd:role>
+                                <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                                 codeListValue="pointOfContact">pointOfContact
+                                </gmd:CI_RoleCode>
+                            </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                    </gmd:distributorContact>
+                    <gmd:distributorFormat>
+
+                        <gmd:MD_Format>
+                            <gmd:name>
+                                <gco:CharacterString>HTML</gco:CharacterString>
+                            </gmd:name>
+                            <gmd:version gco:nilReason="inapplicable"/>
+
+
+                        </gmd:MD_Format>
+
+
+                    </gmd:distributorFormat>
+                    <gmd:distributorTransferOptions>
+
+                        <gmd:MD_DigitalTransferOptions>
+                            <gmd:onLine>
+                                <gmd:CI_OnlineResource>
+                                    <gmd:linkage>
+                                        <gmd:URL>{{ row['MagIC URL#link #hidden'] }}</gmd:URL>
+                                    </gmd:linkage>
+
+                                    <gmd:name>
+                                        <gco:CharacterString>Data from EarthRef MagIC</gco:CharacterString>
+                                    </gmd:name>
+                                    {#
+                                    <gmd:description>
+                                        <gco:CharacterString>Detailed information about the dataset, with download links
+                                        </gco:CharacterString>
+                                    </gmd:description>
+
+                                    #}
+                                    <gmd:function>
+                                        <gmd:CI_OnLineFunctionCode
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                                codeListValue="download"/>
+                                    </gmd:function>
+                                </gmd:CI_OnlineResource>
+                            </gmd:onLine>
+                        </gmd:MD_DigitalTransferOptions>
+
+                    </gmd:distributorTransferOptions>
+                </gmd:MD_Distributor>
+            </gmd:distributor>
+            <gmd:distributor>
+                <gmd:MD_Distributor>
+                    <gmd:distributorContact>
+                        <gmd:CI_ResponsibleParty>
+
+                            <gmd:individualName>
+                                <gco:CharacterString>MagIC Database Team</gco:CharacterString>
+                            </gmd:individualName>
+
+                            <gmd:organisationName>
+                                <gco:CharacterString>Magnetics Information Consortium (MagIC)</gco:CharacterString>
+                            </gmd:organisationName>
+
+
+                            <gmd:role>
+                                <gmd:CI_RoleCode codeSpace="ISOTC211/19115"
+                                                 codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                                 codeListValue="pointOfContact">pointOfContact
+                                </gmd:CI_RoleCode>
+                            </gmd:role>
+                        </gmd:CI_ResponsibleParty>
+                    </gmd:distributorContact>
+                    <gmd:distributorFormat>
+
+                        <gmd:MD_Format>
+                            <gmd:name>
+                                <gco:CharacterString>HTML</gco:CharacterString>
+                            </gmd:name>
+                            <gmd:version gco:nilReason="inapplicable"/>
+
+
+                        </gmd:MD_Format>
+
+
+                    </gmd:distributorFormat>
+                    <gmd:distributorTransferOptions>
+
+                        <gmd:MD_DigitalTransferOptions>
+                            <gmd:onLine>
+                                <gmd:CI_OnlineResource>
+                                    <gmd:linkage>
+                                        <gmd:URL>{{ row['DOI#link #hidden'] }}</gmd:URL>
+                                    </gmd:linkage>
+
+                                    <gmd:name>
+                                        <gco:CharacterString>Publication DOI</gco:CharacterString>
+                                    </gmd:name>
+                                    {# <!-- <gmd:description>
+                        <gco:CharacterString>Final Report for LCM2007 - the new UK Land Cover Map</gco:CharacterString>
+                        </gmd:description>
+                        -->
+                                    #}
+                                    <gmd:function>
+                                        <gmd:CI_OnLineFunctionCode
+                                                codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                                codeListValue="information"/>
+                                    </gmd:function>
+                                </gmd:CI_OnlineResource>
+                            </gmd:onLine>
+                        </gmd:MD_DigitalTransferOptions>
+
+                    </gmd:distributorTransferOptions>
+                </gmd:MD_Distributor>
+            </gmd:distributor>
+
         </gmd:MD_Distribution>
     </gmd:distributionInfo>
     {% endif %}
